@@ -1,0 +1,73 @@
+body{
+    background-color: var(--body-color);
+}
+.profile-card{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    position: relative;
+    padding: 0;
+    page-break-after: always;
+}
+.profileImg{
+    width: 8rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.profileImg img{
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: bottom;
+}
+.card-details{
+    padding: 7rem 0rem 4rem;
+}
+.personalInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 0 2rem;
+}
+.profileName {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.profileType {
+    color: var(--text-color-light);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+.someDetailsHeader{
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    padding: 0 2rem;
+    margin: 1rem 0;
+}
+.item{
+    text-align: right;
+    font-size: 1rem;
+    padding: 0 2rem;
+    margin: 0.5rem 0;
+}
+.item .type{
+    font-weight: bold;
+    color: #9fa0a7;
+}
+.item .info{
+    font-weight: 500;
+    color: var(--text-color-light);
+}
+
