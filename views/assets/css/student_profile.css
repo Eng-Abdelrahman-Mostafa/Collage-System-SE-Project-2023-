@@ -70,4 +70,52 @@ body{
     font-weight: 500;
     color: var(--text-color-light);
 }
+.profile-panel{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.tab-box{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid rgba(229,229,229);
+    position: relative;
+}
+.tab-box .tab-btn{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color-light);
+    background: none;
+    border: none;
+    padding: 18px;
+    cursor: pointer;
+}
+.tab-box .tab-btn.active{
+    color: var(--text-color);
+    /*border-bottom: 3px solid var(--first-color);*/
+}
+.box-content{
+    padding: 20px;
+}
+.content-box .content{
+    display: none;
+    padding: 20px;
+}
+.content-box .content.active{
+    display: block;
+}
+.tab-line{
+    position: absolute;
+    top:62px;
+    left: 0;
+    width: 90px;
+    height: 5px;
+    background-color: var(--first-color);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
 
