@@ -12,3 +12,6 @@ tabs.forEach((tab, index) => {
         all_contents[index].classList.add('active');
     })
 })
+
+// Trigger click event on first tab button element
+tabs[0].dispatchEvent(new Event('click'));

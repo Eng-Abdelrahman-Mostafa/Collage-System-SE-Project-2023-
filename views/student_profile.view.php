@@ -73,10 +73,10 @@
                     <div class="col-lg-8 col-sm-12">
                         <div class="profile-panel">
                             <div class="tab-box">
-                                <button class="tab-btn">البيانات الرئيسية</button>
-                                <button class="tab-btn">اخرى 1</button>
-                                <button class="tab-btn">اخرى 2</button>
-                                <button class="tab-btn">اخرى 3</button>
+                                <button class="tab-btn">البيانات</button>
+                                <button class="tab-btn">التقييمات</button>
+                                <button class="tab-btn">الاقسام</button>
+                                <button class="tab-btn">الساعات</button>
                                 <div class="tab-line"></div>
                             </div>
                             <div class="content-box">
