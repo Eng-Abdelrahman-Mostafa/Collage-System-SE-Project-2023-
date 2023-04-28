@@ -21,3 +21,6 @@ function dd($data){
 function base_path($path = ''){
     return BASE_PATH.$path;
 }
+function asset($path = ''){
+    return base_path("public/assets/{$path}");
+}
