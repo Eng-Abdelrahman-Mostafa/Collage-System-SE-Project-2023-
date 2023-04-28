@@ -1,6 +1,8 @@
 <?php
 
 namespace Core;
+use PDO;
+
 
 class Database
 {
@@ -11,9 +13,9 @@ class Database
         $dsn = "mysql:".http_build_query($config['database'], '', ';');
         $this->connection = new PDO($dsn,
             $username,
-            password,
+            $password,
             [
-                PDO::ATTER_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]);
     }
     public function query($query, $params = [])
@@ -36,9 +38,5 @@ class Database
             abort(404);
         }
     }
-
-
-
-
 
 }
