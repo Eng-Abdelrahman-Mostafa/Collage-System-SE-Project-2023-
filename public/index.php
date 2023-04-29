@@ -5,6 +5,7 @@ const BASE_PATH = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
 
 require BASE_PATH . "app/helper.php";
 
+
 spl_autoload_register(function ($class) {
 $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
     require base_path("{$class}.php");
