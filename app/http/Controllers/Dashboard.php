@@ -1,12 +1,12 @@
 <?php
 namespace app\http\Controllers;
 //write code here
-class Controller {
+class Dashboard {
     public function index() {
-        view('all_students');
+        view('dashboard');
     }
 }
 
 //write code here
 
-return new Controller();
+return new Dashboard();

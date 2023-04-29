@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/images/collage-logo.svg">
+    <link rel="icon" type="image/png" href="<?= asset('images/collage-logo.svg') ?>">
     <title>Dashboard</title>
     <!-- matrial icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- css -->
-    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?=asset('css/dashboard.css')?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
  <div class="bdy">
     <div class="container">
+
+<!--    start aside bar    -->
         <aside class="side-bar">
           <div class="top">
             <div class="logo">
-                <img src="assets/images/collage-logo.svg" alt="">
+                <img src="<?= asset('images/collage-logo.svg') ?>" alt="">
                 <h2>كلية الحاسبات والذكاء الاصطناعي <span class="danger">حلوان</span></h2>
                 <a href="#" class="close-btn"><span class="material-symbols-sharp">close</span></a>            
             </div>
@@ -98,7 +100,9 @@
           </div>
         </aside>
          <!-- end aside -->
+
     <main>
+<!--        right-top-nav bar-->
         <div class="menu"><a href="#" class="menu-btn"><span class="material-symbols-outlined">menu</span></a></div>
         <div class="title">
             <h1>لوحة التحكم</h1>
@@ -106,6 +110,7 @@
                 <span id="year">2023</span>-<span id="month">4</span>-<span id="day">13</span>
             </div>
         </div>
+        <!--        left-top-nav bar-->
         <div class="right">
             <div class="top">
                 <div class="search">
@@ -115,17 +120,20 @@
                     <span class="material-symbols-outlined">search</span>
                 </div>   
                 <div class="profile-photo">
-                    <img src="assets/images/me.jpg" alt="">
+                    <img src="<?= asset('images/me.jpg')?>" alt="">
                 </div>
             </div>
         </div>
-        <div class="portfolio" style="background-image: url('assets/images/bg-dashboard.png');">
+<!--        end nav-->
+
+<!--     start main-content   -->
+        <div class="portfolio" style="background-image: url('<?= asset('images/bg-dashboard.png') ?>');">
             <div class="right">
                 <h2>اهلا <span class="name">عبدالرحمن</span></h2>
                 <p>اهلا بكم في لوحة تحكم مدير نظام كلية الحاسبات والذكاء الاصطناعي بجامعة حلوان</p>
             </div>
             <div class="left">
-                <img src="assets/images/Cartoon.svg" alt="">
+                <img src="<?= asset("images/Cartoon.svg")?>" alt="">
             </div>
     </div>
         <div class="insights">
@@ -157,6 +165,7 @@
                 </div>
             </div>
         </div>
+<!--        end main-content-->
     </main>
     </div>
 <script>
@@ -178,6 +187,13 @@
         $('.menu-btn').css("visibility", "visible");
       });
     });
+       let dateObj = new Date();
+       let month = dateObj.getUTCMonth() + 1;
+       document.getElementById('month').innerHTML=`${month}`;
+       let day = dateObj.getUTCDate();
+       document.getElementById('day').innerHTML=`${day}`;
+       let year = dateObj.getUTCFullYear();
+       document.getElementById('month').innerHTML=`${day}`;
 </script>
 </div>   
 </body>
