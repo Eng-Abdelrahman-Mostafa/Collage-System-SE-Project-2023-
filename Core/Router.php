@@ -2,40 +2,45 @@
 
 namespace Core;
 
+use app\http\Controllers\Controller;
+use app\http\Middlewares\Middlewares_Provider;
+
+
 class Router {
 
     protected $routes = [];
 
     public function get($uri, $controller, $method_name = 'index', $middlewares = null) {
-        if ($middlewares != null) {
-            //middlewares applied
-        } else {
-            $this->routes[] = [
-                'uri' => $uri,
-                'controller' => $controller,
-                'method' => 'GET',
-                'method_name' => $method_name,
-                'middlewares' => $middlewares
-            ];
-        }
+        $this->routes[] = [
+            'uri' => $uri,
+            'controller' => $controller,
+            'method' => 'GET',
+            'method_name' => $method_name,
+            'middlewares' => $middlewares
+        ];
     }
 
     public function post($uri, $controller, $method_name = 'store', $middlewares = null) {
-        if ($middlewares != null) {
-            //middlewares applied
-        } else {
-            $this->routes[] = [
-                'uri' => $uri,
-                'controller' => $controller,
-                'method' => 'POST',
-                'method_name' => $method_name,
-                'middlewares' => $middlewares
-            ];
-        }
+        $this->routes[] = [
+            'uri' => $uri,
+            'controller' => $controller,
+            'method' => 'GET',
+            'method_name' => $method_name,
+            'middlewares' => $middlewares
+        ];
     }
     public function route($url, $method = 'GET') {
         foreach ($this->routes as $route) {
-            if ($route['uri'] === $url && $route['method'] === $method) {
+            if ($route['uri'] === $url && $route['method'] === strtoupper($method)) {
+                if ($route['middlewares'] !== null) {
+//                    $middlewares = explode('|', $route['middlewares']);
+                    $middlewares = $route['middlewares'];
+                    foreach ($middlewares as $middleware) {
+                        $middleware = Middlewares_Provider::MAP[$middleware];
+                        $middleware = new $middleware();
+                        $middleware->handle();
+                    }
+                }
                 $controller = require base_path($route['controller']);
                 if (!is_object($controller)) {
                     abort(500, "Controller is not an object");
@@ -49,7 +54,5 @@ class Router {
         }
         abort(404);
     }
-
-
 
 }

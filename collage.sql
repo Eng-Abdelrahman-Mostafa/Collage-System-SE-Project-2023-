@@ -168,10 +168,10 @@ CREATE TABLE `nationalities` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prerequisties_courses`
+-- Table structure for table `courses_prerequisites`
 --
 
-CREATE TABLE `prerequisties_courses` (
+CREATE TABLE `courses_prerequisites` (
   `id` bigint(20) NOT NULL,
   `course_id` bigint(20) NOT NULL,
   `prerequisties_id` bigint(20) NOT NULL
@@ -351,9 +351,9 @@ ALTER TABLE `nationalities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `prerequisties_courses`
+-- Indexes for table `courses_prerequisites`
 --
-ALTER TABLE `prerequisties_courses`
+ALTER TABLE `courses_prerequisites`
   ADD PRIMARY KEY (`id`),
   ADD KEY `course_id` (`course_id`),
   ADD KEY `prerequisties_id` (`prerequisties_id`);
@@ -462,9 +462,9 @@ ALTER TABLE `nationalities`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `prerequisties_courses`
+-- AUTO_INCREMENT for table `courses_prerequisites`
 --
-ALTER TABLE `prerequisties_courses`
+ALTER TABLE `courses_prerequisites`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
@@ -552,11 +552,11 @@ ALTER TABLE `exam_degrees`
   ADD CONSTRAINT `exam_degrees_ibfk_2` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `prerequisties_courses`
+-- Constraints for table `courses_prerequisites`
 --
-ALTER TABLE `prerequisties_courses`
-  ADD CONSTRAINT `prerequisties_courses_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prerequisties_courses_ibfk_2` FOREIGN KEY (`prerequisties_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `courses_prerequisites`
+  ADD CONSTRAINT `courses_prerequisites_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `courses_prerequisites_ibfk_2` FOREIGN KEY (`prerequisties_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `semesters`
