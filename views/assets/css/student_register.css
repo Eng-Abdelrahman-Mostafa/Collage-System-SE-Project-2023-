@@ -1,0 +1,28 @@
+
+
+.div1 {
+    position: absolute;
+    z-index: 1;
+
+    background-size: 200px;
+    height: 200px;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.div2 {
+    margin-top: 50px;
+    position: absolute;
+    z-index: 2;
+    background-color: #fff;
+    height: auto;
+    width: 80%;
+    border-radius: 15px;
+    padding: 20px ;
+}
+
+.div1 img{
+    width: 100%;
+
+
+}
