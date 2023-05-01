@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-      <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/all_students.css">
     <title>Admin</title>
   </head>
@@ -16,11 +16,11 @@
       <div class="row">
         <div class="col-xl-2 side">
         </div>
-        <div class="col-xl-10 left">
+        <div class="col-xl-10 left" style="zoom: 80%">
           <!-- Your main content goes here -->
           <div class="stds-stat row">
             <div class="col-lg-3 col-sm-6">
-              <a href="#" class="add-new-std" style="width: 100%;">
+              <a href="#" class="add-new-std" style="width: 90%;">
                 <div class="stc-box">
                   <div class="stc-val-parent">
                     <span class="stc-value">
@@ -33,7 +33,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 100%;">
+              <a class="real-stc" style="width: 90%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 3.2 </span>
@@ -46,7 +46,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 100%;">
+              <a class="real-stc" style="width: 90%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 80% </span>
@@ -59,7 +59,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 100%;">
+              <a class="real-stc" style="width: 90%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 3205 </span>
@@ -112,7 +112,7 @@
                 </select>
               </div>
               <div class="col col-lg-1 col-sm-12"></div>
-              <button class="btn col-lg-2 col-sm-12 align-self-end mt-3">فلترة</button>
+              <button class="btn col-lg-2 col-sm-12 align-self-end mt-3 fltr">فلترة</button>
             </div>
             <div class="row mt-5">
               <div class="col-lg-10 col-sm-12"></div>
