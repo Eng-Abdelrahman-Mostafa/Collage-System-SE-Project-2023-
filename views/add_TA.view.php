@@ -14,45 +14,93 @@
     <link rel="stylesheet" href="assets/css/add.css">
 </head>
 <body>
-<div class="photo" > <img src="bg-dashboard.png" alt="">
+<div class="photo" > <img src="assets/images/bg-dashboard.png" alt="">
 </div>
 <div class="container col-md-8 form" >
 
-    <form class="row g-3 needs-validation justify-content-center  " novalidate  action="a.php">
+    <form class="row g-3 needs-validation justify-content-center  " novalidate  action="add_TA" method="post">
+
+        <div class=" ">
+            <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>
+            <input type="text" class="form-control" value="@fci.helwan.com" required name="email" placeholder="اضف البريد الالكتروني">
+            <div class="invalid-feedback">
+                Please choose a email.
+            </div>
+        </div>
+
+        <div class=" ">
+            <label for="validationCustom01" class="form-label"> كلمة المرور :</label>
+            <input type="password" class="form-control"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >
+            <div class="invalid-feedback">
+                Please choose a password.
+            </div>
+        </div>
+
+
 
         <div class="">
             <label for="validationCustom01" class="form-label mt-3">الاسم الرباعي باللغه العربية :</label>
-            <input type="text" class="form-control"  placeholder="ادخل اسم الطالب " required name="name" autofocus>
+            <input type="text" class="form-control"  placeholder="ادخل الاسم باللغة العربية  " required name="ar_name">
+            <div class="invalid-feedback">
+                Please enter your name in arabic.
+            </div>
+        </div>
+
+        <div class=" ">
+            <label for="validationCustom01" class="form-label">الاسم الرباعي باللغه الانجليزية :</label>
+            <input type="text" class="form-control"  placeholder="ادخل الاسم باللغة الانجليزية " required="" name="en_name">
             <div class="invalid-feedback">
                 Please choose a username.
             </div>
         </div>
 
         <div class=" ">
-            <label for="validationCustom01" class="form-label">الاسم الرباعي باللغه الانجليزيه :</label>
-            <input type="text" class="form-control"  placeholder="ادخل اسم الطالب" required="" name="name">
+            <label for="validationCustom01" class="form-label">رقم الهاتف :</label>
+            <input type="text" class="form-control"  placeholder="رقم الهاتف" required name="phone_number">
             <div class="invalid-feedback">
                 Please choose a username.
             </div>
         </div>
 
         <div class=" ">
-            <label for="validationCustom01" class="form-label">الرقم القومي للطالب :</label>
+            <label for="validationCustom01" class="form-label">الرقم القومي :</label>
             <input type="text" class="form-control"  placeholder="الرقم القومي " required name="National_ID">
             <div class="invalid-feedback">
                 Please choose a username.
             </div>
         </div>
 
+        <div class=" ">
+            <label for="validationCustom01" class="form-label">اللقب :</label>
+            <input type="text" class="form-control"  placeholder=" ادخل وصف الطالب " required name="title">
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+        </div>
+
+        <div class=" ">
+            <label for="validationCustom01" class="form-label">عنوان :</label>
+            <input type="text" class="form-control"  placeholder=" ادخل عنوان الطالب " required name="address">
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+        </div>
+
+        <div class=" ">
+            <label for="validationCustom01" class="form-label">الوصف :</label>
+            <input type="text" class="form-control"  placeholder=" ادخل عنوان الطالب " required name="description">
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+        </div>
 
         <div class="c">
-            <label for="validationCustom04" class="form-label">قسم الطالب :</label>
-            <select class="form-select" id="validationCustom04" required>
+            <label for="validationCustom04" class="form-label">القسم :</label>
+            <select class="form-select" id="validationCustom04" required name="department" name="department">
                 <option selected disabled > اختر قسم الطالب</option>
-                <option value="cs">CS</option>
-                <option value="is">is</option>
-                <option value="it">it</option>
-
+                <?php foreach ($departments as $department ):?>
+                    <option value="<?= $department['id']?>"><?=$department['name']?></option>
+                <?php endforeach; ?>
             </select>
             <div class="invalid-feedback">
                 Please select a valid ya Dawly.
@@ -60,72 +108,48 @@
         </div>
 
         <div class="c">
-            <label for="validationCustom04" class="form-label">مرحلة الطالب :</label>
-            <select class="form-select" id="validationCustom04" required>
-                <option selected disabled value=""> اختر مرحلةالطالب</option>
-                <option value="">الاول</option>
-                <option value="">الثاني</option>
-                <option value="">الثالث</option>
-                <option value="">الرابع</option>
+            <label for="validationCustom04" class="form-label">الدور :</label>
+            <select class="form-select" id="validationCustom04" required name="role">
+                <option selected disabled > اختر قسم الطالب</option>
+                <?php foreach ($roles  as $role ):?>
+                    <option value="<?= $role['id']?>"><?=$role['name']?></option>
+                <?php endforeach; ?>
             </select>
             <div class="invalid-feedback">
-                Please choose a username.
+                Please select a valid ya Dawly.
+            </div>
+        </div>
+
+
+
+        <div class="c">
+            <label for="validationCustom04" class="form-label">الجنسية :</label>
+            <select class="form-select" id="validationCustom04" required name="nationality">
+                <option selected disabled > اختر قسم الطالب</option>
+                <?php foreach ($nationalities as $nationality): ?>
+                <option value="<?= $nationality['id']?>"><?=$nationality['name']?></option>
+                <?php endforeach; ?>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid ya Dawly.
             </div>
         </div>
 
 
 
         <div class=" ">
-            <label for="validationCustom01" class="form-label">رقم هاتف الطالب :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل رقم الهاتف " required name="">
-            <div class="invalid-feedback">
-                Please choose a username.
-            </div>
-        </div>
-        <div class=" ">
-            <label for="validationCustom01" class="form-label">عنوان الطالب :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل عنوان الطالب " required name="">
+            <label for="validationCustom01" class="form-label">صورة الطالب :</label>
+            <input type="file" class="form-control"  placeholder=" ادخل صورة الطالب " name="image">
             <div class="invalid-feedback">
                 Please choose a username.
             </div>
         </div>
 
-        <div class=" ">
-            <label for="validationCustom01" class="form-label">وصف الطالب :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل وصف الطالب " required>
-            <div class="invalid-feedback">
-                Please choose a username.
-            </div>
-        </div>
 
-<!--        <div class=" ">-->
-<!--            <label for="validationCustom01" class="form-label">صورة الطالب :</label>-->
-<!--            <input type="file" class="form-control"  placeholder=" ادخل صورة الطالب " required name="image">-->
-<!--            <div class="invalid-feedback">-->
-<!--                Please choose a username.-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class=" ">-->
-<!--            <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>-->
-<!--            <input type="email" class="form-control"  value="@fci.helwan.com" required name="email">-->
-<!--            <div class="invalid-feedback">-->
-<!--                Please choose a username.-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class=" ">-->
-<!--            <label for="validationCustom01" class="form-label"> كلمة المرور :</label>-->
-<!--            <input type="password" class="form-control"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >-->
-<!--            <div class="invalid-feedback">-->
-<!--                Please choose a username.-->
-<!--            </div>-->
-<!--        </div>-->
 
 
         <div class="col-12 mt-3  " >
             <button class=" btn-primary btn1" type="submit" >اضافه</button>
-            <button class=" btn-primary btn2" type="submit" style="margin-right: 20px;"> طباعة</button>
         </div>
 
 
