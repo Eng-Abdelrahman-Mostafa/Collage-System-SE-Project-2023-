@@ -6,12 +6,17 @@
   outline: none;
   list-style: none;
   word-wrap: break-word;
-  overflow-x: hidden;  
+  overflow-x: hidden;
 }
 
 .main-content
 {
   background-color: var(--container-color);
+}
+body{
+  background: var(--body-color);
+  user-select: none;
+  overflow-x: hidden;
 }
 
 .stds-stat{
@@ -236,7 +241,6 @@ button, input, optgroup, select, textarea {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
-  line-height: inherit;
 }
 
 
