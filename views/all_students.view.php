@@ -15,14 +15,20 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <title>Admin</title>
+      <!-- matrial icon -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
   </head>
   <body>
     <div class="container-fulid" dir="rtl">
       <div class="row">
         <div class="col-xl-2 side">
-
+            <?php include 'layouts/aside_bar.view.php';?>
         </div>
         <div class="col-xl-10 left" style="zoom: 80%">
+            <?php include 'layouts/nav_bar.view.php';?>
           <!-- Your main content goes here -->
           <div class="stds-stat row">
             <div class="col-lg-3 col-sm-6">

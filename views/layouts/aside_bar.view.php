@@ -1,7 +1,230 @@
+<style>
+    /*========== VARIABLES CSS ==========*/
+    :root {
+        --header-height: 3.5rem;
+        --nav-width: 219px;
 
-    <div class="container">
-<!--    start aside bar    -->
-        <aside class="side-bar">
+        /*========== Colors ==========*/
+        --first-color: #92BCB5;
+        --first-color-light: #FEF1CF;
+        --title-color: #19181B;
+        --text-color: #5a5b62;
+        --text-color-light: #B5B5B8;
+        --body-color: #F7F6FD;
+        --container-color: #FFFFFF;
+        --shadow: rgba(0,0,0,0.15) 0px 2px 8px;
+
+        /*========== Font and typography ==========*/
+        --body-font: 'Cairo', sans-serif;
+        --normal-font-size: .938rem;
+        --small-font-size: .75rem;
+        --smaller-font-size: .75rem;
+
+        /*========== Font weight ==========*/
+        --font-medium: 500;
+        --font-semi-bold: 600;
+
+        /*========== z index ==========*/
+        --z-fixed: 100;
+    }
+    aside{
+        margin-top: 1rem;
+        width: 16rem;
+        background-color:var(--container-color);
+        border-radius: 2%;
+        -webkit-border-radius: 2%;
+        -moz-border-radius: 2%;
+        -ms-border-radius: 2%;
+        -o-border-radius: 2%;
+    }
+
+    aside .top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 1.4rem;
+    }
+    aside .logo{
+        display: flex;
+        gap: 0.8rem;
+    }
+    aside .logo img{
+        width: 3rem;
+        height: 3rem;
+    }
+    aside .logo .danger{
+        color: var(--first-color);
+    }
+    aside .logo .close-btn{
+        margin-top: -1rem;
+        margin-left: 1rem;
+        color: #92BCB5;
+        display: none;
+    }
+    aside .sidebar{
+        display: flex;
+        flex-direction: column;
+        height: 86vh;
+        position: relative;
+        top: 1rem;
+    }
+    aside .sidebar li a{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        position: relative;
+        height: 3.2rem;
+        transition:all 300ms ease ;
+        -webkit-transition:all 300ms ease ;
+        -moz-transition:all 300ms ease ;
+        -ms-transition:all 300ms ease ;
+        -o-transition:all 300ms ease ;
+    }
+    aside .sidebar  li:last-child{
+        position: absolute;
+        bottom: 6rem;
+        width: 100%;
+    }
+    aside hr{
+        border-top: 1px solid var(--text-color);
+        margin-top: 1rem;
+    }
+    aside .sidebar a.active{
+        color:var(--first-color) ;
+        margin-left: 0;
+    }
+    aside .sidebar a.active::before{
+        content: "";
+        width: 4px;
+        height: 60%;
+        background: var(--first-color);
+    }
+    aside .sidebar a:hover {
+        color: var(--first-color);
+    }
+    aside .sidebar a:hover span{
+        margin-left: 1rem;
+    }
+    aside .sidebar li a .drop{
+        position: absolute;
+        left: 0;
+        margin: 20px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+    }
+    aside .sidebar li .sub-menu{
+        display: none;
+    }
+    aside .sidebar li .sub-menu a{
+        display: flex;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        height: 1.5rem;
+        transition:all 300ms ease ;
+        -webkit-transition:all 300ms ease ;
+        -moz-transition:all 300ms ease ;
+        -ms-transition:all 300ms ease ;
+        -o-transition:all 300ms ease ;
+        margin-right: 2rem;
+    }
+    aside .sidebar li .sub-menu .show{
+        display: block;
+    }
+    .rotate{
+        transform: rotate(90deg);
+    }
+    .menu-btn{
+        margin-right: -11%;
+        color: var(--first-color);
+        margin-top: 1.4rem;
+        display: none;
+    }
+    @media screen and (max-width: 1200px) {
+
+        aside{
+            width: 5rem;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+        }
+        aside .logo h2{
+            display: none;
+        }
+        aside .sidebar h3{
+            display: none;
+        }
+        aside .sidebar li .sub-menu a{
+            display: flex;
+            gap: 2rem;
+            margin-right: .5rem;
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+        aside{
+            right: 0;
+            width: 18rem;
+            z-index: 3;
+            box-shadow: 1rem 3rem 4rem #92BCB5;
+            height: 100vh;
+        }
+        aside .logo h2{
+            display: block;
+        }
+        aside .sidebar h3{
+            display: block;
+        }
+        aside .sidebar li .sub-menu a{
+            display: flex;
+            gap: 4rem;
+            margin-right: 2rem;
+        }
+        aside .logo .close-btn{
+            display:block;
+        }
+        aside{
+            width: 0;
+        }
+        aside .sidebar{
+            display: none;
+        }
+        aside .top{
+            display: none;
+        }
+        .menu-btn{
+            display: block;
+            color: #92BCB5;
+
+        }
+        .active{
+            width: 18rem;
+        }
+        .active .sidebar{
+            display: block;
+        }
+        .active .top{
+            display: block;
+        }
+        aside .menu-btn{
+            margin-right: 40px;
+        }
+    }
+    @media screen and (max-width: 440px) {
+        aside .menu-btn{
+            margin-right: 25px;
+        }
+        .menu-btn{
+            margin-top: -.3rem;
+        }
+    }
+</style>
+<aside class="side-bar">
           <div class="top">
             <div class="logo">
                 <img src="assets/images/collage-logo.svg" alt="">
@@ -80,42 +303,10 @@
                 </li>
             </ul>
           </div>
-        </aside>
-         <!-- end aside -->
-    <main>
-<!--        right-top-nav bar-->
-        <div class="menu"><a href="#" class="menu-btn"><span class="material-symbols-outlined">menu</span></a></div>
-        <div class="title">
-            <h1>لوحة التحكم</h1>
-            <div class="date">
-                <span id="year">2023</span>-<span id="month">4</span>-<span id="day">13</span>
-            </div>
-        </div>
-        <!--        left-top-nav bar-->
-        <div class="right">
-            <div class="top">
-                <div class="search">
-                    <input type="search">
-                </div>
-                <div class="span">
-                    <span class="material-symbols-outlined">search</span>
-                </div>   
-                <div class="profile-photo">
-                    <img src="assets/images/me.jpg" alt="">
-                </div>
-            </div>
-        </div>
-<!--        end nav-->
-<!--     start main-content   -->
+    <div class="menu"><a href="#" class="menu-btn"><span class="material-symbols-outlined">menu</span></a></div>
+</aside>
 
-
-
-
-<!--        end main-content-->
-    </main>
-    </div>
 <script>
-       $(document).ready(function(){
       $('.sub-btn').click(function(){
         $(this).next('.sub-menu').slideToggle();
         $(this).find('.drop').toggleClass('rotate');
@@ -129,12 +320,4 @@
         $('.side-bar').removeClass('active');
         $('.menu-btn').css("visibility", "visible");
       });
-    });
-       let dateObj = new Date();
-       let month = dateObj.getUTCMonth() + 1;
-       document.getElementById('month').innerHTML=`${month}`;
-       let day = dateObj.getUTCDate();
-       document.getElementById('day').innerHTML=`${day}`;
-       let year = dateObj.getUTCFullYear();
-       document.getElementById('month').innerHTML=`${day}`;
 </script>
