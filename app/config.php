@@ -7,6 +7,6 @@ return [
     ],
     'app' => [
         'name' => 'Collage',
-        'url' => 'http://localhost/SE_Project/collage/public',
+        'url' => 'http://localhost/collage/public',
     ],
 ];
