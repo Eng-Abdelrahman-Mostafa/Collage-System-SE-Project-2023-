@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="ar">
   <head>
     <!-- Required meta tags -->
@@ -138,7 +139,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-primary">
+                    <tr class="table">
                       <th scope="row">1</th>
                       <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن ياسر حامد أحمد
                         <div class="depType">القسم:العام</div>
@@ -149,72 +150,6 @@
                       <td>3.1</td>
                       <td>20210536</td>
                       <td>82%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">2</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن مصطفى محمود محمد
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                    <td>3.6</td>
-                    <td>20210533</td>
-                      <td>92%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-danger">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالله الشرقاوي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>2.9</td>
-                      <td>20210539</td>
-                      <td>70%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>اية سالم الشامي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>4.0</td>
-                      <td>20210079</td>
-                      <td>100%</td>
                       <td>
                         <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                           <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -243,6 +178,58 @@
                 </ul>
               </nav>
             </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Launch static backdrop modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form>
+                                  <div class="mb-3">
+                                      <label for="exampleInputText" class="form-label">Department Name</label>
+                                      <input type="Text" class="form-control" id="exampleInputText" aria-describedby="textHelp">
+                                      <div id="textHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Understood</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Launch demo modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Department</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                             هل تريد حذف الفسم؟
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-warning">Delete</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
         </div>
       </div>
