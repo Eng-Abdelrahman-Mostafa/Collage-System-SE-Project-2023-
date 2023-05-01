@@ -1,32 +1,27 @@
 <!doctype html>
+
 <html lang="ar">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- matrial icon -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-      <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/all_students.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <title>Admin</title>
   </head>
   <body>
     <div class="container-fulid" dir="rtl">
       <div class="row">
         <div class="col-xl-2 side">
-
         </div>
-        <div class="col-xl-10 left" style="zoom: 80%">
+        <div class="col-xl-10 left">
           <!-- Your main content goes here -->
           <div class="stds-stat row">
             <div class="col-lg-3 col-sm-6">
-              <a href="#" class="add-new-std" style="width: 90%;">
+              <a href="#" class="add-new-std" style="width: 100%;">
                 <div class="stc-box">
                   <div class="stc-val-parent">
                     <span class="stc-value">
@@ -39,7 +34,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 90%;">
+              <a class="real-stc" style="width: 100%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 3.2 </span>
@@ -52,7 +47,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 90%;">
+              <a class="real-stc" style="width: 100%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 80% </span>
@@ -65,7 +60,7 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <a class="real-stc" style="width: 90%;">
+              <a class="real-stc" style="width: 100%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
                       <span class="stc-value"> 3205 </span>
@@ -118,7 +113,7 @@
                 </select>
               </div>
               <div class="col col-lg-1 col-sm-12"></div>
-              <button class="btn col-lg-2 col-sm-12 align-self-end mt-3 fltr">فلترة</button>
+              <button class="btn col-lg-2 col-sm-12 align-self-end mt-3">فلترة</button>
             </div>
             <div class="row mt-5">
               <div class="col-lg-10 col-sm-12"></div>
@@ -144,7 +139,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-primary">
+                    <tr class="table">
                       <th scope="row">1</th>
                       <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن ياسر حامد أحمد
                         <div class="depType">القسم:العام</div>
@@ -155,72 +150,6 @@
                       <td>3.1</td>
                       <td>20210536</td>
                       <td>82%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">2</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن مصطفى محمود محمد
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                    <td>3.6</td>
-                    <td>20210533</td>
-                      <td>92%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-danger">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالله الشرقاوي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>2.9</td>
-                      <td>20210539</td>
-                      <td>70%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>اية سالم الشامي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>4.0</td>
-                      <td>20210079</td>
-                      <td>100%</td>
                       <td>
                         <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                           <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -249,27 +178,62 @@
                 </ul>
               </nav>
             </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Launch static backdrop modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form>
+                                  <div class="mb-3">
+                                      <label for="exampleInputText" class="form-label">Department Name</label>
+                                      <input type="Text" class="form-control" id="exampleInputText" aria-describedby="textHelp">
+                                      <div id="textHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Understood</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Launch demo modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Department</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                             هل تريد حذف الفسم؟
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-warning">Delete</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-    $(document).ready(function(){
-    $('.sub-btn').click(function(){
-    $(this).next('.sub-menu').slideToggle();
-    $(this).find('.drop').toggleClass('rotate');
-    });
-    $('.menu-btn').click(function(){
-    $('.side-bar').addClass('active');
-    $('.menu-btn').css("visibility", "hidden");
-    });
-
-    $('.close-btn').click(function(){
-    $('.side-bar').removeClass('active');
-    $('.menu-btn').css("visibility", "visible");
-    });
-    });
-    </script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

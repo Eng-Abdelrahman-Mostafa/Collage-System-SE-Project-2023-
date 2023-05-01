@@ -136,7 +136,6 @@ svg:not(:host).svg-inline--fa, svg:not(:root).svg-inline--fa {
 
 .btn
 {
-  background-color: var(--first-color);
   box-shadow: var(--shadow);
   color: white;
   font-weight: var(--font-semi-bold);

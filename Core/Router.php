@@ -24,7 +24,7 @@ class Router {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => 'GET',
+            'method' => 'POST',
             'method_name' => $method_name,
             'middlewares' => $middlewares
         ];
