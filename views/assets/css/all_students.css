@@ -6,8 +6,9 @@
   outline: none;
   list-style: none;
   word-wrap: break-word;
-  overflow-x: hidden;  
 }
+
+
 
 .main-content
 {
@@ -134,13 +135,20 @@ svg:not(:host).svg-inline--fa, svg:not(:root).svg-inline--fa {
   box-shadow: var(--shadow);
 }
 
+
+.fltr
+{
+  background-color: var(--first-color);
+  width: 17%;
+}
+
 .btn
 {
+
   box-shadow: var(--shadow);
   color: white;
   font-weight: var(--font-semi-bold);
   height: 40px;
-  width: 320px;
 }
 
 
@@ -320,3 +328,4 @@ label
   background-color: white;
   color: rgb(56, 123, 215);
 }
+
