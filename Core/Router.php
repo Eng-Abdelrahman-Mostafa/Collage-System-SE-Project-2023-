@@ -52,6 +52,7 @@ class Router {
                 return $controller->$method_name();
             }
         }
+//        dd($this->routes);
         abort(404);
     }
 

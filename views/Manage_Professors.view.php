@@ -141,39 +141,36 @@
                   <thead>
                     <tr >
                       <th scope="col">#</th>
-                      <th scope="col">الاسم</th>
-                      <th scope="col">المرحلة الدراسية</th>
-                      <th scope="col">GPA</th>
-                      <th scope="col">الكود</th>
-                      <th scope="col">المستوى العام</th>
+                      <th scope="col">اسم الدكتور</th>
+                      <th scope="col">القسم</th>
                       <th scope="col">اجراءات</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table">
-                      <th scope="row">1</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن ياسر حامد أحمد
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                      </td>
-                      <td>3.1</td>
-                      <td>20210536</td>
-                      <td>82%</td>
-                      <td>
-                        <div class="dropdown-center">
-                          <button class="btn btn-outline-secondary dropdown-toggle btn-drop" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            :
-                          </button>
-                          <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                            <li id="createBtn"><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Action two</a></li>
-                            <li><a class="dropdown-item" href="#">Action three</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
+                  <?= $i = 1; ?>
+                      <?php foreach ($professors as $professor) : ?>
+                        <tr class="table">
+                          <th scope="row"><?= $i++ ?></th>
+                          <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?= $professor['full_name_ar'] ?>
+                          </td>
+                          <td data-lable="المرحلة الدراسية :" class="table-level-parent">
+                            <span class="table-level"><?= $professor['d_name'] ?></span>
+                          </td>
+                          <td>
+                            <div class="dropdown-center">
+                              <button class="btn btn-outline-secondary dropdown-toggle btn-drop" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                              </button>
+                              <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
+                                <li id="createBtn"><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Action two</a></li>
+                                <li><a class="dropdown-item" href="#">Action three</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+
+                      <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>
@@ -184,20 +181,25 @@
       </div>
     </div>
 <!--    Modal Starting code-->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal Title</h4>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Modal body text goes here.
+            <form>
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label">الاسم:</label>
+                <input type="text" class="form-control"  value="" required name="name">
+              </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
           </div>
+            </form>
         </div>
       </div>
     </div>
