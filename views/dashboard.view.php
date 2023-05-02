@@ -8,7 +8,21 @@
     <title>Dashboard</title>
    <!-- css -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+<style>
+    main .charts {
 
+    }
+    main .charts .donut{
+        background-color: var(--container-color);
+        border-radius: 10px;
+        margin-left: 10px;
+    }
+    main .charts .bar{
+        background-color: var(--container-color);
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+</style>
     <!-- matrial icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -61,9 +75,91 @@
                 </div>
             </div>
         </div>
+        <div class="charts" style="margin-top: 2rem;display: flex">
+            <div class="donut" id="donut" style="width: 40%">
+            </div>
+            <div class="bar" id="bar" style="width: 60%">
+            </div>
+        </div>
 <!--        end main-content-->
     </main>
     </div>
-</div>   
+</div>
+ <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+   <script>
+       var options1 = {
+           series: [55, 44, 41, 17, 15,23],
+           chart: {
+               type: 'donut',
+           },
+           colors: ['#92BCB5', '#FEF1CF', '#B5B5B8', '#F7F6FD', '#c6beef','#20B2AA'],
+           labels: ['CS', 'IS', 'AI', 'IT', 'MI','SW'],
+           responsive: [{
+               breakpoint: 480,
+               options: {
+                   chart: {
+                       width: 200
+                   },
+                   legend: {
+                       position: 'bottom'
+                   }
+               }
+           }]
+       };
+
+       var chart2 = new ApexCharts(document.getElementById('donut'), options1);
+       chart2.render();
+
+       var options = {
+           series: [{
+               name: 'المستوي العام',
+               data: [44, 55, 57, 56, 61, 58]
+           },  {
+               name: 'مستوي الطلاب',
+               data: [35, 41, 36, 26, 45, 48]
+           }],
+           colors: ['#FEF1CF','#92BCB5'],
+           chart: {
+               type: 'bar',
+               height: 350
+           },
+           plotOptions: {
+               bar: {
+                   horizontal: false,
+                   columnWidth: '55%',
+                   endingShape: 'rounded'
+               },
+           },
+           dataLabels: {
+               enabled: false
+           },
+           stroke: {
+               show: true,
+               width: 2,
+               colors: ['transparent']
+           },
+           xaxis: {
+               categories: ['CS', 'IS', 'AI', 'IT', 'MI', 'SW'],
+           },
+           yaxis: {
+               title: {
+                   text: '$ (thousands)'
+               }
+           },
+           fill: {
+               opacity: 1
+           },
+           tooltip: {
+               y: {
+                   formatter: function (val) {
+                       return "$ " + val + " thousands"
+                   }
+               }
+           }
+       };
+
+       var chart = new ApexCharts(document.getElementById('bar'), options);
+       chart.render();
+   </script>
 </body>
 </html>

@@ -6,8 +6,8 @@
   outline: none;
   list-style: none;
   word-wrap: break-word;
+  overflow-x: hidden;
 }
-
 .main-content
 {
   background-color: var(--container-color);
@@ -319,10 +319,4 @@ label
   border-radius: 10px;
   background-color: white;
   color: rgb(56, 123, 215);
-}
-.ul-drop{
-  background-color: #FFFFFF;
-}
-.btn-drop{
-  color: black;
 }
