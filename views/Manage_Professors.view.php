@@ -11,15 +11,15 @@
       <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/all_students.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <title>Admin</title>
-      <!-- matrial icon -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <!-- matrial icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="assets/css/all_students.css">
   </head>
   <body>
     <div class="container-fulid" dir="rtl">
@@ -150,141 +150,101 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-primary">
+                    <tr class="table">
                       <th scope="row">1</th>
                       <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن ياسر حامد أحمد
                         <div class="depType">القسم:العام</div>
                       </td>
                       <td data-lable="المرحلة الدراسية :" class="table-level-parent">
                         <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
+                      </td>
                       <td>3.1</td>
                       <td>20210536</td>
                       <td>82%</td>
                       <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">2</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن مصطفى محمود محمد
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                    <td>3.6</td>
-                    <td>20210533</td>
-                      <td>92%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-danger">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالله الشرقاوي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>2.9</td>
-                      <td>20210539</td>
-                      <td>70%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">3</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>اية سالم الشامي
-                        <div class="depType">القسم:العام</div>
-                      </td>
-                      <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level">المستوى الثاني منقول</span>
-                    </td>
-                      <td>4.0</td>
-                      <td>20210079</td>
-                      <td>100%</td>
-                      <td>
-                        <button type="button" class="btn btn-primary dropdown-toggle btndots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Option 1</a></li>
-                          <li><a class="dropdown-item" href="#">Option 2</a></li>
-                          <li><a class="dropdown-item" href="#">Option 3</a></li>
-                        </ul>
+                        <div class="dropdown-center">
+                          <button class="btn btn-outline-secondary dropdown-toggle btn-drop" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            :
+                          </button>
+                          <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
+                            <li id="createBtn"><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Action two</a></li>
+                            <li><a class="dropdown-item" href="#">Action three</a></li>
+                          </ul>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            <div class="row mt-5">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <div class="btns">
-                    <li class="page-item"><a class="page-link" href="#">السابق</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">التالي</a></li>
-                  </div>
-                </ul>
-              </nav>
-            </div>
+
           </div>
         </div>
       </div>
     </div>
-    <script>
-    $(document).ready(function(){
-    $('.sub-btn').click(function(){
-    $(this).next('.sub-menu').slideToggle();
-    $(this).find('.drop').toggleClass('rotate');
-    });
-    $('.menu-btn').click(function(){
-    $('.side-bar').addClass('active');
-    $('.menu-btn').css("visibility", "hidden");
-    });
+<!--    Modal Starting code-->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal Title</h4>
+          </div>
+          <div class="modal-body">
+            Modal body text goes here.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--    Modal ending code-->
+<!--    <script>-->
+<!--    $(document).ready(function(){-->
+<!--    $('.sub-btn').click(function(){-->
+<!--    $(this).next('.sub-menu').slideToggle();-->
+<!--    $(this).find('.drop').toggleClass('rotate');-->
+<!--    });-->
+<!--    $('.menu-btn').click(function(){-->
+<!--    $('.side-bar').addClass('active');-->
+<!--    $('.menu-btn').css("visibility", "hidden");-->
+<!--    });-->
+<!---->
+<!--    $('.close-btn').click(function(){-->
+<!--    $('.side-bar').removeClass('active');-->
+<!--    $('.menu-btn').css("visibility", "visible");-->
+<!--    });-->
+<!--    });-->
+<!--    </script>-->
 
-    $('.close-btn').click(function(){
-    $('.side-bar').removeClass('active');
-    $('.menu-btn').css("visibility", "visible");
-    });
-    });
-    </script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/df48339200.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
+    <script>
+      $(document).ready(function() {
+        $('#createBtn').click(function (){
+          $('#createModal').modal('show');
+        });
+      });
+      const createBtn = document.querySelector("#createBtn");
+      const createModal = document.querySelector("#createModal");
+
+      createBtn.addEventListener("click", function() {
+        createModal.modal('show');
+      });
+
+
+    </script>
   </body>
 </html>

@@ -319,3 +319,22 @@ label
   background-color: white;
   color: rgb(56, 123, 215);
 }
+.ul-drop{
+  background-color: #FFFFFF;
+}
+.btn-drop{
+  color: black;
+  max-width: 30px;
+
+}
+@media screen and (max-width: 767px) {
+  .dropdown-center {
+    text-align: center;
+  }
+  .dropdown-center .btn-drop {
+    width: 100%;
+  }
+  .ul-drop {
+    width: 100%;
+  }
+}
