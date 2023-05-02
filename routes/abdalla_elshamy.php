@@ -1,9 +1,11 @@
 <?php
 
-$router->get('/Controller_Student_register', 'app\http\Controllers\Controller_Student_register.php', 'index');
+$router->get('/Controller_enrolled_students', 'app\http\Controllers\Controller_enrolled_students.php', 'index');
+
+//$router->get('/Controller_enrolled_students', 'app\http\Controllers\Controller_enrolled_students.php', 'add');
 
 
-
+$router->get('/Controller_enrolled_students/delete', 'app\http\Controllers\Controller_enrolled_students.php', 'delete');
 
 
 

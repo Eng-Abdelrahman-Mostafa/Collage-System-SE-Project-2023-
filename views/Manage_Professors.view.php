@@ -237,12 +237,6 @@
           $('#createModal').modal('show');
         });
       });
-      const createBtn = document.querySelector("#createBtn");
-      const createModal = document.querySelector("#createModal");
-
-      createBtn.addEventListener("click", function() {
-        createModal.modal('show');
-      });
 
 
     </script>

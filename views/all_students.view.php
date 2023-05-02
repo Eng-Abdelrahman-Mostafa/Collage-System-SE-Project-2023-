@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="ar">
   <head>
     <!-- Required meta tags -->
@@ -151,8 +151,9 @@
                   </thead>
                   <tbody>
                     <tr class="table-primary">
+
                       <th scope="row">1</th>
-                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>عبدالرحمن ياسر حامد أحمد
+                      <td class="name"><i class="fa-solid fa-id-card-clip"></i>  عبدالل الشامي ريمكس
                         <div class="depType">القسم:العام</div>
                       </td>
                       <td data-lable="المرحلة الدراسية :" class="table-level-parent">
@@ -235,6 +236,7 @@
                           <li><a class="dropdown-item" href="#">Option 1</a></li>
                           <li><a class="dropdown-item" href="#">Option 2</a></li>
                           <li><a class="dropdown-item" href="#">Option 3</a></li>
+
                         </ul>
                       </td>
                     </tr>
