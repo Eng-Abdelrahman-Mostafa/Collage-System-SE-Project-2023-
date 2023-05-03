@@ -293,6 +293,11 @@ label
   padding-left: 10px;
 }
 
+.fa-user-tie
+{
+  padding-left: 10px;
+}
+
 
 .dropdown-toggle::after {
   display: none;
