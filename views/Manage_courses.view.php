@@ -163,7 +163,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/collage/public/Manage_courses_delete" method="post" style="text-align: right">
+        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/courses_delete" method="post" style="text-align: right">
           <p>هل انت متأكد انك تريد مسح الكورس</p>
           <input type="hidden" id="coures_id_delete" name='id' value="">
       </div>
@@ -227,15 +227,15 @@
 </div>
 
 
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  action="add_courses" method="post">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">تعديل الكورس</h5>
+        <h5 class="modal-title" id="exampleModalLabel">اضافة كورس</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" style="text-align: right">
+        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/add_courses" method="post" style="text-align: right">
           <div class="form-group">
             <label for="name">اسم الكورس:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
@@ -265,11 +265,11 @@
 
             </select>
           </div>
-          <input type="hidden" id="course_id_add" name="course_id" value="">
+<!--          <input type="hidden" id="course_id_add" name="course_id" value="">-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-        <button type="submit" class="btn btn-primary">تحديث</button>
+        <button type="submit" class="btn btn-primary">اضافة</button>
         </form>
       </div>
     </div>
@@ -281,38 +281,7 @@
 
 
 <!--    Modal ending code-->
-<script>
-  // $(document).ready(function(){
-  //   $('.sub-btn').click(function(){
-  //     $(this).next('.sub-menu').slideToggle();
-  //     $(this).find('.drop').toggleClass('rotate');
-  //   });
-  //   $('.menu-btn').click(function(){
-  //     $('.side-bar').addClass('active');
-  //     $('.menu-btn').css("visibility", "hidden");
-  //   });
-  //
-  //   $('.close-btn').click(function(){
-  //     $('.side-bar').removeClass('active');
-  //     $('.menu-btn').css("visibility", "visible");
-  //   });
-  // });
-  //
-  //
-  //
-  // $(document).ready(function() {
-  //   $('#delete-item').click(function (){
-  //     $('#createModal').modal('delete');
-  //   });
-  // });
-  // const createBtn = document.querySelector("#delete-item");
-  // const createModal = document.querySelector("#createModal");
-  //
-  // createBtn.addEventListener("click", function() {
-  //   createModal.modal('delete');
-  // });
 
-</script>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

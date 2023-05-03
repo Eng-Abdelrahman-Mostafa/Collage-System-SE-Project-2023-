@@ -6,7 +6,7 @@ $router->get('/Manage_courses', 'app\http\Controllers\Controller_Manage_courses.
 
 
 
-$router->post('/Manage_courses_delete', 'app\http\Controllers\Controller_Manage_courses.php', 'delete');
+$router->post('/courses_delete', 'app\http\Controllers\Controller_Manage_courses.php', 'delete');
 
 $router->get('/enrolled_students/updata', 'app\http\Controllers\Controller_Manage_courses.php', 'updata');
 
