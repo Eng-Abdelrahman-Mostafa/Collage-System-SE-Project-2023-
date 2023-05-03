@@ -149,9 +149,9 @@
                   <tbody>
                   <?= $i = 1; ?>
                       <?php foreach ($professors as $professor) : ?>
-                        <tr class="table">
+                        <tr class="table-light">
                           <th scope="row"><?= $i++ ?></th>
-                          <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?= $professor['full_name_ar'] ?>
+                          <td class="name"><i class="fa-sharp fa-solid fa-user-tie"></i> <?= $professor['full_name_ar'] ?>
                           </td>
                           <td data-lable="المرحلة الدراسية :" class="table-level-parent">
                             <span class="table-level"><?= $professor['d_name'] ?></span>
@@ -162,14 +162,13 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                               </button>
                               <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                                <li id="createBtn"><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Action two</a></li>
-                                <li><a class="dropdown-item" href="#">Action three</a></li>
+                                <li><a class="dropdown-item" href="#">الصفحة الشخصية</a></li>
+                                <li id="createBtn"><a class="dropdown-item update-btn" href="#">تعديل البيانات</a></li>
+                                <li><a class="dropdown-item delete-btn" href="#">حذف المستخدم</a></li>
                               </ul>
                             </div>
                           </td>
                         </tr>
-
                       <?php endforeach; ?>
                   </tbody>
                 </table>
@@ -204,6 +203,30 @@
       </div>
     </div>
 <!--    Modal ending code-->
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form style="text-align: right">
+                        <div class="mb-3">
+                            <h6>هل تريد حذف المستخدم بالفعل</h6>
+                            <input type="hidden" class="form-control"  value="" required name="name">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
 <!--    <script>-->
 <!--    $(document).ready(function(){-->
 <!--    $('.sub-btn').click(function(){-->
@@ -235,9 +258,15 @@
     -->
     <script>
       $(document).ready(function() {
-        $('#createBtn').click(function (){
+        $('.update-btn').click(function (){
           $('#createModal').modal('show');
         });
+      });
+
+      $(document).ready(function() {
+          $('.delete-btn').click(function (){
+              $('#deleteModal').modal('show');
+          });
       });
 
 

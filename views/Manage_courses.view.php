@@ -31,14 +31,14 @@
       <?php include 'layouts/nav_bar.view.php';?>
       <!-- Your main content goes here -->
       <div class="stds-stat row">
-        <div class="col-lg-3 col-sm-6">
+        <div class="col-lg-3 col-sm-6 add-btn" data="<?= $s['id_courses'] ?>">
           <a href="#" class="add-new-std" style="width: 90%;">
             <div class="stc-box">
               <div class="stc-val-parent">
                     <span class="stc-value">
                         <svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <i class="fa-solid fa-plus"></i> Font Awesome fontawesome.com -->
                     </span>
-                <span class="stc-name">اضافة طالب جديد
+                <span class="stc-name">اضافة كورس  جديد
                     </span>
               </div>
             </div>
@@ -84,48 +84,7 @@
           </a>
         </div>
       </div>
-      <div class="stdTableParent">
-        <h5>لائحة الطلاب</h5>
-        <div class="row d-flex justify-content-between mt-5">
-          <div class="slco col-lg-2 col-sm-12">
-            <label > المرحلة الدراسية</label>
-            <select class="form-select"  aria-label=".form-select-lg example">
-              <option selected>جميع المراحل الدراسية</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="slco col-lg-2 col-sm-12">
-            <label > الاقسام</label>
-            <select class="form-select"  aria-label=".form-select-lg example">
-              <option selected>جميع الاقسام</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="slco col-lg-2 col-sm-12">
-            <label > العام الدراسي</label>
-            <select class="form-select"  aria-label=".form-select-lg example" >
-              <option selected>جميع الاعوام</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="slco col-lg-2 col-sm-12">
-            <label > المستوى العام</label>
-            <select class="form-select"  aria-label=".form-select-lg example">
-              <option selected>جميع الاعوام</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="col col-lg-1 col-sm-12"></div>
-          <button class="btn col-lg-2 col-sm-12 align-self-end mt-3 fltr">فلترة</button>
-        </div>
+
         <div class="row mt-5">
           <div class="col-lg-10 col-sm-12"></div>
           <div class="col-lg-2 col-sm-12">
@@ -148,10 +107,10 @@
                 <th scope="col">اجراءات</th>
               </tr>
               </thead>
-              <tbody><?php $counter=0; ?>
+              <tbody><?php $counter=1; ?>
               <?php foreach ($data as $s): ?>
               <tr class="table-primary">
-                <th scope="row"><?php echo $counter++ ; ?></th>
+                <th scope="row"><?= $counter++ ?></th>
                 <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?php echo $s['name_courses']; ?>
                   <div class="depType">القسم:العام</div>
                 </td>
@@ -166,8 +125,7 @@
                       :
                     </button>
                     <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                      <li id="createBtn"><a class="dropdown-item" href="#"> اضافه الكورس</a></li>
-                      <li><a class="dropdown-item updata-btn"data="<?= $s['id_courses'] ?>"> تعديل الكورس  </a></li>
+                       <li><a class="dropdown-item update-btn"data="<?= $s['id_courses'] ?>"> تعديل الكورس  </a></li>
                       <li><a class="dropdown-item delete-btn" data="<?= $s['id_courses'] ?>">مسح  الكورس</a></li>
                     </ul>
                   </div>
@@ -205,9 +163,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" style="text-align: right">
-          <p>هل انت متأكد انك تريد مسح المادة</p>
-          <input type="hidden" id="coures_id_delete" name='course_id'value="">
+        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/courses_delete" method="post" style="text-align: right">
+          <p>هل انت متأكد انك تريد مسح الكورس</p>
+          <input type="hidden" id="coures_id_delete" name='id' value="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="deleteModal">الغاء</button>
@@ -219,60 +177,111 @@
 </div>
 <!--    Modal ending code-->
 
-
-
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">تعديل الكورس</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="" method="post" style="text-align: right">
-          <p>هل انت متأكد انك تريد مسح المادة</p>
-          <input type="hidden" id="coures_id_delete" name='course_id'value="">
+          <div class="form-group">
+            <label for="name">اسم الكورس:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
+          </div>
+          <div class="form-group">
+            <label for="department">القسم:</label>
+            <select class="form-control" id="department" name="department" required>
+              <option value="">اختر القسم</option>
+              <option value="قسم الحاسبات">قسم  IS</option>
+              <option value="قسم الهندسة الميكانيكية">قسم  CS</option>
+              <option value="قسم الهندسة الكهربائية">قسم AI</option>
+              <option value="قسم الهندسة الكهربائية">قسم  IT
+
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="code">كود المادة:</label>
+            <input type="text" class="form-control" id="code" name="code" placeholder="أدخل كود المادة" required>
+          </div>
+          <div class="form-group">
+            <label for="hours">عدد الساعات:</label>
+            <select class="form-control" id="hours" name="hours" required>
+              <option value="">اختر عدد الساعات</option>
+              <option value="2">2 ساعة</option>
+              <option value="3">3 ساعات</option>
+
+            </select>
+          </div>
+          <input type="hidden" id="course_id_update" name="course_id" value="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="deleteModal">الغاء</button>
-        <button type="submit" class="btn btn-danger">حذف</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="submit" class="btn btn-primary">تحديث</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-<script>
-  // $(document).ready(function(){
-  //   $('.sub-btn').click(function(){
-  //     $(this).next('.sub-menu').slideToggle();
-  //     $(this).find('.drop').toggleClass('rotate');
-  //   });
-  //   $('.menu-btn').click(function(){
-  //     $('.side-bar').addClass('active');
-  //     $('.menu-btn').css("visibility", "hidden");
-  //   });
-  //
-  //   $('.close-btn').click(function(){
-  //     $('.side-bar').removeClass('active');
-  //     $('.menu-btn').css("visibility", "visible");
-  //   });
-  // });
-  //
-  //
-  //
-  // $(document).ready(function() {
-  //   $('#delete-item').click(function (){
-  //     $('#createModal').modal('delete');
-  //   });
-  // });
-  // const createBtn = document.querySelector("#delete-item");
-  // const createModal = document.querySelector("#createModal");
-  //
-  // createBtn.addEventListener("click", function() {
-  //   createModal.modal('delete');
-  // });
 
-</script>
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">اضافة كورس</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/add_courses" method="post" style="text-align: right">
+          <div class="form-group">
+            <label for="name">اسم الكورس:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
+          </div>
+          <div class="form-group">
+            <label for="department">القسم:</label>
+            <select class="form-control" id="department" name="department" required>
+              <option value="">اختر القسم</option>
+              <option value="قسم  IS">قسم  IS</option>
+              <option value="قسم CS">قسم  CS</option>
+              <option value="قسم  AI">قسم AI</option>
+              <option value="قسم IT">قسم  IT
+
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="code">كود المادة:</label>
+            <input type="text" class="form-control" id="code" name="code" placeholder="أدخل كود المادة" required>
+          </div>
+          <div class="form-group">
+            <label for="hours">عدد الساعات:</label>
+            <select class="form-control" id="hours" name="hours" required>
+              <option value="">اختر عدد الساعات</option>
+              <option value="2">2 ساعة</option>
+              <option value="3">3 ساعات</option>
+
+            </select>
+          </div>
+<!--          <input type="hidden" id="course_id_add" name="course_id" value="">-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="submit" class="btn btn-primary">اضافة</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--    Modal ending code-->
+
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -293,7 +302,23 @@
       let input_id = document.querySelector('#coures_id_delete');
       input_id.setAttribute("value",id);
     });
+    $('.update-btn').click(function (){
+      $('#updateModal').modal('show');
+      let id = this.getAttribute('data');
+      console.log(id)
+      let input_id = document.getElementById('course_id_update');
+      input_id.setAttribute("value",id);
+    });
+    $('.add-btn').click(function (){
+      $('#addModal').modal('show');
+      let id = this.getAttribute('data');
+      console.log(id)
+      let input_id = document.getElementById('course_id_add');
+      input_id.setAttribute("value",id);
+    });
   });
+
+
 </script>
 </body>
 </html>

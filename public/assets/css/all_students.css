@@ -292,6 +292,12 @@ label
   padding-left: 10px;
 }
 
+.fa-user-tie
+{
+  padding-left: 10px;
+}
+
+
 
 .dropdown-toggle::after {
   display: none;
@@ -319,13 +325,16 @@ label
   background-color: white;
   color: rgb(56, 123, 215);
 }
+
 .ul-drop{
   background-color: #FFFFFF;
 }
 .btn-drop{
-  color: black;
+  color: white;
+  border-radius: 10px;
   max-width: 30px;
-
+  background-color: var(--first-color);
+  border : none;
 }
 @media screen and (max-width: 767px) {
   .dropdown-center {
