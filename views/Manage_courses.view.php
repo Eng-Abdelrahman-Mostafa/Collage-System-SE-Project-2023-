@@ -163,7 +163,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="Controller_Manage_courses" method="post" style="text-align: right">
+        <form action="http://localhost/collage/public/Manage_courses_delete" method="post" style="text-align: right">
           <p>هل انت متأكد انك تريد مسح الكورس</p>
           <input type="hidden" id="coures_id_delete" name='id' value="">
       </div>
@@ -227,7 +227,7 @@
 </div>
 
 
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  action="add_courses" method="post">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
