@@ -292,16 +292,6 @@
                     </div>
                 </div>
 
-
-
-                <div class=" ">
-                    <label for="validationCustom01" class="form-label">صورة الطالب :</label>
-                    <input type="file" class="form-control"  placeholder=" ادخل صورة الطالب " name="image">
-                    <div class="invalid-feedback">
-                        Please choose a username.
-                    </div>
-                </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
@@ -395,7 +385,6 @@
                                 this.setAttribute('selected' , 'selected')
                             }
                         })
-                        document.getElementById('prof_password').setAttribute('value',data.prof[0]['password'])
                         document.getElementById('prof_phone_number').setAttribute('value',data.prof[0]['phone_number'])
                         document.getElementById('prof_title').setAttribute('value',data.prof[0]['title'])
                         document.getElementById('prof_description').setAttribute('value',data.prof[0]['description'])
