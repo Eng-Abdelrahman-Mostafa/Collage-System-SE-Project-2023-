@@ -200,7 +200,7 @@
 
                 <div class=" ">
                     <label for="validationCustom01" class="form-label"> كلمة المرور :</label>
-                    <input type="password" class="form-control" id="prof_password"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >
+                    <input type="password" class="form-control" id="prof_password"  placeholder=" ادخل كلمةالمرور للطالب"  name="password" minlength="8" maxlength="20" >
                     <div class="invalid-feedback">
                         Please choose a password.
                     </div>
