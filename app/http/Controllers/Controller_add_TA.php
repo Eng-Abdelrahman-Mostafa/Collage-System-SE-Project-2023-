@@ -57,6 +57,8 @@ class Controller_add_TA{
                 'nationality_id' => $nationality,
                 'department_id' => $department
             ]);
+            header('Location: add_TA');
+            exit();
         }else{
             isset($_POST['email']) ? : $errors['email']='يرجى ادخال البريد الالكتروني';
             isset($_POST['password']) ? : $errors['password']='يرجى ادخال كلمة المرور';
@@ -69,8 +71,10 @@ class Controller_add_TA{
             isset($_POST['department']) ? : $errors['department']='يرجى ادخال القسم';
             isset($_POST['role']) ? : $errors['role']='يرجى ادخال الدور';
             isset($_POST['nationality']) ? : $errors['nationality']='يرجى ادخال الجنسية';
+            $_POST['errors']=$errors;
+            header('Location: add_TA');
+            exit();
         }
-        header('Location: add_TA');
     }
 }
 

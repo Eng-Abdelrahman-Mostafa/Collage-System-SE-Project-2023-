@@ -162,9 +162,9 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                               </button>
                               <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                                <li><a class="dropdown-item" href="#">الصفحة الشخصية</a></li>
-                                <li id="createBtn"><a class="dropdown-item update-btn" href="#">تعديل البيانات</a></li>
-                                <li><a class="dropdown-item delete-btn" href="#">حذف المستخدم</a></li>
+                                <li><a class="dropdown-item" data="<?=$professor['id']?>">الصفحة الشخصية</a></li>
+                                <li id="createBtn"><a class="dropdown-item update-btn" data="<?=$professor['id']?>" >تعديل البيانات</a></li>
+                                <li><a class="dropdown-item delete-btn" data="<?=$professor['id']?>" >حذف المستخدم</a></li>
                               </ul>
                             </div>
                           </td>
@@ -184,19 +184,128 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update user</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="validationCustom01" class="form-label">الاسم:</label>
-                <input type="text" class="form-control"  value="" required name="name">
-              </div>
+            <form action="Manage_Professors" method="post" dir="rtl">
+                <input type="hidden" id="update_hidden_id" value="" name="id">
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>
+                    <input type="text" class="form-control"  id="profEmail" required name="email" placeholder="اضف البريد الالكتروني">
+                    <div class="invalid-feedback">
+                        Please choose a email.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label"> كلمة المرور :</label>
+                    <input type="password" class="form-control" id="prof_password"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >
+                    <div class="invalid-feedback">
+                        Please choose a password.
+                    </div>
+                </div>
+
+
+
+                <div class="">
+                    <label for="validationCustom01" class="form-label mt-3">الاسم الرباعي باللغه العربية :</label>
+                    <input type="text" class="form-control"  id="profNameAr" placeholder="ادخل الاسم باللغة العربية  " required name="ar_name">
+                    <div class="invalid-feedback">
+                        Please enter your name in arabic.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">الاسم الرباعي باللغه الانجليزية :</label>
+                    <input type="text" class="form-control"  id="profNameEn" placeholder="ادخل الاسم باللغة الانجليزية " required name="en_name">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">رقم الهاتف :</label>
+                    <input type="text" class="form-control" id="prof_phone_number"   value="" placeholder="رقم الهاتف" required name="phone_number">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">الرقم القومي :</label>
+                    <input type="text" class="form-control"  id="prof_national_id" placeholder="الرقم القومي " required name="National_ID">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">اللقب :</label>
+                    <input type="text" class="form-control"  id="prof_title" placeholder=" ادخل وصف الطالب " required name="title">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">عنوان :</label>
+                    <input type="text" class="form-control" id="prof_address"  placeholder=" ادخل عنوان الطالب " required name="address">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">الوصف :</label>
+                    <input type="text" class="form-control"  id="prof_description" placeholder=" ادخل عنوان الطالب " required name="description">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                <div class="c">
+                    <label for="validationCustom04" class="form-label">القسم :</label>
+                    <select class="form-select"  id="prof_department_id" required name="department" name="department">
+                        <option selected disabled > اختر قسم الطالب</option>
+                        <?php foreach ($departments as $department ):?>
+                            <option value="<?= $department['id']?>"><?=$department['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid ya Dawly.
+                    </div>
+                </div>
+
+
+
+                <div class="c">
+                    <label for="validationCustom04" class="form-label">الجنسية :</label>
+                    <select class="form-select" id="prof_nationality_id" required name="nationality">
+                        <option selected disabled > اختر جنسية الطالب</option>
+                        <?php foreach ($nationalities as $nationality): ?>
+                            <option value="<?= $nationality['id']?>"><?=$nationality['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid ya Dawly.
+                    </div>
+                </div>
+
+
+
+                <div class=" ">
+                    <label for="validationCustom01" class="form-label">صورة الطالب :</label>
+                    <input type="file" class="form-control"  placeholder=" ادخل صورة الطالب " name="image">
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+            <button type="submit" class="btn btn-primary">حفظ التغيرات</button>
           </div>
             </form>
         </div>
@@ -208,7 +317,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete user</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -259,7 +368,57 @@
     <script>
       $(document).ready(function() {
         $('.update-btn').click(function (){
-          $('#createModal').modal('show');
+            let id = this.getAttribute('data');
+            console.log(id);
+            let input_id = document.querySelector('#update_hidden_id');
+            input_id.setAttribute("value",id);
+
+
+            const formData = new FormData();
+            formData.append('id',id);
+
+            fetch('<?= site_url() ?>/get_professor_data', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('profNameAr').setAttribute('value',data.prof[0]['full_name_ar'])
+                        document.getElementById('profNameEn').setAttribute('value',data.prof[0]['full_name_en'])
+                        document.getElementById('profEmail').setAttribute('value',data.prof[0]['email'])
+                        document.getElementById('prof_national_id').setAttribute('value',data.prof[0]['national_id_number'])
+                        $("#prof_nationality_id").find('option').each(function (){
+                            this.removeAttribute('selected')
+                            if (this.getAttribute('value')== data.prof[0]['nationality_id'])
+                            {
+                                this.setAttribute('selected' , 'selected')
+                            }
+                        })
+                        document.getElementById('prof_password').setAttribute('value',data.prof[0]['password'])
+                        document.getElementById('prof_phone_number').setAttribute('value',data.prof[0]['phone_number'])
+                        document.getElementById('prof_title').setAttribute('value',data.prof[0]['title'])
+                        document.getElementById('prof_description').setAttribute('value',data.prof[0]['description'])
+                        document.getElementById('prof_address').setAttribute('value',data.prof[0]['address'])
+                        $("#prof_department_id").find('option').each(function (){
+                            this.removeAttribute('selected')
+                            if (this.getAttribute('value')== data.prof[0]['department_id'])
+                            {
+                                this.setAttribute('selected' , 'selected')
+                            }
+                        })
+                        $('#createModal').modal('show');
+                    } else {
+                        // Login failed, show error message to user
+                        const errorMessage = document.getElementById('error-message');
+                        errorMessage.textContent = data.message;
+                    }
+                })
+                .catch(error => {
+                    // Handle network error or other exceptions
+                    console.error(error);
+                });
+
         });
       });
 

@@ -10,10 +10,36 @@ class Controller_Manage_Professors {
                                         FROM `teaching_staff` 
                                         INNER JOIN `departments` 
                                         ON departments.id = teaching_staff.department_id
-                                        where  `role_num`=3;
-")->fetchAll();
+                                        where  `role_num`=3;")->fetchAll();
+        $roles = $db->query("select * from `roles`")->fetchAll();
+        $nationalities = $db->query("select * from `nationalities`")->fetchAll();
+        $departments = $db->query("select * from `departments`")->fetchAll();
 //        dd($professors);
-        view('Manage_Professors' , compact('professors'));
+        view('Manage_Professors' , compact('professors', "roles","nationalities","departments"));
+    }
+    public function submit()
+    {
+        $errors=[];
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $db->query();
+    }
+    public function getProfessorData()
+    {
+        $professorId= $_POST['id'];
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $prof  =   $db->query("SELECT * FROM `teaching_staff` where id =:id",['id' => $professorId])->fetchAll();
+        if(!$prof)
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('success' => false,'message' => 'Professor not Founded'));
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'prof' => $prof , 'message' => 'Professor Founded'));
+        exit;
+
     }
 }
 

@@ -27,3 +27,8 @@ function config($key = ''){
 function asset($path = ''){
     return base_path("public/assets/{$path}");
 }
+
+function site_url(){
+    $config = require  base_path('app/config.php');
+    return $config['app']['url'];
+}
