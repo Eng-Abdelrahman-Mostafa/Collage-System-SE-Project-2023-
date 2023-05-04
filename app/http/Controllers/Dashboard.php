@@ -18,6 +18,13 @@ class Dashboard {
 //
         view('dashboard');
     }
+    public function index2() {
+        $config = require base_path("app/config.php");
+        require_once base_path("Core/Database.php");
+        $db=new Database($config);
+
+    view('dashboard_student');
+    }
 }
 
 //write code here
