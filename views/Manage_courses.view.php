@@ -163,7 +163,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/courses_delete" method="post" style="text-align: right">
+        <form action="http://localhost/collage/public/courses_delete" method="post" style="text-align: right">
           <p>هل انت متأكد انك تريد مسح الكورس</p>
           <input type="hidden" id="coures_id_delete" name='id' value="">
       </div>
@@ -185,7 +185,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" style="text-align: right">
+        <form action="http://localhost/collage/public/courses_updata" method="post" style="text-align: right">
           <div class="form-group">
             <label for="name">اسم الكورس:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
@@ -194,10 +194,10 @@
             <label for="department">القسم:</label>
             <select class="form-control" id="department" name="department" required>
               <option value="">اختر القسم</option>
-              <option value="قسم الحاسبات">قسم  IS</option>
-              <option value="قسم الهندسة الميكانيكية">قسم  CS</option>
-              <option value="قسم الهندسة الكهربائية">قسم AI</option>
-              <option value="قسم الهندسة الكهربائية">قسم  IT
+              <option value="3">قسم  IS</option>
+              <option value="1">قسم  CS</option>
+              <option value="2">قسم MI</option>
+              <option value="4">قسم  IT
 
               </option>
             </select>
@@ -235,7 +235,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/add_courses" method="post" style="text-align: right">
+        <form action="http://localhost/collage/public/add_courses" method="post" style="text-align: right">
           <div class="form-group">
             <label for="name">اسم الكورس:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
@@ -244,10 +244,10 @@
             <label for="department">القسم:</label>
             <select class="form-control" id="department" name="department" required>
               <option value="">اختر القسم</option>
-              <option value="قسم  IS">قسم  IS</option>
-              <option value="قسم CS">قسم  CS</option>
-              <option value="قسم  AI">قسم AI</option>
-              <option value="قسم IT">قسم  IT
+              <option value="3">قسم  IS</option>
+              <option value="1">قسم  CS</option>
+              <option value="2">قسم MI</option>
+              <option value="4">قسم  IT
 
               </option>
             </select>
@@ -306,7 +306,7 @@
       $('#updateModal').modal('show');
       let id = this.getAttribute('data');
       console.log(id)
-      let input_id = document.getElementById('course_id_update');
+      let input_id = document.getElementById('#course_id_update');
       input_id.setAttribute("value",id);
     });
     $('.add-btn').click(function (){
