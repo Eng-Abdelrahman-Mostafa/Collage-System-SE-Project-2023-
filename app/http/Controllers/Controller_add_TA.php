@@ -71,8 +71,9 @@ class Controller_add_TA{
             isset($_POST['department']) ? : $errors['department']='يرجى ادخال القسم';
             isset($_POST['role']) ? : $errors['role']='يرجى ادخال الدور';
             isset($_POST['nationality']) ? : $errors['nationality']='يرجى ادخال الجنسية';
-            $_POST['errors']=$errors;
-            header('Location: add_TA');
+        }
+        if (count($errors)>0){
+            view('add_TA',compact('errors'));
             exit();
         }
     }

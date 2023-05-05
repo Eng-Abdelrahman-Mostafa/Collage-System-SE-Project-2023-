@@ -30,9 +30,9 @@
 
         <div class=" ">
             <label for="validationCustom01" class="form-label"> كلمة المرور :</label>
-            <input type="password" class="form-control"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >
+            <input type="password" class="form-control <?php isset($_POST['errors']['password']) ? 'is-invalid':''?>"  placeholder=" ادخل كلمةالمرور للطالب" required name="password" minlength="8" maxlength="20" >
             <div class="invalid-feedback">
-                Please choose a password.
+                <?php isset($_POST['errors']['password']) ? $_POST['errors']['password']:''?>
             </div>
         </div>
 
@@ -40,83 +40,83 @@
 
         <div class="">
             <label for="validationCustom01" class="form-label mt-3">الاسم الرباعي باللغه العربية :</label>
-            <input type="text" class="form-control"  placeholder="ادخل الاسم باللغة العربية  " required name="ar_name">
+            <input type="text" class="form-control <?php isset($_POST['errors']['ar_name']) ? 'is-invalid':''?>"  placeholder="ادخل الاسم باللغة العربية  " required name="ar_name">
             <div class="invalid-feedback">
-                Please enter your name in arabic.
+                <?php isset($_POST['errors']['ar_name']) ? $_POST['errors']['ar_name']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">الاسم الرباعي باللغه الانجليزية :</label>
-            <input type="text" class="form-control"  placeholder="ادخل الاسم باللغة الانجليزية " required="" name="en_name">
+            <input type="text" class="form-control <?php isset($_POST['errors']['en_name']) ? 'is-invalid':''?>"  placeholder="ادخل الاسم باللغة الانجليزية " required="" name="en_name">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['en_name']) ? $_POST['errors']['en_name']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">رقم الهاتف :</label>
-            <input type="text" class="form-control"  placeholder="رقم الهاتف" required name="phone_number">
+            <input type="text" class="form-control <?php isset($_POST['errors']['phone_number']) ? 'is-invalid':''?>"  placeholder="رقم الهاتف" required name="phone_number">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['phone_number']) ? $_POST['errors']['phone_number']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">الرقم القومي :</label>
-            <input type="text" class="form-control"  placeholder="الرقم القومي " required name="National_ID">
+            <input type="text" class="form-control <?php isset($_POST['errors']['National_ID']) ? 'is-invalid':''?>"  placeholder="الرقم القومي " required name="National_ID">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['National_ID']) ? $_POST['errors']['National_ID']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">اللقب :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل وصف الطالب " required name="title">
+            <input type="text" class="form-control <?php isset($_POST['errors']['title']) ? 'is-invalid':''?>"  placeholder=" ادخل وصف الطالب " required name="title">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['title']) ? $_POST['errors']['title']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">عنوان :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل عنوان الطالب " required name="address">
+            <input type="text" class="form-control <?php isset($_POST['errors']['address']) ? 'is-invalid':''?>"  placeholder=" ادخل عنوان الطالب " required name="address">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['address']) ? $_POST['errors']['address']:''?>
             </div>
         </div>
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">الوصف :</label>
-            <input type="text" class="form-control"  placeholder=" ادخل عنوان الطالب " required name="description">
+            <input type="text" class="form-control <?php isset($_POST['errors']['description']) ? 'is-invalid':''?>"  placeholder=" ادخل عنوان الطالب " required name="description">
             <div class="invalid-feedback">
-                Please choose a username.
+                <?php isset($_POST['errors']['description']) ? $_POST['errors']['description']:''?>
             </div>
         </div>
 
         <div class="c">
             <label for="validationCustom04" class="form-label">القسم :</label>
-            <select class="form-select" id="validationCustom04" required name="department" name="department">
+            <select class="form-select <?php isset($_POST['errors']['department']) ? 'is-invalid':''?>" id="validationCustom04" required name="department" name="department">
                 <option selected disabled > اختر قسم الطالب</option>
                 <?php foreach ($departments as $department ):?>
                     <option value="<?= $department['id']?>"><?=$department['name']?></option>
                 <?php endforeach; ?>
             </select>
             <div class="invalid-feedback">
-                Please select a valid ya Dawly.
+                <?php isset($_POST['errors']['department']) ? $_POST['errors']['department']:''?>
             </div>
         </div>
 
         <div class="c">
             <label for="validationCustom04" class="form-label">الدور :</label>
-            <select class="form-select" id="validationCustom04" required name="role">
+            <select class="form-select <?php isset($_POST['errors']['role']) ? 'is-invalid':''?>" id="validationCustom04" required name="role">
                 <option selected disabled > اختر قسم الطالب</option>
                 <?php foreach ($roles  as $role ):?>
                     <option value="<?= $role['id']?>"><?=$role['name']?></option>
                 <?php endforeach; ?>
             </select>
             <div class="invalid-feedback">
-                Please select a valid ya Dawly.
+                <?php isset($_POST['errors']['role']) ? $_POST['errors']['role']:''?>
             </div>
         </div>
 
@@ -124,14 +124,14 @@
 
         <div class="c">
             <label for="validationCustom04" class="form-label">الجنسية :</label>
-            <select class="form-select" id="validationCustom04" required name="nationality">
+            <select class="form-select <?php isset($_POST['errors']['nationality']) ? 'is-invalid':''?>" id="validationCustom04" required name="nationality">
                 <option selected disabled > اختر قسم الطالب</option>
                 <?php foreach ($nationalities as $nationality): ?>
                 <option value="<?= $nationality['id']?>"><?=$nationality['name']?></option>
                 <?php endforeach; ?>
             </select>
             <div class="invalid-feedback">
-                Please select a valid ya Dawly.
+                <?php isset($_POST['errors']['nationality']) ? $_POST['errors']['nationality']:''?>
             </div>
         </div>
 

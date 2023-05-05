@@ -141,20 +141,20 @@
                   <thead>
                     <tr >
                       <th scope="col">#</th>
-                      <th scope="col">اسم الدكتور</th>
+                      <th scope="col">اسم الطالب</th>
                       <th scope="col">القسم</th>
                       <th scope="col">اجراءات</th>
                     </tr>
                   </thead>
                   <tbody>
                   <?= $i = 1; ?>
-                      <?php foreach ($professors as $professor) : ?>
+                      <?php foreach ($students as $student) : ?>
                         <tr class="table-light">
                           <th scope="row"><?= $i++ ?></th>
-                          <td class="name"><i class="fa-sharp fa-solid fa-user-tie"></i> <?= $professor['full_name_ar'] ?>
+                          <td class="name"><i class="fa-sharp fa-solid fa-user-tie"></i> <?= $student['full_name_ar'] ?>
                           </td>
                           <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                            <span class="table-level"><?= $professor['d_name'] ?></span>
+                            <span class="table-level"><?= $student['d_name'] ?></span>
                           </td>
                           <td>
                             <div class="dropdown-center">
@@ -162,9 +162,9 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                               </button>
                               <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                                <li><a class="dropdown-item" data="<?=$professor['id']?>">الصفحة الشخصية</a></li>
-                                <li id="createBtn"><a class="dropdown-item update-btn" data="<?=$professor['id']?>" >تعديل البيانات</a></li>
-                                <li><a class="dropdown-item delete-btn" data="<?=$professor['id']?>" >حذف المستخدم</a></li>
+                                <li><a class="dropdown-item" data="<?=$student['id']?>">الصفحة الشخصية</a></li>
+                                <li id="createBtn"><a class="dropdown-item update-btn" data="<?=$student['id']?>" >تعديل البيانات</a></li>
+                                <li><a class="dropdown-item delete-btn" data="<?=$student['id']?>" >حذف المستخدم</a></li>
                               </ul>
                             </div>
                           </td>
@@ -188,7 +188,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="updateUser" method="post" dir="rtl">
+            <form action="updateStd" method="post" dir="rtl">
                 <input type="hidden" id="update_hidden_id" value="" name="id">
                 <div class=" ">
                     <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>
@@ -311,7 +311,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="deleteUser" method="post" style="text-align: right">
+                    <form action="deleteStd" method="post" style="text-align: right">
                         <div class="mb-3">
                             <input type="hidden" id="delete_hidden_id" value="" name="id">
                             <h6>هل تريد حذف المستخدم بالفعل</h6>
@@ -367,31 +367,31 @@
             const formData = new FormData();
             formData.append('id',id);
 
-            fetch('<?= site_url() ?>/get_professor_data', {
+            fetch('<?= site_url() ?>/get_student_data', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('profNameAr').setAttribute('value',data.prof[0]['full_name_ar'])
-                        document.getElementById('profNameEn').setAttribute('value',data.prof[0]['full_name_en'])
-                        document.getElementById('profEmail').setAttribute('value',data.prof[0]['email'])
-                        document.getElementById('prof_national_id').setAttribute('value',data.prof[0]['national_id_number'])
+                        document.getElementById('profNameAr').setAttribute('value',data.std[0]['full_name_ar'])
+                        document.getElementById('profNameEn').setAttribute('value',data.std[0]['full_name_en'])
+                        document.getElementById('profEmail').setAttribute('value',data.std[0]['email'])
+                        document.getElementById('prof_national_id').setAttribute('value',data.std[0]['national_id_number'])
                         $("#prof_nationality_id").find('option').each(function (){
                             this.removeAttribute('selected')
-                            if (this.getAttribute('value')== data.prof[0]['nationality_id'])
+                            if (this.getAttribute('value')== data.std[0]['nationality_id'])
                             {
                                 this.setAttribute('selected' , 'selected')
                             }
                         })
-                        document.getElementById('prof_phone_number').setAttribute('value',data.prof[0]['phone_number'])
-                        document.getElementById('prof_title').setAttribute('value',data.prof[0]['title'])
-                        document.getElementById('prof_description').setAttribute('value',data.prof[0]['description'])
-                        document.getElementById('prof_address').setAttribute('value',data.prof[0]['address'])
+                        document.getElementById('prof_phone_number').setAttribute('value',data.std[0]['phone_number'])
+                        document.getElementById('prof_title').setAttribute('value',data.std[0]['title'])
+                        document.getElementById('prof_description').setAttribute('value',data.std[0]['description'])
+                        document.getElementById('prof_address').setAttribute('value',data.std[0]['address'])
                         $("#prof_department_id").find('option').each(function (){
                             this.removeAttribute('selected')
-                            if (this.getAttribute('value')== data.prof[0]['department_id'])
+                            if (this.getAttribute('value')== data.std[0]['department_id'])
                             {
                                 this.setAttribute('selected' , 'selected')
                             }

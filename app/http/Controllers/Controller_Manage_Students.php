@@ -2,20 +2,19 @@
 namespace app\http\Controllers;
 use Core\Database;
 //write code here
-class Controller_Manage_Professors {
+class Controller_Manage_Students {
     public function index() {
         $config = require base_path("app/config.php");
         $db = new Database($config);
-        $professors = $db->query("SELECT teaching_staff.`id`, `national_id_number`, `nationality_id`, `role_num`, `full_name_ar`, `full_name_en`, `title`, `email`, `password`, `photo`, `phone_number`, `address`, `description`, `department_id`, `created_at`, `updated_at`, `deleted_at`, departments.name as d_name 
-                                        FROM `teaching_staff` 
-                                        INNER JOIN `departments` 
-                                        ON departments.id = teaching_staff.department_id
-                                        where  `role_num`=3;")->fetchAll();
-        $roles = $db->query("select * from `roles`")->fetchAll();
+        $students = $db->query("SELECT students.id, `national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`, `password`, `photo`, `phone_number`, 
+                                        `address`, `description`, `academic_id`, `department_id`, `grade_id`, `created_at`, `updated_at`, 
+                                        `deleted_at` , departments.name AS d_name FROM `students` 
+                                        INNER JOIN  `departments`
+                                         ON students.department_id = departments.id")->fetchAll();
         $nationalities = $db->query("select * from `nationalities`")->fetchAll();
         $departments = $db->query("select * from `departments`")->fetchAll();
 //        dd($professors);
-        view('Manage_Professors' , compact('professors', "roles","nationalities","departments"));
+        view('Manage_Students' , compact('students', "nationalities","departments"));
     }
     public function update()
     {
@@ -62,7 +61,7 @@ class Controller_Manage_Professors {
                     'password' => $password
                 ]
             );
-            header("Location: Manage_Professors");
+            header("Location: Manage_Students");
             exit();
         }
         elseif(
@@ -102,24 +101,24 @@ class Controller_Manage_Professors {
                     'id' => $id
                 ]
             );
-            header("Location: Manage_Professors");
+            header("Location: Manage_Students");
             exit();
         }
     }
-    public function getProfessorData()
+    public function getStudentData()
     {
-        $professorId= $_POST['id'];
+        $studentId= $_POST['id'];
         $config = require base_path("app/config.php");
         $db = new Database($config);
-        $prof  =   $db->query("SELECT * FROM `teaching_staff` where id =:id",['id' => $professorId])->fetchAll();
-        if(!$prof)
+        $std  =   $db->query("SELECT * FROM `students` where id =:id",['id' => $studentId])->fetchAll();
+        if(!$std)
         {
             header('Content-Type: application/json');
-            echo json_encode(array('success' => false,'message' => 'Professor not Founded'));
+            echo json_encode(array('success' => false,'message' => 'Student not Founded'));
             exit;
         }
         header('Content-Type: application/json');
-        echo json_encode(array('success' => true, 'prof' => $prof , 'message' => 'Professor Founded'));
+        echo json_encode(array('success' => true, 'std' => $std , 'message' => 'Student Founded'));
         exit;
 
     }
@@ -129,12 +128,12 @@ class Controller_Manage_Professors {
         $userId  = $_POST['id'];
         $config = require  base_path("app/config.php");
         $db = new Database($config) ;
-        $db->query("DELETE FROM `teaching_staff` WHERE `id` = :id",['id' => $userId]);
-        header("Location: Manage_Professors");
+        $db->query("DELETE FROM `students` WHERE `id` = :id",['id' => $userId]);
+        header("Location: Manage_Students");
         exit();
     }
 }
 
 //write code here
 
-return new Controller_Manage_Professors();
+return new Controller_Manage_Students();
