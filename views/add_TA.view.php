@@ -22,7 +22,7 @@
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>
-            <input type="text" class="form-control <?php isset($_POST['errors']['email']) ? 'is-invalid':''?>" value="@fci.helwan.com" required name="email" placeholder="اضف البريد الالكتروني">
+            <input type="email" class="form-control <?php isset($_POST['errors']['email']) ? 'is-invalid':''?>" value="@fci.helwan.com" required name="email" placeholder="اضف البريد الالكتروني">
             <div class="invalid-feedback">
                 <?php isset($_POST['errors']['email']) ? $_POST['errors']['email']:''?>
             </div>

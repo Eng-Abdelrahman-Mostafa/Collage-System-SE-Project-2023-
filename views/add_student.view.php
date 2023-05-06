@@ -18,7 +18,7 @@
 <div class="photo" > <img src="assets/images/bg-dashboard.png" alt=""> </div>
 <div class="container col-md-8 form" >
 
-    <form class="row g-3 needs-validation justify-content-center  " novalidate  action="add_student" method="post">
+    <form class="row g-3 needs-validation justify-content-center  " novalidate  action="addStudent" method="post">
 
         <div class=" ">
             <label for="validationCustom01" class="form-label">البريد الالكتروني  :</label>

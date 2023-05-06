@@ -37,20 +37,19 @@ class Controller_add_student {
             $std_department =$_POST['std_department'];
             $std_grade =$_POST['std_grade'];
             $std_nationality =$_POST['std_nationality'];
-
             $config = require base_path("app/config.php");
             require base_path("Core/Database.php");
             $db=new Database($config);
-//            $checkEmail = $db->query("select id from `students` where `email`=:email",['email'=>$email])->fetch();
-//
-//            if(!$checkEmail)
-//
-//            {
-//                $errors['email'] = 'البريد الالكتروني موجود سابقا';
-//                exit();
-//
-//            }
-            $db->query("INSERT INTO `students`( `role_num`, `national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`, `password`, `photo`,`phone_number`, `address`, `description`, `academic_id`, `department_id`, `grade_id`) VALUES ('1',:national_id_number,:nationality_id,:full_name_ar,:full_name_en,:email,:password,'1',:phone_number,:address,:description,:academic_id,:department_id,:grade_id)",[
+            $checkEmail = $db->query("select id from `students` where `email`=:email",['email'=>$email])->fetch();
+            if(!$checkEmail)
+
+            {
+                $errors['email'] = 'البريد الالكتروني موجود سابقا';
+            }
+            $db->query("INSERT INTO `students`( `national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`,
+                       `password`, `photo`,`phone_number`, `address`, `description`, `academic_id`, `department_id`, `grade_id`) 
+                       VALUES (:national_id_number,:nationality_id,:full_name_ar,:full_name_en,:email,:password,'1',:phone_number,:address,
+                               :description,:academic_id,:department_id,:grade_id)",[
                     'national_id_number' => $National_ID ,
                     'nationality_id' => $std_nationality ,
                     'full_name_ar' => $ar_name,
@@ -63,12 +62,9 @@ class Controller_add_student {
                     'academic_id' => $std_id,
                     'department_id' => $std_department,
                     'grade_id' =>$std_grade ,
-                ]
-
-
-
-            );
-            header('Location: add_student');
+                ]);
+            header("Location: add_student");
+            exit();
 
         }else{
             isset($_POST['email']) ? : $errors['email']='يرجى ادخال البريد الالكتروني';

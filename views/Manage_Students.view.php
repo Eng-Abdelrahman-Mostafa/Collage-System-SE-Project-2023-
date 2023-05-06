@@ -74,7 +74,7 @@
               <a class="real-stc" style="width: 90%;">
                 <div class="stc-box sec-stc">
                   <div class="stc-val-parent">
-                      <span class="stc-value"> 3205 </span>
+                      <span class="stc-value"> <?=  $students_num['number'] ?> </span>
                       <span class="stc-name">طالب</span>
                   </div>
                   <div class="stc-icon">
