@@ -10,8 +10,8 @@
     <!--CDN Links-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!--Stylesheet Files-->
-    <link rel="stylesheet" href="<?= asset('css/main.css')?>">
-    <link rel="stylesheet" href="<?= asset('css/student_profile.css')?>">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/student_profile.css">
 </head>
 <body>
     <div class="main" style="margin-top: 100px">
@@ -117,7 +117,7 @@
 <!--CDN Links-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?=asset('js/student_profile.js')?>"></script>
+<script src="assets/js/student_profile.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!--Charts Script-->
 <script>
