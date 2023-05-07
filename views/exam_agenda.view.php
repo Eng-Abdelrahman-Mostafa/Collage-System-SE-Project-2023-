@@ -38,16 +38,6 @@
     <main>
         <?php include 'layouts/nav_bar.view.php';?>
 
-<!--     start main-content   -->
-        <div class="portfolio" style="background-image: url(assets/images/bg-dashboard.png);">
-            <div class="right">
-                <h2>اهلا <span class="name">عبدالرحمن</span></h2>
-                <p>اهلا بكم في لوحة تحكم مدير نظام كلية الحاسبات والذكاء الاصطناعي بجامعة حلوان</p>
-            </div>
-            <div class="left">
-                <img src="assets/images/Cartoon.svg" alt="">
-            </div>
-    </div>
         <div class="insights">
             <div class="student">
 

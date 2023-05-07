@@ -9,8 +9,8 @@
    <!-- css -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
 <style>
-    main .charts {
-
+    .container{
+        display: flex;
     }
     main .charts .donut{
         background-color: var(--container-color);
@@ -50,7 +50,9 @@
             <div class="student">
                 <div class="right">
                     <h3>الطلاب الحاليين</h3>
-                    <h1>14325 طالب</h1>
+                    <?php foreach ($std_num as $s): ?>
+                        <h1><?php echo implode(' ', $s); ?> طالب</h1>
+                    <?php endforeach; ?>
                 </div>
                 <div class="left">
                     <span class="material-symbols-outlined">person</span>                   
@@ -59,7 +61,9 @@
             <div class="professor">
                 <div class="right">
                     <h3>الاساتذه الحاليين</h3>
-                    <h1>52 استاذ</h1>
+                    <?php foreach ($professor_num as $s): ?>
+                        <h1><?php echo implode(' ', $s); ?> استاذ</h1>
+                    <?php endforeach; ?>
                 </div>
                 <div class="left">
                     <span class="material-symbols-outlined">school</span>         
@@ -68,7 +72,9 @@
             <div class="TA">
                 <div class="right">
                     <h3>المعيدين الحاليين</h3>
-                    <h1>156 معيد</h1>
+                    <?php foreach ($TA_num as $s): ?>
+                        <h1><?php echo implode(' ', $s); ?> معيد</h1>
+                    <?php endforeach; ?>
                 </div>
                 <div class="left">
                     <span class="material-symbols-outlined">person</span>                   
@@ -88,12 +94,17 @@
  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
    <script>
        var options1 = {
-           series: [55, 44, 41, 17, 15,23],
+           // series: [55, 44, 41, 17, 15,23],
+           series: [
+               <?php foreach ($departments_num as $s): ?>
+               <?php echo implode(' ', $s); ?>,
+               <?php endforeach; ?>
+           ],
            chart: {
                type: 'donut',
            },
            colors: ['#92BCB5', '#FEF1CF', '#B5B5B8', '#F7F6FD', '#c6beef','#20B2AA'],
-           labels: ['CS', 'IS', 'AI', 'IT', 'MI','SW'],
+           labels: ['CS','MI','IS', 'AI', 'IT','SW'],
            responsive: [{
                breakpoint: 480,
                options: {
