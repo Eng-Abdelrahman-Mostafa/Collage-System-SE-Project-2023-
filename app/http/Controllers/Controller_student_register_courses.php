@@ -26,7 +26,6 @@ class Controller_student_register_courses {
                 }
             }
         }
-        dd($active_courses);
 
 
             view('student_register_courses',compact('active_semester','active_courses'));

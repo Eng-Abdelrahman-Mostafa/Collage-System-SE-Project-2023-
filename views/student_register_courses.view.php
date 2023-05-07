@@ -21,6 +21,15 @@
     <div class="div2">
         <h6>المقررات المفتوحة المسموح بتسجيلها</h6>
 
+        <?php
+        if ($active_semester['registration_status'] == 0) {
+            echo '<div class="alert alert-warning" role="alert">
+             تم انتهاء التسجيل فى الفصل الدراسى الحالى  
+          </div>';
+        }
+        ?>
+
+
         <table class="table">
             <thead>
             <tr>
