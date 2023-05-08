@@ -8,7 +8,9 @@ class Controller_Student_Profile {
     private int $total_hours = 0;
     private $db;
     public function index() {
-        $userRole = $_SESSION['user_role'];
+//        $userRole = $_SESSION['user_role'];
+        require base_path("app/Modals/Students.php");
+        $userRole = 2;
         $studentId = 0;
         if ($userRole == 4) {
             $studentId = $_SESSION['user_id'];
@@ -17,12 +19,12 @@ class Controller_Student_Profile {
         }
         $config = require base_path("app/config.php");
         $this->db = new Database($config);
-        $student = new Student();
-        $student_info = $student->get($studentId);
+        $student = new Student($studentId);
+        $student_info = $student->get();
         $grades_count = $this->getGradesCount($studentId);
         $grades_departments = $this->getGradesDepartments($studentId);
-        $student['total_hours'] = ($this->total_hours/$config['academic_info']['total_hours'])*100;
-        view('student_profile', compact('student_info', 'grades_count', 'grades_departments'));
+        $student_info['total_hours'] = ($this->total_hours/$config['academic_info']['total_hours'])*100;
+        view('student_profile', compact('student_info', 'grades_count', 'grades_departments', 'userRole'));
     }
     private function getGradesCount($id){
         $grades_count = [
@@ -38,7 +40,7 @@ class Controller_Student_Profile {
         ];
         $config = require base_path("app/config.php");
         $db = new Database($config);
-        $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id semesters on semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
+        $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
         foreach ($student_courses as $student_course){
             $course_total_degree= $db->query("SELECT 
                   exams.id, 
@@ -65,7 +67,7 @@ class Controller_Student_Profile {
         foreach ($departments as $department){
             $departments_grades[]=[$department['name'] => 0];
         }
-        $student_courses= $this->db->query("SELECT `courses_students`.chance_number,courses.course_hour,departments.name AS department_name,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on semester_id = semesters.id INNER JOIN departments ON courses.department_id=departments.id where semesters.active_status=0 and student_id =''",['id' => $id])->fetchAll();
+        $student_courses= $this->db->query("SELECT `courses_students`.chance_number,courses.course_hour,departments.name AS department_name,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on semester_id = semesters.id INNER JOIN departments ON courses.department_id=departments.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
         foreach ($student_courses as $student_course){
             $course_total_degree= $this->db->query("SELECT 
                   exams.id, 

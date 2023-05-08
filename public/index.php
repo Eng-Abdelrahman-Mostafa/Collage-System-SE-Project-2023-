@@ -22,7 +22,9 @@ $uri = $_SERVER['REQUEST_URI'];
 $url = $protocol . "://" . $host . $uri;
 $url= str_replace($config['app']['url'], '', $url);
 $method = $_SERVER['REQUEST_METHOD'];
-
+if (str_contains($url,"?")){
+    $url=explode("?",$url)[0];
+}
 $router->route($url, $method);
 
 

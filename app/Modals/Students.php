@@ -24,17 +24,11 @@ class Student {
     private $deleted_at;
     private $db;
     public $info=[];
-    public function __construct($info = null, $id = null) {
+    public function __construct($id = null) {
         $config = require base_path("app/config.php");
         $this->db = new Database($config);
-        if ($info) {
-            $this->info = $info;
-            $this->id = $info['id'];
-            $this->info[]=['gpa' => $this->gpa($this->id)];
-        }
-        if ($id && !$info){
+        if ($id){
             $info=$this->db->query("SELECT * FROM `students` where id =:id",['id' => $id])->fetch();
-            $this->id = $info['id'];
             $this->info = $info;
             $this->info[]=['gpa' => $this->gpa($this->id)];
         }
@@ -106,7 +100,7 @@ class Student {
 
         $sql .= implode(", ", $setClauses);
 
-        $sql.= "where id = ?";
+        $sql.= " where id = ?";
 
         $values[] = $info['id'];
 
@@ -128,10 +122,9 @@ class Student {
         }
         $GPA = 0;
         $totalHours = 0;
-
         $config = require base_path("app/config.php");
         $db = new Database($config);
-        $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id semesters on semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
+        $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on `courses_students`.semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
         foreach ($student_courses as $student_course){
             $course_total_degree= $db->query("SELECT 
                   exams.id, 
@@ -153,7 +146,11 @@ class Student {
             $GPA+=$student_course['course_gpa'];
             $totalHours+=$student_course['course_hour'];
         }
-        return $GPA/$totalHours;
+        if ($totalHours>0){
+            return $GPA/$totalHours;
+        }else{
+            return 0;
+        }
     }
     private static function percentage_to_gpa($percentage){
         switch ($percentage){

@@ -215,6 +215,7 @@
             name: 'Series 1',
             data: [
                 <?php
+                dd($grades_departments);
                 $departments_names="";
                 foreach ($grades_departments as $key => $grade_department) {
                     $departments_names.= "'".$grade_department."',";
