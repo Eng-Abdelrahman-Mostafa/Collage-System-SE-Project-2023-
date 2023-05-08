@@ -8,9 +8,9 @@ class Controller_Student_Profile {
     private int $total_hours = 0;
     private $db;
     public function index() {
-//        $userRole = $_SESSION['user_role'];
+        session_start();
+        $userRole = $_SESSION['user_role'];
         require base_path("app/Modals/Students.php");
-        $userRole = 2;
         $studentId = 0;
         $config = require base_path("app/config.php");
         $this->db = new Database($config);

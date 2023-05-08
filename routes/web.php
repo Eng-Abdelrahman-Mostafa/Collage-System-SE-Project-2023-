@@ -15,3 +15,5 @@ $router->get('/register-courses-dgree', 'app\http\Controllers\Regist_Dg.php', 'i
 $router->get('/all_students', 'app\http\Controllers\Controller_all_students.php', 'index');
 $router->get('/student_profile', 'app\http\Controllers\Controller_Student_Profile.php', 'index');
 $router->post('/student_profile/update', 'app\http\Controllers\Controller_Student_Profile.php', 'save_info');
+$router->get('/profile', 'app\http\Controllers\Controller_Teaching_Profile.php', 'index');
+$router->post('/profile/update', 'app\http\Controllers\Controller_Teaching_Profile.php', 'save_info');

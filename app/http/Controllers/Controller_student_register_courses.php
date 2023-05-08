@@ -16,8 +16,7 @@ class Controller_student_register_courses {
 
     public function index() {
         session_start();
-//        $this->studentId = $_SESSION['user_id'];
-        $this->studentId = 4;
+        $this->studentId = $_SESSION['user_id'];
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();
         $active_semester_id = $active_semester? $active_semester['id']:'';
         $active_courses = $this->db->query("SELECT * FROM `semester_courses` INNER JOIN `courses` ON semester_courses.course_id = courses.id WHERE semester_courses.semester_id = :id", ['id' => $active_semester_id])->fetchAll();
@@ -45,9 +44,9 @@ class Controller_student_register_courses {
 
     public function registerCourseData()
     {
-        $this->studentId = 4;
-        $studentId = $this->studentId;
         session_start();
+        $this->studentId = $_SESSION['user_id'];
+        $studentId = $this->studentId;
         $coursesIds= $_POST['selected_courses'][0]===''?'0':$_POST['selected_courses'][0];
         $total_courses_hours  =   $this->db->query("SELECT SUM(convert(course_hour,char)) AS total_hours FROM `courses`  where id in (".$coursesIds.")")->fetch();
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();

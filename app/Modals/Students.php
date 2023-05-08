@@ -191,6 +191,21 @@ class Student {
         }
         return false;
     }
-
-    // getters and setters for each property (omitted for brevity)
+    public function login($email,$password){
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $student = $db->query("SELECT * FROM `students` WHERE `email` = :email",['email' => $email])->fetch();
+        if ($student){
+            if (password_verify($password,$student['password'])){
+                return $student;
+            }
+        }
+        return false;
+    }
+    public function search($search){
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $students = $db->query("SELECT * FROM `students` WHERE `full_name_ar` LIKE :search OR `full_name_en` LIKE :search OR `email` LIKE :search OR `phone_number` LIKE :search",['search' => "%$search%"])->fetchAll();
+        return $students;
+    }
 }
