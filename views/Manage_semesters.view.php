@@ -170,8 +170,10 @@
                                 </button>
                                 <ul class="dropdown-menu ul-drop">
                                     <li><a class="dropdown-item active-sem" data="<?=$semester['id']?>">تفعيل الترم</a></li>
-                                    <li id="createBtn"><a class="dropdown-item update-btn" data="<?=$professor['id']?>" >تعديل البيانات</a></li>
-                                    <li><a class="dropdown-item delete-btn" data="<?=$professor['id']?>" >حذف المستخدم</a></li>
+                                    <li><a class="dropdown-item active-register" data="<?=$semester['id']?>" >تفعيل تسجيل المواد</a></li>
+                                    <li><a class="dropdown-item add-courses" data="<?=$semester['id']?>" >اضافة مواد</a></li>
+                                    <li><a class="dropdown-item update-sem" data="<?=$semester['id']?>" >تعديل الترم</a></li>
+                                    <li><a class="dropdown-item delete-sem" data="<?=$semester['id']?>" >حذف الترم</a></li>
                                 </ul>
                             </div>
                       </td>
@@ -259,6 +261,147 @@
     </div>
     <!--    Modal ending code-->
 
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="activeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Active semester</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="activeSem" method="post" dir="rtl">
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">تفعيل الترم</label>
+                        <input class="form-check-input switch-cls" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="switchValue"  >
+                    </div>
+                        <div class="mb-3">
+                            <input type="hidden" id="active_hidden_id" value="" name="id">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">حفظ</button>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
+
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="active_register_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Active courses register</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="activeReg" method="post" dir="rtl">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">تفعيل تسجيل المواد</label>
+                            <input class="form-check-input switch-clas" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="switchValue"  >
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" id="register_hidden_id" value="" name="id">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">حفظ</button>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
+
+
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Semester</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="deleteSem" method="post" style="text-align: right">
+                        <div class="mb-3">
+                            <input type="hidden" id="delete_hidden_id" value="" name="id">
+                            <h6>هل تريد حذف الترم بالفعل</h6>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
+
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update semester</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="updateSemester" method="post" dir="rtl">
+                        <input type="hidden" id="update_hidden_id" value="" name="id">
+                        <div class=" ">
+                            <label for="validationCustom01" class="form-label">اسم الترم :</label>
+                            <input type="text" class="form-control"  id="semester_title" placeholder="ادخل اسم الترم " required name="semesterTitle">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                        <div class=" ">
+                            <label for="validationCustom01" class="form-label">يبدأ من :</label>
+                            <input type="date" class="form-control"  id="semester_startDate" placeholder="بداية الترم" required name="startDate">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                        <div class=" ">
+                            <label for="validationCustom01" class="form-label">ينتهي في :</label>
+                            <input type="date" class="form-control"  id="semester_endDate"  placeholder="نهاية الترم " required name="endDate">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+
+                        <div class="c">
+                            <label for="validationCustom04" class="form-label">بواسطة :</label>
+                            <select class="form-select" id="sem_created_by" required name="creator">
+                                <option selected disabled value=""> اختر المنشئ</option>
+                                <?php foreach ($roles as $role):?>
+                                    <option value="<?= $role['id']?>"><?=$role['full_name_ar']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-primary">اضافة ترم</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/df48339200.js" crossorigin="anonymous"></script>
@@ -274,11 +417,160 @@
 
         $(document).ready(function() {
             $('.active-sem').click(function () {
-                $('#addModal').modal('show');
+                let id = this.getAttribute('data');
+                console.log(id);
+                let input_id = document.querySelector('#active_hidden_id');
+                input_id.setAttribute("value", id);
+                $('#activeModal').modal('show');
+
+
+                const formData = new FormData();
+                formData.append('id',id);
+
+                fetch('<?= site_url() ?>/get_semester_status', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                           let swicth = document.querySelector('.switch-cls')
+                            if(data.sem.active_status == '1')
+                            {
+                                swicth.checked=true
+                            }
+                        else
+                            {
+                                swicth.checked=false
+                            }
+
+                        } else {
+                            // Login failed, show error message to user
+                            const errorMessage = document.getElementById('error-message');
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network error or other exceptions
+                        console.error(error);
+                    });
+
+
+
+
             });
         });
 
 
+
+
+
+        $(document).ready(function() {
+            $('.active-register').click(function () {
+                let id = this.getAttribute('data');
+                console.log(id);
+                let input_id = document.querySelector('#register_hidden_id');
+                input_id.setAttribute("value", id);
+                $('#active_register_Modal').modal('show');
+
+
+                const formData = new FormData();
+                formData.append('id',id);
+
+                fetch('<?= site_url() ?>/get_register_status', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            let swicth = document.querySelector('.switch-clas')
+                            if(data.sem.registration_status == '1')
+                            {
+                                swicth.checked=true
+                            }
+                            else
+                            {
+                                swicth.checked=false
+                            }
+
+                        } else {
+                            // Login failed, show error message to user
+                            const errorMessage = document.getElementById('error-message');
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network error or other exceptions
+                        console.error(error);
+                    });
+
+
+
+
+            });
+        });
+
+
+
+
+        $(document).ready(function() {
+            $('.update-sem').click(function (){
+                let id = this.getAttribute('data');
+                console.log(id);
+                let input_id = document.querySelector('#update_hidden_id');
+                input_id.setAttribute("value",id);
+
+
+                const formData = new FormData();
+                formData.append('id',id);
+
+                fetch('<?= site_url() ?>/get_semester_data', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById('semester_title').setAttribute('value',data.sem.title)
+                            document.getElementById('semester_startDate').setAttribute('value',data.sem.start_date)
+                            document.getElementById('semester_endDate').setAttribute('value',data.sem.end_date)
+                            $("#sem_created_by").find('option').each(function (){
+                                this.removeAttribute('selected')
+                                if (this.getAttribute('value')== data.sem.created_by)
+                                {
+                                    this.setAttribute('selected' , 'selected')
+                                }
+                            })
+                            $('#updateModal').modal('show');
+                        } else {
+                            // Login failed, show error message to user
+                            const errorMessage = document.getElementById('error-message');
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network error or other exceptions
+                        console.error(error);
+                    });
+
+            });
+        });
+
+
+
+
+
+
+        $(document).ready(function() {
+            $('.delete-sem').click(function () {
+                let id = this.getAttribute('data');
+                console.log(id);
+                let input_id = document.querySelector('#delete_hidden_id');
+                input_id.setAttribute("value", id);
+                $('#deleteModal').modal('show');
+            });
+        });
     </script>
     <!-- Optional JavaScript; choose one of the two! -->
 

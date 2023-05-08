@@ -54,6 +54,69 @@ class Controller_Manage_semesters {
         }
 
     }
+
+    public function active()
+    {
+            $id = $_POST['id'];
+        if (isset($_POST['switchValue'])) {
+            $switchValue = $_POST['switchValue'];
+            if ($switchValue === "on") {
+                $this->db->query("UPDATE `semesters` SET `active_status`= 1 where id =:id",['id'=>$id]);
+                header("Location: Manage_semesters");
+                exit();
+            }
+        }else{
+            $this->db->query("UPDATE `semesters` SET `active_status`= 0 where id =:id",['id'=>$id]);
+            header("Location: Manage_semesters");
+            exit();
+        }
+
+    }
+
+    public function activeReg()
+    {
+            $id = $_POST['id'];
+        if (isset($_POST['switchValue'])) {
+            $switchValue = $_POST['switchValue'];
+            if ($switchValue === "on") {
+                $this->db->query("UPDATE `semesters` SET `registration_status`= 1 where id =:id",['id'=>$id]);
+                header("Location: Manage_semesters");
+                exit();
+            }
+        }else{
+            $this->db->query("UPDATE `semesters` SET `registration_status`= 0 where id =:id",['id'=>$id]);
+            header("Location: Manage_semesters");
+            exit();
+        }
+
+    }
+
+
+    public function  getSemStatus()
+    {
+        $semId= $_POST['id'];
+        $sem  =   $this->db->query("SELECT * FROM `semesters` where id =:id",['id' => $semId])->fetch();
+        if(!$sem)
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('success' => false,'message' => 'Semester not Founded'));
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'sem' => $sem , 'message' => 'Semester Founded'));
+        exit;
+    }
+
+    public  function delete()
+    {
+        $semId= $_POST['id'];
+        $this->db->query("DELETE FROM `semesters` WHERE id = :id",['id'=>$semId]);
+        header("Location: Manage_semesters");
+        exit();
+
+    }
+
+
 }
 
 //write code here
