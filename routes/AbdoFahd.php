@@ -18,3 +18,7 @@ $router->post('/deleteUser', 'app\http\Controllers\Controller_Manage_Professors.
 $router->get('/Manage_Students', 'app\http\Controllers\Controller_Manage_Students.php', 'index');
 $router->Post('/deleteStd', 'app\http\Controllers\Controller_Manage_Students.php', 'delete');
 $router->Post('/updateStd', 'app\http\Controllers\Controller_Manage_Students.php', 'update');
+
+
+
+$router->get('/student_register_courses', 'app\http\Controllers\Controller_student_register_courses.php', 'index');
