@@ -68,7 +68,7 @@ class Controller_student_register_courses {
             $courses=explode(",", "$coursesIds");
             foreach ($courses as $course)
             {
-                $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`, `created_at`) 
+                $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
                 [
                     'student_id' => $studentId,
@@ -88,7 +88,7 @@ class Controller_student_register_courses {
                 $courses=explode(",", "$coursesIds");
                 foreach ($courses as $course)
                 {
-                    $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`, `created_at`) 
+                    $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
                         [
                             'student_id' => $studentId,
