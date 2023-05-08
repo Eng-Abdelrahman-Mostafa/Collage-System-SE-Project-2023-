@@ -46,18 +46,21 @@ class Controller_student_register_courses {
 
     public function registerCourseData()
     {
+        $this->studentId = 4;
+        $studentId = $this->studentId;
+        session_start();
         $coursesIds= $_POST['selected_courses'][0];
         $total_courses_hours  =   $this->db->query("SELECT SUM(convert(course_hour,char)) AS total_hours FROM `courses`  where id in (".$coursesIds.")")->fetch();
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();
         $active_semester_id = $active_semester['id'];
+        $student_courses = $this->db->query("SELECT `id` FROM `courses_students` WHERE `student_id` = :student_id  AND `semester_id` = :semester_id ",['student_id' => $this->studentId , 'semester_id' => $active_semester_id])->fetchAll();
         if(!$coursesIds)
         {
             header('Content-Type: application/json');
             echo json_encode(array('success' => false,'message' => 'no course selected'));
             exit;
         }
-        $this->studentId = 4;
-        $studentId = $this->studentId;
+
         if($total_courses_hours>18 && $total_courses_hours<=0)
         {
             header('Content-Type: application/json');
@@ -71,16 +74,31 @@ class Controller_student_register_courses {
         {
             
             $courses=explode(",", "$coursesIds");
+
             foreach ($courses as $course)
             {
-                $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
+                if (found_in_array($course, $student_courses)){
+                    continue;
+                }else{
+                    $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
+                        [
+                            'course_id' => $course,
+                            'student_id' => $studentId
+                        ])->fetch();
+                    if($check_course){
+                        $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $check_course['id']]);
+                    }else{
+                        $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
-                [
-                    'student_id' => $studentId,
-                    'course_id' => $course,
-                    'semester_id' => $active_semester_id
-                ]
-                );
+                            [
+                                'student_id' => $studentId,
+                                'course_id' => $course,
+                                'semester_id' => $active_semester_id
+                            ]
+                        );
+                    }
+                }
+
             }
             header('Content-Type: application/json');
             echo json_encode(array('success' => true,'message' => 'تم التسجيل بنجاح'));
@@ -93,14 +111,28 @@ class Controller_student_register_courses {
                 $courses=explode(",", "$coursesIds");
                 foreach ($courses as $course)
                 {
-                    $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
+                    if (found_in_array($course, $student_courses)){
+                        continue;
+                    }else{
+                        $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
+                            [
+                                'course_id' => $course,
+                                'student_id' => $studentId
+                            ])->fetch();
+                        if($check_course){
+                            $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $check_course['id']]);
+                        }else{
+                            $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
-                        [
-                            'student_id' => $studentId,
-                            'course_id' => $course,
-                            'semester_id' => $active_semester_id
-                        ]
-                    );
+                                [
+                                    'student_id' => $studentId,
+                                    'course_id' => $course,
+                                    'semester_id' => $active_semester_id
+                                ]
+                            );
+                        }
+                    }
+
                 }
                 header('Content-Type: application/json');
                 echo json_encode(array('success' => true,'message' => 'تم التسجيل بنجاح'));

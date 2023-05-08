@@ -34,9 +34,7 @@
         ?>
 
 
-        <form action="">
-
-        </form>
+        <div class="message"></div>
 
         <table class="table">
             <thead>
@@ -113,11 +111,13 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        console.log(done)
+                        console.log('done');
+                        $('.message').html('<div class="alert alert-success" role="alert">'+data.message+'</div>');
                     } else {
                         // Login failed, show error message to user
                         const errorMessage = document.getElementById('error-message');
                         errorMessage.textContent = data.message;
+                        $('.message').html('<div class="alert alert-danger" role="alert">'+data.message+'</div>');
                     }
                 })
                 .catch(error => {

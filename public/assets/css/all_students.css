@@ -1,11 +1,11 @@
 *{
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  outline: none;
-  list-style: none;
-  word-wrap: break-word;
+  /*-webkit-box-sizing: border-box;*/
+  /*box-sizing: border-box;*/
+  /*outline: none;*/
+  /*list-style: none;*/
+  /*word-wrap: break-word;*/
 }
 
 .main-content
@@ -82,7 +82,7 @@ svg:not(:host).svg-inline--fa, svg:not(:root).svg-inline--fa {
 }
 
 .svg-inline--fa {
-  display: var(inline-block);
+  display: inline-block;
   height: 1em;
   overflow: visible;
   vertical-align: -0.125em;
