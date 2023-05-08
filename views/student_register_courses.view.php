@@ -61,7 +61,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success" style="background:#80ab976e;" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>>تسجيل</button>
+        <button type="submit" class="btn btn-success submit-btn" style="background:#80ab976e;" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>>تسجيل</button>
     </div>
 </div>
 
@@ -82,12 +82,24 @@
                 console.log(id);
                 let input_id = $(this).closest('tr').find('.select_hidden_id');
                 input_id.val(id);
+            } else {
+                let input_id = $(this).closest('tr').find('.select_hidden_id');
+                input_id.val('');
             }
+        });
 
+        $('.submit-btn').click(function () {
 
-
+            let selected_courses = []
             const formData = new FormData();
-            formData.append('id',id);
+            $('.select_hidden_id').each(function ()
+            {
+                if(parseInt(this.getAttribute('value'))>0)
+                {
+                    selected_courses.push(this.getAttribute('value'))
+                }
+            });
+            formData.append('selected_courses[]', selected_courses);
 
             fetch('<?= site_url() ?>/get_registerCourse_data', {
                 method: 'POST',
@@ -96,7 +108,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('course_name').setAttribute('value',data.course[0]['name'])
+                        console.log(done)
                     } else {
                         // Login failed, show error message to user
                         const errorMessage = document.getElementById('error-message');
@@ -108,6 +120,7 @@
                     console.error(error);
                 });
         });
+
     });
 
 
