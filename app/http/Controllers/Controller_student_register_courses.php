@@ -30,6 +30,23 @@ class Controller_student_register_courses {
 
             view('student_register_courses',compact('active_semester','active_courses'));
     }
+
+    public function registerCourseData()
+    {
+        $courseId= $_POST['id'];
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $course  =   $db->query("SELECT * FROM `course` where id =:id",['id' => $courseId])->fetchAll();
+        if(!$course)
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('success' => false,'message' => 'Course not Founded'));
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'course' => $course , 'message' => 'Course Founded'));
+        exit;
+    }
 }
 
 //write code here
