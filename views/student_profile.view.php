@@ -125,7 +125,15 @@
         colors: ['#92BCB5'],
         series: [{
             name: 'عدد التقييم',
-            data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4]
+            data: [
+                <?php
+                $counts="";
+                foreach ($grades_count as $key => $grade_count) {
+                    $counts.= $grade_count . ",";
+                }
+                $counts = rtrim($counts, ",");
+                ?>
+            ]
         }],
         chart: {
             height: 350,
@@ -205,7 +213,15 @@
         colors: ['#92BCB5'],
         series: [{
             name: 'Series 1',
-            data: [80, 50, 30, 40, 100, 20],
+            data: [
+                <?php
+                $departments_names="";
+                foreach ($grades_departments as $key => $grade_department) {
+                    $departments_names.= "'".$grade_department."',";
+                }
+                $departments_names = rtrim($departments_names, ",");
+                ?>
+            ],
         }],
         chart: {
             height: 350,
@@ -215,12 +231,20 @@
             text: 'مؤشر تقييم الاقسام'
         },
         xaxis: {
-            categories: ['CS', 'AI', 'IT', 'IS', 'SW', 'MI']
+            categories: [
+                <?php
+                    $departments_names="";
+                    foreach ($grades_departments as $key => $grade_department) {
+                        $departments_names.= "'".$key."',";
+                    }
+                    $departments_names = rtrim($departments_names, ",");
+                ?>
+            ]
         }
     };
     var options3 = {
         colors: ['#92BCB5'],
-        series: [67],
+        series: [<?= $student_info['total_hours'] ?>],
         chart: {
             height: 350,
             type: 'radialBar',

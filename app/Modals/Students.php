@@ -22,26 +22,21 @@ class Student {
     private $created_at;
     private $updated_at;
     private $deleted_at;
-
-    public function __construct($info = null) {
+    private $db;
+    public $info=[];
+    public function __construct($info = null, $id = null) {
+        $config = require base_path("app/config.php");
+        $this->db = new Database($config);
         if ($info) {
+            $this->info = $info;
             $this->id = $info['id'];
-            $this->national_id_number = $info['national_id_number'];
-            $this->nationality_id = $info['nationality_id'];
-            $this->full_name_ar = $info['full_name_ar'];
-            $this->full_name_en = $info['full_name_en'];
-            $this->email = $info['email'];
-            $this->password = $info['password'];
-            $this->photo = $info['photo'];
-            $this->phone_number = $info['phone_number'];
-            $this->address = $info['address'];
-            $this->description = $info['description'];
-            $this->academic_id = $info['academic_id'];
-            $this->department_id = $info['department_id'];
-            $this->grade_id = $info['grade_id'];
-            $this->created_at = $info['created_at'];
-            $this->updated_at = $info['updated_at'];
-            $this->deleted_at = $info['deleted_at'];
+            $this->info[]=['gpa' => $this->gpa($this->id)];
+        }
+        if ($id && !$info){
+            $info=$this->db->query("SELECT * FROM `students` where id =:id",['id' => $id])->fetch();
+            $this->id = $info['id'];
+            $this->info = $info;
+            $this->info[]=['gpa' => $this->gpa($this->id)];
         }
     }
 
@@ -124,9 +119,7 @@ class Student {
         {
             $id = $this->id;
         }
-        $config = require base_path("app/config.php");
-        $db = new Database($config);
-        return   $db->query("SELECT * FROM `students` where id =:id",['id' => $id])->fetchAll();
+        return $this->info;
     }
     public function gpa($id=null){
         if(!$id)

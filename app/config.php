@@ -9,4 +9,8 @@ return [
         'name' => 'Collage',
         'url' => 'http://collage.local',
     ],
+    'academic_info' => [
+        'total_hours' => 144,
+        'course_total_degree' => '100',
+    ],
 ];
