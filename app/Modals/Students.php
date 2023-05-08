@@ -53,30 +53,27 @@ class Student {
     public function update($info) {
         // perform validation, then update the record in the database based on the current $this->id
 
-        if ($info) {
-            $this->id = $info['id'];
-            $this->national_id_number = $info['national_id_number'];
-            $this->nationality_id = $info['nationality_id'];
-            $this->full_name_ar = $info['full_name_ar'];
-            $this->full_name_en = $info['full_name_en'];
-            $this->email = $info['email'];
-            isset($info['password']) ? $this->password = $info['password'] : $this->password = null ;
-            $this->photo = $info['photo'];
-            $this->phone_number = $info['phone_number'];
-            $this->address = $info['address'];
-            $this->description = $info['description'];
-            $this->academic_id = $info['academic_id'];
-            $this->department_id = $info['department_id'];
-            $this->grade_id = $info['grade_id'];
-            $this->created_at = $info['created_at'];
-            $this->updated_at = $info['updated_at'];
-            $this->deleted_at = $info['deleted_at'];
-        }
+//        if ($info) {
+//            $this->id = $info['id'];
+//            $this->national_id_number = $info['national_id_number'];
+//            $this->nationality_id = $info['nationality_id'];
+//            $this->full_name_ar = $info['full_name_ar'];
+//            $this->full_name_en = $info['full_name_en'];
+//            $this->email = $info['email'];
+//            isset($info['password']) ? $this->password = $info['password'] : $this->password = null ;
+//            $this->photo = $info['photo'];
+//            $this->phone_number = $info['phone_number'];
+//            $this->address = $info['address'];
+//            $this->description = $info['description'];
+//            $this->academic_id = $info['academic_id'];
+//            $this->department_id = $info['department_id'];
+//            $this->grade_id = $info['grade_id'];
+//        }
 
         $config = require base_path("app/config.php");
         $db = new Database($config);
 
-        $sql = "UPDATE `teaching_staff` SET";
+        $sql = "UPDATE `students` SET";
 
         $columns = [];
         $values = [];

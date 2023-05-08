@@ -317,7 +317,7 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `role_num` bigint(20) NOT NULL,
-    `national_id_number` int(20) NOT NULL,
+    `national_id_number` bigint(20) NOT NULL,
     `nationality_id` bigint(20) NOT NULL,
     `full_name_ar` varchar(250) NOT NULL,
     `full_name_en` varchar(250) NOT NULL,

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="ar">
 <head>
@@ -24,8 +25,8 @@
                             </div>
                             <div class="card-details">
                                 <div class="personalInformation">
-                                    <h3 class="profileName">م.عبدالرحمن مصطفى</h3>
-                                    <span class="profileType">سوبر ادمن</span>
+                                    <h3 class="profileName"><?= $student_info['full_name_ar'] ?></h3>
+                                    <span class="profileType">طالب</span>
                                 </div>
                                 <div class="someDetails">
                                     <div class="container">
@@ -36,31 +37,19 @@
                                             <div class="col-12">
                                                 <div class="item">
                                                     <span class="type">الاسم:</span>
-                                                    <span class="info">م.عبدالرحمن مصطفى</span>
+                                                    <span class="info"><?= $student_info['full_name_ar'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="item">
-                                                    <span class="type">الاسم:</span>
-                                                    <span class="info">م.عبدالرحمن مصطفى</span>
+                                                    <span class="type">المعرف الاكاديمي:</span>
+                                                    <span class="info"><?= $student_info['academic_id'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="item">
-                                                    <span class="type">الاسم:</span>
-                                                    <span class="info">م.عبدالرحمن مصطفى</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="item">
-                                                    <span class="type">الاسم:</span>
-                                                    <span class="info">م.عبدالرحمن مصطفى</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="item">
-                                                    <span class="type">الاسم:</span>
-                                                    <span class="info">م.عبدالرحمن مصطفى</span>
+                                                    <span class="type">رقم الهاتف:</span>
+                                                    <span class="info"><?= $student_info['phone_number'] ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,18 +71,103 @@
                             <div class="content-box">
                                 <div class="content">
                                     <div class="container">
-                                        <form dir="rtl">
+                                        <form dir="rtl" method="post" action="<?=site_url()?>/student_profile/update">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">البريد الإلكتروني</label>
-                                                <input type="email" class="form-control is-invalid" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl">
-                                                <div class="invalid-feedback">
-                                                    تجربة التحقق
-                                                </div>
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">الرقم القومي</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['national_id_number'])?"is-invalid":"" ?>" value="<?= $student_info['national_id_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="national_id_number" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['national_id_number'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['national_id_number']?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label" dir="rtl">كلمة السر</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" dir="rtl">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">الاسم بالعربية</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_ar'])?"is-invalid":"" ?>" value="<?= $student_info['full_name_ar'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_ar" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['full_name_ar'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['full_name_ar']?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">الاسم بالانجليزية</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_en'])?"is-invalid":"" ?>" value="<?= $student_info['full_name_en'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_en" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['full_name_en'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['full_name_en']?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">البريد الالكتروني</label>
+                                                <input type="email" class="form-control <?= isset($_SESSION['errors']['email'])?"is-invalid":"" ?>" value="<?= $student_info['email'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="email" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['full_name_en'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['full_name_en']?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">كلمة المرور</label>
+                                                <input type="password" class="form-control <?= isset($_SESSION['errors']['password'])?"is-invalid":"" ?>" value="" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="password" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['password'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['password']?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">رقم الهاتف</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['phone_number'])?"is-invalid":"" ?>" value="<?= $student_info['phone_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="phone_number" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['phone_number'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['phone_number']?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">المعرف الاكاديمي</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['academic_id'])?"is-invalid":"" ?>" value="<?= $student_info['academic_id'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="academic_id" <?= $userRole==4?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['academic_id'])):?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $_SESSION['errors']['academic_id']?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
+                                                <select id="disabledSelect" class="form-select" dir="rtl" name="department_id">
+                                                    <?php foreach ($data['departments'] as $department):?>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
+                                                <select id="disabledSelect" class="form-select" dir="rtl" name="nationality_id" <?= $userRole==4?"disabled":""?>>
+                                                    <?php foreach ($data['nationalities'] as $department):?>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
+                                                <select id="disabledSelect" class="form-select" dir="rtl" name="grade_id" <?= $userRole==4?"disabled":""?>>
+                                                    <?php foreach ($data['grades'] as $department):?>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
+                                                <select id="disabledSelect" class="form-select" dir="rtl" name="group_id" <?= $userRole==4?"disabled":""?>>
+                                                    <?php foreach ($data['groups'] as $department):?>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" value="<?= $student_info['id'] ?>" name="id">
                                             <button type="submit" class="btn btn-primary" dir="rtl">إرسال</button>
                                         </form>
 
@@ -215,10 +289,11 @@
             name: 'Series 1',
             data: [
                 <?php
-                dd($grades_departments);
                 $departments_names="";
-                foreach ($grades_departments as $key => $grade_department) {
-                    $departments_names.= "'".$grade_department."',";
+                foreach ($grades_departments as $grade_department) {
+                    foreach ($grade_department as $key => $value) {
+                        $departments_names.= $value . ",";
+                    }
                 }
                 $departments_names = rtrim($departments_names, ",");
                 ?>
@@ -234,11 +309,13 @@
         xaxis: {
             categories: [
                 <?php
-                    $departments_names="";
-                    foreach ($grades_departments as $key => $grade_department) {
-                        $departments_names.= "'".$key."',";
+                $departments_names="";
+                foreach ($grades_departments as $grade_department) {
+                    foreach ($grade_department as $key => $value) {
+                        $departments_names.= $key . ",";
                     }
-                    $departments_names = rtrim($departments_names, ",");
+                }
+                $departments_names = rtrim($departments_names, ",");
                 ?>
             ]
         }
