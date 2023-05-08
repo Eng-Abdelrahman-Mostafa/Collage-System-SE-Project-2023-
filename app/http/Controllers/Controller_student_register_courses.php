@@ -21,8 +21,7 @@ class Controller_student_register_courses {
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();
         $active_semester_id = $active_semester? $active_semester['id']:'';
         $active_courses = $this->db->query("SELECT * FROM `semester_courses` INNER JOIN `courses` ON semester_courses.course_id = courses.id WHERE semester_courses.semester_id = :id", ['id' => $active_semester_id])->fetchAll();
-        $student_courses = $this->db->query("SELECT `id` FROM `courses_students` WHERE `student_id` = :student_id  AND `semester_id` = :semester_id ",['student_id' => $this->studentId , 'semester_id' => $active_semester_id])->fetchAll();
-
+        $student_courses = $this->db->query("SELECT `course_id` FROM `courses_students` WHERE `student_id` = :student_id  AND `semester_id` = :semester_id ",['student_id' => $this->studentId , 'semester_id' => $active_semester_id])->fetchAll();
         foreach ($active_courses as $key => $active_course) {
             $courses_prerequisites = $this->db->query("SELECT prerequisties_id FROM `courses_prerequisites` WHERE course_id = :course_id", ['course_id' => $active_course['course_id']])->fetchAll();
 
@@ -49,7 +48,7 @@ class Controller_student_register_courses {
         $this->studentId = 4;
         $studentId = $this->studentId;
         session_start();
-        $coursesIds= $_POST['selected_courses'][0];
+        $coursesIds= $_POST['selected_courses'][0]===''?'0':$_POST['selected_courses'][0];
         $total_courses_hours  =   $this->db->query("SELECT SUM(convert(course_hour,char)) AS total_hours FROM `courses`  where id in (".$coursesIds.")")->fetch();
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();
         $active_semester_id = $active_semester['id'];
@@ -74,31 +73,32 @@ class Controller_student_register_courses {
         {
             
             $courses=explode(",", "$coursesIds");
-
+            $delete_courses = $student_courses;
             foreach ($courses as $course)
             {
                 if (found_in_array($course, $student_courses)){
                     continue;
                 }else{
-                    $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
-                        [
-                            'course_id' => $course,
-                            'student_id' => $studentId
-                        ])->fetch();
-                    if($check_course){
-                        $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $check_course['id']]);
-                    }else{
-                        $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
+//                    $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $check_course['id']]);
+//                    $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
+//                        [
+//                            'course_id' => $course,
+//                            'student_id' => $studentId
+//                        ])->fetch();
+                    $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
-                            [
-                                'student_id' => $studentId,
-                                'course_id' => $course,
-                                'semester_id' => $active_semester_id
-                            ]
-                        );
-                    }
+                        [
+                            'student_id' => $studentId,
+                            'course_id' => $course,
+                            'semester_id' => $active_semester_id
+                        ]
+                    );
+                    unset($delete_courses[$course]);
                 }
-
+            }
+            foreach ($delete_courses as $delete_course)
+            {
+                $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $delete_course['id']]);
             }
             header('Content-Type: application/json');
             echo json_encode(array('success' => true,'message' => 'تم التسجيل بنجاح'));
@@ -109,30 +109,32 @@ class Controller_student_register_courses {
             {
                 //register_this_courses
                 $courses=explode(",", "$coursesIds");
+                $delete_courses = $student_courses;
                 foreach ($courses as $course)
                 {
                     if (found_in_array($course, $student_courses)){
                         continue;
                     }else{
-                        $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
-                            [
-                                'course_id' => $course,
-                                'student_id' => $studentId
-                            ])->fetch();
-                        if($check_course){
-                            $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $check_course['id']]);
-                        }else{
-                            $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
+//                        $check_course = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
+//                            [
+//                                'course_id' => $course,
+//                                'student_id' => $studentId
+//                            ])->fetch();
+                        $this->db->query("INSERT INTO `courses_students`( `student_id`, `course_id`, `semester_id`, `chance_number`) 
                                             VALUES (:student_id,:course_id,:semester_id,'1')",
-                                [
-                                    'student_id' => $studentId,
-                                    'course_id' => $course,
-                                    'semester_id' => $active_semester_id
-                                ]
-                            );
-                        }
+                            [
+                                'student_id' => $studentId,
+                                'course_id' => $course,
+                                'semester_id' => $active_semester_id
+                            ]
+                        );
+                        unset($delete_courses[$course]);
                     }
 
+                }
+                foreach ($delete_courses as $delete_course)
+                {
+                    $this->db->query('DELETE FROM `courses_students` WHERE `id` = :id',['id' => $delete_course['id']]);
                 }
                 header('Content-Type: application/json');
                 echo json_encode(array('success' => true,'message' => 'تم التسجيل بنجاح'));

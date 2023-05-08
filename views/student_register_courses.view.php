@@ -52,7 +52,7 @@
                 <th scope="row">
                     <div class="form-check">
                         <input class="form-check-input select-btn" data-id="<?= $active_course['id'] ?>" type="checkbox" value="" id="flexCheckDefault" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>   <?php  if(found_in_array($active_course['id'],$student_courses)){echo 'checked';}?> >
-                        <input type="hidden" class="select_hidden_id" value="" name="id">
+                        <input type="hidden" class="select_hidden_id" value="<?php  if(found_in_array($active_course['id'],$student_courses)){echo $active_course['id'];}?>" name="id">
                         <label class="form-check-label" for="flexCheckDefault"></label>
                     </div>
                 </th>
@@ -115,8 +115,6 @@
                         $('.message').html('<div class="alert alert-success" role="alert">'+data.message+'</div>');
                     } else {
                         // Login failed, show error message to user
-                        const errorMessage = document.getElementById('error-message');
-                        errorMessage.textContent = data.message;
                         $('.message').html('<div class="alert alert-danger" role="alert">'+data.message+'</div>');
                     }
                 })
