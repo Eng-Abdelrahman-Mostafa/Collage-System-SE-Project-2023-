@@ -122,24 +122,20 @@ class Student {
         $config = require base_path("app/config.php");
         $db = new Database($config);
         $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on `courses_students`.semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
+        $student_courses_data=[];
         foreach ($student_courses as $student_course){
-            $course_total_degree= $db->query("SELECT 
-                  exams.id, 
-                  (SELECT SUM(exam_degrees.degree) 
-                   FROM exam_degrees 
-                   WHERE exam_degrees.exam_id = exams.id) as total_degree
-                FROM 
-                  exams 
-                WHERE 
-                  exams.semester_id = :semester_id AND exams.course_id = :course_id;
+            $course_total_degree= $db->query("SELECT SUM(`degree`) as total_degree FROM `exam_degrees` WHERE `exam_id` IN (SELECT id FROM exams WHERE exams.course_id=:course_id AND exams.semester_id=:semester_id) AND `student_id`=:student_id
                 ",[
                 'semester_id' => $student_course['semester_id'],
                 'course_id' => $student_course['course_id']
-            ])->fetch()['total_degree'];
-            $course_gpa=self::percentage_to_gpa($course_total_degree/100)*$student_course['course_hour'];
-            $student_course[] = ['course_gpa' => $course_gpa];
+                ,'student_id' => $id
+            ])->fetch();
+            $course_total_degree? $course_total_degree=$course_total_degree['total_degree']:$course_total_degree=0;
+            $course_gpa=$this->percentage_to_gpa(($course_total_degree/$config['academic_info']['course_total_degree'])*100)*(int)$student_course['course_hour'];
+            $student_course['course_gpa'] = $course_gpa;
+            $student_courses_data[]=$student_course;
         }
-        foreach ($student_courses as $student_course){
+        foreach ($student_courses_data as $student_course){
             $GPA+=$student_course['course_gpa'];
             $totalHours+=$student_course['course_hour'];
         }
@@ -149,7 +145,7 @@ class Student {
             return 0;
         }
     }
-    private static function percentage_to_gpa($percentage){
+    private function percentage_to_gpa($percentage){
         switch ($percentage){
             case ($percentage>=90):
                 return 4;
