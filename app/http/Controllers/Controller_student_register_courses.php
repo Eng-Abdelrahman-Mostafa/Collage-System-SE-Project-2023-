@@ -7,7 +7,7 @@ use Modals\Student;
 class Controller_student_register_courses {
     
     private $db;
-
+    private int $studentId ;
     public function  __construct()
     {
         $config = require base_path("app/config.php");
@@ -15,9 +15,13 @@ class Controller_student_register_courses {
     }
 
     public function index() {
+        session_start();
+//        $this->studentId = $_SESSION['user_id'];
+        $this->studentId = 4;
         $active_semester = $this->db->query("SELECT * FROM `semesters` WHERE `active_status` = 1")->fetch();
-        $active_semester_id = $active_semester['id'];
+        $active_semester_id = $active_semester? $active_semester['id']:'';
         $active_courses = $this->db->query("SELECT * FROM `semester_courses` INNER JOIN `courses` ON semester_courses.course_id = courses.id WHERE semester_courses.semester_id = :id", ['id' => $active_semester_id])->fetchAll();
+        $student_courses = $this->db->query("SELECT `id` FROM `courses_students` WHERE `student_id` = :student_id  AND `semester_id` = :semester_id ",['student_id' => $this->studentId , 'semester_id' => $active_semester_id])->fetchAll();
 
         foreach ($active_courses as $key => $active_course) {
             $courses_prerequisites = $this->db->query("SELECT prerequisties_id FROM `courses_prerequisites` WHERE course_id = :course_id", ['course_id' => $active_course['course_id']])->fetchAll();
@@ -26,7 +30,7 @@ class Controller_student_register_courses {
                 $check_std_prerequisites = $this->db->query("SELECT `id` FROM `courses_students` WHERE `course_id` = :course_id AND `student_id` = :student_id",
                     [
                         'course_id' => $pre['prerequisties_id'],
-                        'student_id' => 4
+                        'student_id' => $this->studentId
                     ])->fetch();
 
                 if (!$check_std_prerequisites) {
@@ -37,7 +41,7 @@ class Controller_student_register_courses {
         }
 
 
-            view('student_register_courses',compact('active_semester','active_courses'));
+            view('student_register_courses',compact('active_semester','active_courses','student_courses'));
     }
 
     public function registerCourseData()
@@ -52,7 +56,8 @@ class Controller_student_register_courses {
             echo json_encode(array('success' => false,'message' => 'no course selected'));
             exit;
         }
-        $studentId = 4;
+        $this->studentId = 4;
+        $studentId = $this->studentId;
         if($total_courses_hours>18 && $total_courses_hours<=0)
         {
             header('Content-Type: application/json');

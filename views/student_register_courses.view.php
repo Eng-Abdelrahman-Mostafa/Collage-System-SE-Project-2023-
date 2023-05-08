@@ -23,10 +23,13 @@
         <h6>المقررات المفتوحة المسموح بتسجيلها</h6>
 
         <?php
-        if ($active_semester['registration_status'] == 0) {
-            echo '<div class="alert alert-warning" role="alert">
-             تم انتهاء التسجيل فى الفصل الدراسى الحالى  
-          </div>';
+        if(isset($active_semester['registration_status'])) {
+            if ($active_semester['registration_status'] == 0) {
+                echo '<div class="alert alert-warning" role="alert">
+                 تم انتهاء التسجيل فى الفصل الدراسى الحالى  
+              </div>';
+            }
+
         }
         ?>
 
@@ -45,11 +48,12 @@
             </tr>
             </thead>
             <tbody>
+            <?php if(count($active_courses)):  ?>
             <?php foreach ($active_courses as $active_course) : ?>
             <tr>
                 <th scope="row">
                     <div class="form-check">
-                        <input class="form-check-input select-btn" data-id="<?= $active_course['id'] ?>" type="checkbox" value="" id="flexCheckDefault" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?> >
+                        <input class="form-check-input select-btn" data-id="<?= $active_course['id'] ?>" type="checkbox" value="" id="flexCheckDefault" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>   <?php  if(found_in_array($active_course['id'],$student_courses)){echo 'checked';}?> >
                         <input type="hidden" class="select_hidden_id" value="" name="id">
                         <label class="form-check-label" for="flexCheckDefault"></label>
                     </div>
@@ -59,9 +63,10 @@
                 <td><?= $active_semester['title'] ?></td>
             </tr>
             <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success submit-btn" style="background:#80ab976e;" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>>تسجيل</button>
+        <button type="submit" class="btn btn-success submit-btn" style="background:#80ab976e;" <?php  if(isset($active_semester['registration_status'])){   if($active_semester['registration_status']==0) { echo 'disabled';} } ?>>تسجيل</button>
     </div>
 </div>
 

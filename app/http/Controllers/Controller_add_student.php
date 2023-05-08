@@ -46,9 +46,9 @@ class Controller_add_student {
             {
                 $errors['email'] = 'البريد الالكتروني موجود سابقا';
             }
-            $db->query("INSERT INTO `students`( `national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`,
+            $db->query("INSERT INTO `students`( `role_num`,`national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`,
                        `password`, `photo`,`phone_number`, `address`, `description`, `academic_id`, `department_id`, `grade_id`) 
-                       VALUES (:national_id_number,:nationality_id,:full_name_ar,:full_name_en,:email,:password,'1',:phone_number,:address,
+                       VALUES ('4',:national_id_number,:nationality_id,:full_name_ar,:full_name_en,:email,:password,'1',:phone_number,:address,
                                :description,:academic_id,:department_id,:grade_id)",[
                     'national_id_number' => $National_ID ,
                     'nationality_id' => $std_nationality ,

@@ -32,3 +32,15 @@ function site_url(){
     $config = require  base_path('app/config.php');
     return $config['app']['url'];
 }
+
+function found_in_array($element,$arr){
+    foreach ($arr as $array_element)
+    {
+        if(in_array($element,$array_element))
+        {
+            return true;
+        }
+
+    }
+    return false;
+}
