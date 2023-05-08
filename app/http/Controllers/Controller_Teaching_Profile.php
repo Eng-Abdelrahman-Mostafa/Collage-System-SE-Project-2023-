@@ -11,9 +11,8 @@ class Controller_Teaching_Profile
 
     public function index()
     {
-//        $userRole = $_SESSION['user_role'];
+        $userRole = $_SESSION['user_role'];
         require base_path("app/Modals/TeachingStaff.php");
-        $userRole = 1;
         $studentId = 0;
         $config = require base_path("app/config.php");
         $this->db = new Database($config);
@@ -22,7 +21,7 @@ class Controller_Teaching_Profile
         $data = [];
         $data['departments'] = $this->db->query("SELECT * FROM `departments`")->fetchAll();
         $data['nationalities'] = $this->db->query("SELECT * FROM `nationalities`")->fetchAll();
-        if ($userRole == 2 || $userRole == 3) {
+        if ($userRole == 2 || $userRole == 3 || $userRole == 1) {
             $studentId = $_SESSION['user_id'];
         } else {
             $studentId = $_GET['id'];
