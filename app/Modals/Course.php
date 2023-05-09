@@ -98,29 +98,25 @@ class Course
         $course  = $this->db->query("SELECT * FROM `courses_prerequisites` where `course_id` =:id",['id' => $courseid])->fetchAll();
         return $course;
     }
-    public function add_to_semester($courses, $semester_id) {
-        $db_courses_semester = $this->db->query("SELECT * FROM `semester_courses` WHERE `semester_id` = ?", [$semester_id])->fetchAll();
-
-        foreach ($courses as $course) {
-            if (found_in_array($course, $db_courses_semester)) {
+    public function add_to_semester($courses,$semester_id){
+        $db_courses_semester= $this->db->query("SELECT * FROM `semester_courses` WHERE `semester_id` = ?",[$semester_id])->fetchAll();
+        $db_courses_semester_id=[];
+        foreach ($db_courses_semester as $course){
+            $db_courses_semester_id[]=$course['course_id'];
+        }
+        foreach ($courses as $course){
+            if (found_in_array($course,$db_courses_semester)){
                 continue;
-            } else {
-                $sql = "INSERT INTO `semester_courses`(`course_id`, `semester_id`) VALUES (?, ?)";
-                $this->db->query($sql, [$course, $semester_id]);
-
-                // Remove the course from $db_courses_semester array
-                $key = array_search($course, array_column($db_courses_semester, 'course_id'));
-                if ($key !== false) {
-                    unset($db_courses_semester[$key]);
-                }
+            }else{
+                $sql="INSERT INTO `semester_courses`(`course_id`, `semester_id`) VALUES (?,?)";
+                $this->db->query($sql,[$course,$semester_id]);
+                unset($db_courses_semester_id[$course]);
             }
         }
-
-        foreach ($db_courses_semester as $course) {
-            $sql = "DELETE FROM `semester_courses` WHERE `course_id` = ? AND `semester_id` = ?";
-            $this->db->query($sql, [$course['course_id'], $semester_id]);
+        foreach ($db_courses_semester_id as $course){
+            $sql="SELECT * FROM `semester_courses` WHERE `course_id`=? AND`semester_id`=?";
+            $this->db->query($sql,[$course,$semester_id]);
         }
-
         return true;
     }
 
