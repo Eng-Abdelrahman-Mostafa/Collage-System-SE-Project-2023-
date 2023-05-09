@@ -14,7 +14,6 @@ class Controller_login {
             $config= require base_path('app/config.php');
             require base_path('Core/Database.php');
             $db = new Database($config);
-
             $teachingstaff=$db->query('SELECT * FROM `teaching_staff` WHERE `email`=:email AND `password`=:password',[
                 "email"=>$email,
                 "password"=>$password
