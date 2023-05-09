@@ -64,7 +64,7 @@ img{
 
 main .insights{
     display: flex;
-    grid-template-columns: repeat(3,lfr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2.6rem;
     justify-content: center;
 }
@@ -132,7 +132,7 @@ main .portfolio .right{
     
 }
 main .portfolio h2 span{
-   font-weight: 400px;
+   font-weight: 400;
    color: var(--text-color);
 }
 main .portfolio p{
