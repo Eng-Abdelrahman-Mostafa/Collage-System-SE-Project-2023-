@@ -3,13 +3,17 @@
 namespace Modals;
 
 
+use Core\Database;
+
 class Course
 {
     private $db;
+    private $id;
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
+        $config=require base_path("app/config.php");
+        $this->db = new Database($config);
     }
 
     public function addCourse($name, $code, $department_id, $course_hour, $lecturers, $prerequisites)
@@ -67,6 +71,26 @@ class Course
             $stmt->bind_param("ii", $id, $prerequisite_id);
             $stmt->execute();
         }
+    }
+    public function add_prerequisites($id=null,$prerequisites){
+        $db_prerequisites= $this->db->query("SELECT prerequisties_id FROM `courses_prerequisites` WHERE course_id = ?",[$id])->fetchAll();
+        if($id=null){
+            $id=$this->id;
+        }
+        foreach ($prerequisites as $prerequisite){
+            if (found_in_array($prerequisite,$db_prerequisites)){
+                continue;
+            }else{
+                $sql="INSERT INTO `courses_prerequisites` (`course_id`, `prerequisties_id`) VALUES (?, ?)";
+                $this->db->query($sql,[$id,$prerequisite]);
+                unset($db_prerequisites[$prerequisite]);
+            }
+        }
+        foreach ($db_prerequisites as $prerequisite){
+            $sql="DELETE FROM `courses_prerequisites` WHERE `course_id` = ? AND `prerequisties_id` = ?";
+            $this->db->query($sql,[$id,$prerequisite]);
+        }
+
     }
 
 
