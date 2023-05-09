@@ -73,17 +73,17 @@ class Course
         }
     }
     public function add_prerequisites($id=null,$prerequisites){
+        if($id=null){
+            $id=$this->id;
+        }
         $db_prerequisites= $this->db->query("SELECT prerequisties_id FROM `courses_prerequisites` WHERE course_id = ?",[$id])->fetchAll();
         $db_prerequisites_ids=[];
         $db_prerequisites = $db_prerequisites ? $db_prerequisites : [];
         foreach ($db_prerequisites as $prerequisite){
             $db_prerequisites_ids[]=$prerequisite['prerequisties_id'];
         }
-        if($id=null){
-            $id=$this->id;
-        }
         foreach ($prerequisites as $prerequisite){
-            if (found_in_array($prerequisite,$db_prerequisites)){
+            if (in_array($prerequisite,$db_prerequisites_ids)){
                 continue;
             }else{
                 $sql="INSERT INTO `courses_prerequisites` (`course_id`, `prerequisties_id`) VALUES (?, ?)";
