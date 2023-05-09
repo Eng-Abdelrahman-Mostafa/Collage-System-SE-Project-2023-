@@ -106,17 +106,14 @@ class Course
         }
         foreach ($courses as $course){
             if (found_in_array($course,$db_courses_semester)){
-                if(($key = array_search($course, $db_courses_semester_id)) !== false) {
-                    unset($db_courses_semester_id[$key]);
-                }
+                unset($db_courses_semester_id[$course]);
             }else{
                 $sql="INSERT INTO `semester_courses`(`course_id`, `semester_id`) VALUES (?,?)";
                 $this->db->query($sql,[$course,$semester_id]);
             }
         }
-
         foreach ($db_courses_semester_id as $course){
-            $sql="SELECT * FROM `semester_courses` WHERE `course_id`=? AND`semester_id`=?";
+            $sql="Delete FROM `semester_courses` WHERE `course_id`=? AND`semester_id`=?";
             $this->db->query($sql,[$course,$semester_id]);
         }
         return true;
