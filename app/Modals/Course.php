@@ -98,6 +98,23 @@ class Course
         $course  = $this->db->query("SELECT * FROM `courses_prerequisites` where `course_id` =:id",['id' => $courseid])->fetchAll();
         return $course;
     }
+    public function add_to_semester($courses,$semester_id){
+        $db_courses_semester= $this->db->query("SELECT * FROM `semester_courses` WHERE `semester_id` = ?",[$semester_id])->fetchAll();
+        foreach ($courses as $course){
+            if (found_in_array($course,$db_courses_semester)){
+                continue;
+            }else{
+                $sql="INSERT INTO `semester_courses`(`course_id`, `semester_id`) VALUES (?,?)";
+                $this->db->query($sql,[$course,$semester_id]);
+                unset($db_courses_semester[$course]);
+            }
+        }
+        foreach ($db_courses_semester as $course){
+            $sql="SELECT * FROM `semester_courses` WHERE `course_id`=? AND`semester_id`=?";
+            $this->db->query($sql,[$course,$semester_id]);
+        }
+        return true;
+    }
 
 
 }
