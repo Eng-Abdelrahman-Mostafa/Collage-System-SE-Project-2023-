@@ -2,6 +2,7 @@
 namespace app\http\Controllers;
 //write code here
 use Core\Database;
+use Modals\Course;
 
 class Controller_Manage_semesters {
     private  $db;
@@ -116,6 +117,40 @@ class Controller_Manage_semesters {
 
     }
 
+    public function getSemCourses()
+    {
+        $semId= $_POST['id'];
+        $sem  =   $this->db->query("SELECT * FROM `semester_courses` where semester_id =:id",['id' => $semId])->fetchAll();
+        if(!$sem)
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('success' => false,'message' => 'Courses not Founded'));
+            exit;
+        }
+        $coursesIds = [];
+        foreach ($sem as $course)
+        {
+          $coursesIds[]= $course['course_id'];
+        }
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'courses' => $coursesIds , 'message' => 'Courses Founded'));
+        exit;
+    }
+
+
+    public  function  addCourses()
+    {
+        require base_path("app/Modals/Course.php");
+        $courses = $_POST['selected_courses'][0];
+        $courses = explode(",",$courses);
+        $semesterId = $_POST['semester_id'];
+        $Course = new Course();
+        $Course->add_to_semester($courses,$semesterId);
+
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'message' => 'Courses added successfully'));
+        exit;
+    }
 
 }
 

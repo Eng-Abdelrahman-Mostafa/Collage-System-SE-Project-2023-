@@ -414,7 +414,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="addCourse" method="post" dir="rtl">
+                    <form action="addCourses" method="post" dir="rtl">
                         <div class="wrapper">
                             <div class="wrapper">
                                 <div class="container" id="dropdownSelected">
@@ -435,7 +435,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary">اضافة</button>
+                    <button type="button" class="btn btn-primary add_course">اضافة</button>
                 </div>
                 </form>
             </div>
@@ -607,11 +607,82 @@
                 console.log(id);
                 let input_id = document.querySelector('#course_hidden_id');
                 input_id.setAttribute("value", id);
-                $('#coursesModal').modal('show');
-                const selectedValues = Array.from(document.getElementById('myMultiSelect').selectedOptions).map((option) => option.value);
-                console.log(selectedValues);
-            });
 
+                clearOptions()
+
+                const formData = new FormData();
+                formData.append('id',id);
+
+                fetch('<?= site_url() ?>/get_semester_courses', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+
+                            const multiSelect = document.getElementById('myMultiSelect');
+                            const selectedValues = data.courses; // Example selected values to add
+
+                            selectedValues.forEach((value) => {
+                                const option = multiSelect.querySelector(`option[value="${value}"]`);
+                                if (option) {
+                                    option.selected = true;
+                                }
+                            });
+
+// Refresh the MultiSelectDropdown to reflect the changes
+                            multiSelect.loadOptions();
+
+
+                        } else {
+                            // Login failed, show error message to user
+                            const errorMessage = document.getElementById('error-message');
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network error or other exceptions
+                        console.error(error);
+                    });
+
+
+                $('#coursesModal').modal('show');
+
+
+
+
+            });
+            $('.add_course').click(function (){
+                const selectedValues = Array.from(document.getElementById('myMultiSelect').selectedOptions).map((option) => option.value);
+                let input_id = document.querySelector('#course_hidden_id');
+                let semester_id = input_id.getAttribute('value')
+
+
+
+                const formData = new FormData();
+                formData.append('semester_id',semester_id);
+                formData.append('selected_courses[]',selectedValues);
+
+                fetch('<?= site_url() ?>/addCourses', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                                // location.reload();
+                        } else {
+                            // Login failed, show error message to user
+                            const errorMessage = document.getElementById('error-message');
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network error or other exceptions
+                        console.error(error);
+                    });
+            });
         });
 
 
@@ -628,6 +699,21 @@
                 $('#deleteModal').modal('show');
             });
         });
+
+
+        function clearOptions() {
+            const multiSelect = document.getElementById('myMultiSelect');
+            const selectedValues = []; // Example selected values to add
+
+            $(multiSelect).find('option').each(function() {
+                this.selected = false;
+            });
+
+            // Refresh the MultiSelectDropdown to reflect the changes
+            multiSelect.loadOptions(); // Assuming you have a custom loadOptions() method
+        }
+
+
     </script>
     <!-- Optional JavaScript; choose one of the two! -->
 
