@@ -94,6 +94,7 @@ class Course
             }
         }
         foreach ($db_prerequisites_ids as $prerequisite){
+            dd("bytshrmt");
             $sql="DELETE FROM `courses_prerequisites` WHERE `course_id` = ? AND `prerequisties_id` = ?";
             $this->db->query($sql,[$id,$prerequisite]);
         }

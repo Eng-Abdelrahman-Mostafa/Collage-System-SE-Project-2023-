@@ -29,3 +29,7 @@ $router->Post('/addSemester', 'app\http\Controllers\Controller_Manage_semesters.
 $router->Post('/activeSem', 'app\http\Controllers\Controller_Manage_semesters.php', 'active');
 $router->Post('/activeReg', 'app\http\Controllers\Controller_Manage_semesters.php', 'activeReg');
 $router->Post('/deleteSem', 'app\http\Controllers\Controller_Manage_semesters.php', 'delete');
+
+
+
+$router->get('/Manage_appointments', 'app\http\Controllers\Controller_Manage_appointments.php', 'index');
