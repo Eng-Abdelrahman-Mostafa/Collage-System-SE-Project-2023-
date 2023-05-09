@@ -23,17 +23,18 @@
         <h6>المقررات المفتوحة المسموح بتسجيلها</h6>
 
         <?php
-        if ($active_semester['registration_status'] == 0) {
-            echo '<div class="alert alert-warning" role="alert">
-             تم انتهاء التسجيل فى الفصل الدراسى الحالى  
-          </div>';
+        if(isset($active_semester['registration_status'])) {
+            if ($active_semester['registration_status'] == 0) {
+                echo '<div class="alert alert-warning" role="alert">
+                 تم انتهاء التسجيل فى الفصل الدراسى الحالى  
+              </div>';
+            }
+
         }
         ?>
 
 
-        <form action="">
-
-        </form>
+        <div class="message"></div>
 
         <table class="table">
             <thead>
@@ -45,12 +46,13 @@
             </tr>
             </thead>
             <tbody>
+            <?php if(count($active_courses)):  ?>
             <?php foreach ($active_courses as $active_course) : ?>
             <tr>
                 <th scope="row">
                     <div class="form-check">
-                        <input class="form-check-input select-btn" data-id="<?= $active_course['id'] ?>" type="checkbox" value="" id="flexCheckDefault" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?> >
-                        <input type="hidden" class="select_hidden_id" value="" name="id">
+                        <input class="form-check-input select-btn" data-id="<?= $active_course['id'] ?>" type="checkbox" value="" id="flexCheckDefault" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>   <?php  if(found_in_array($active_course['id'],$student_courses)){echo 'checked';}?> >
+                        <input type="hidden" class="select_hidden_id" value="<?php  if(found_in_array($active_course['id'],$student_courses)){echo $active_course['id'];}?>" name="id">
                         <label class="form-check-label" for="flexCheckDefault"></label>
                     </div>
                 </th>
@@ -59,9 +61,10 @@
                 <td><?= $active_semester['title'] ?></td>
             </tr>
             <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success" style="background:#80ab976e;" <?php if($active_semester['registration_status']==0) { echo 'disabled';} ?>>تسجيل</button>
+        <button type="submit" class="btn btn-success submit-btn" style="background:#80ab976e;" <?php  if(isset($active_semester['registration_status'])){   if($active_semester['registration_status']==0) { echo 'disabled';} } ?>>تسجيل</button>
     </div>
 </div>
 
@@ -82,12 +85,24 @@
                 console.log(id);
                 let input_id = $(this).closest('tr').find('.select_hidden_id');
                 input_id.val(id);
+            } else {
+                let input_id = $(this).closest('tr').find('.select_hidden_id');
+                input_id.val('');
             }
+        });
 
+        $('.submit-btn').click(function () {
 
-
+            let selected_courses = []
             const formData = new FormData();
-            formData.append('id',id);
+            $('.select_hidden_id').each(function ()
+            {
+                if(parseInt(this.getAttribute('value'))>0)
+                {
+                    selected_courses.push(this.getAttribute('value'))
+                }
+            });
+            formData.append('selected_courses[]', selected_courses);
 
             fetch('<?= site_url() ?>/get_registerCourse_data', {
                 method: 'POST',
@@ -96,11 +111,11 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('course_name').setAttribute('value',data.course[0]['name'])
+                        console.log('done');
+                        $('.message').html('<div class="alert alert-success" role="alert">'+data.message+'</div>');
                     } else {
                         // Login failed, show error message to user
-                        const errorMessage = document.getElementById('error-message');
-                        errorMessage.textContent = data.message;
+                        $('.message').html('<div class="alert alert-danger" role="alert">'+data.message+'</div>');
                     }
                 })
                 .catch(error => {
@@ -108,6 +123,7 @@
                     console.error(error);
                 });
         });
+
     });
 
 

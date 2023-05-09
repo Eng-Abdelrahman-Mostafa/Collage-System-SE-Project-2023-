@@ -25,31 +25,31 @@
                             </div>
                             <div class="card-details">
                                 <div class="personalInformation">
-                                    <h3 class="profileName"><?= $student_info['full_name_ar'] ?></h3>
-                                    <span class="profileType">طالب</span>
+                                    <h3 class="profileName"><?= $teaching_info['full_name_ar'] ?></h3>
+                                    <span class="profileType"><?= $roleName ?></span>
                                 </div>
                                 <div class="someDetails">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 someDetailsHeader">
-                                                معلومات الطالب
+                                                معلومات شخصية
                                             </div>
                                             <div class="col-12">
                                                 <div class="item">
                                                     <span class="type">الاسم:</span>
-                                                    <span class="info"><?= $student_info['full_name_ar'] ?></span>
+                                                    <span class="info"><?= $teaching_info['full_name_ar'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="item">
-                                                    <span class="type">المعرف الاكاديمي:</span>
-                                                    <span class="info"><?= $student_info['academic_id'] ?></span>
+                                                    <span class="type">اللقب الاكاديمي:</span>
+                                                    <span class="info"><?= $teaching_info['title'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="item">
                                                     <span class="type">رقم الهاتف:</span>
-                                                    <span class="info"><?= $student_info['phone_number'] ?></span>
+                                                    <span class="info"><?= $teaching_info['phone_number'] ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,18 +63,15 @@
                         <div class="profile-panel">
                             <div class="tab-box">
                                 <button class="tab-btn">البيانات</button>
-                                <button class="tab-btn">التقييمات</button>
-                                <button class="tab-btn">الاقسام</button>
-                                <button class="tab-btn">الساعات</button>
                                 <div class="tab-line"></div>
                             </div>
                             <div class="content-box">
                                 <div class="content">
                                     <div class="container">
-                                        <form dir="rtl" method="post" action="<?=site_url()?>/student_profile/update">
+                                        <form dir="rtl" method="post" action="<?=site_url()?>/profile/update">
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">الرقم القومي</label>
-                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['national_id_number'])?"is-invalid":"" ?>" value="<?= $student_info['national_id_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="national_id_number" <?= $userRole==4?"disabled":""?> >
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['national_id_number'])?"is-invalid":"" ?>" value="<?= $teaching_info['national_id_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="national_id_number" <?= $userRole!=1?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['national_id_number'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['national_id_number']?>
@@ -83,7 +80,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">الاسم بالعربية</label>
-                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_ar'])?"is-invalid":"" ?>" value="<?= $student_info['full_name_ar'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_ar" <?= $userRole==4?"disabled":""?> >
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_ar'])?"is-invalid":"" ?>" value="<?= $teaching_info['full_name_ar'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_ar" <?= $userRole!=1?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['full_name_ar'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['full_name_ar']?>
@@ -92,7 +89,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">الاسم بالانجليزية</label>
-                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_en'])?"is-invalid":"" ?>" value="<?= $student_info['full_name_en'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_en" <?= $userRole==4?"disabled":""?> >
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['full_name_en'])?"is-invalid":"" ?>" value="<?= $teaching_info['full_name_en'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="full_name_en" <?= $userRole!=1?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['full_name_en'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['full_name_en']?>
@@ -101,7 +98,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">البريد الالكتروني</label>
-                                                <input type="email" class="form-control <?= isset($_SESSION['errors']['email'])?"is-invalid":"" ?>" value="<?= $student_info['email'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="email" <?= $userRole==4?"disabled":""?> >
+                                                <input type="email" class="form-control <?= isset($_SESSION['errors']['email'])?"is-invalid":"" ?>" value="<?= $teaching_info['email'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="email" <?= $userRole==4?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['email'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['email']?>
@@ -110,7 +107,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">كلمة المرور</label>
-                                                <input type="password" class="form-control <?= isset($_SESSION['errors']['password'])?"is-invalid":"" ?>" value="" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="password" <?= $userRole==4?"disabled":""?> >
+                                                <input type="password" class="form-control <?= isset($_SESSION['errors']['password'])?"is-invalid":"" ?>" value="" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="password" <?= $userRole!=1?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['password'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['password']?>
@@ -119,7 +116,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label" dir="rtl">رقم الهاتف</label>
-                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['phone_number'])?"is-invalid":"" ?>" value="<?= $student_info['phone_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="phone_number" <?= $userRole==4?"disabled":""?> >
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['phone_number'])?"is-invalid":"" ?>" value="<?= $teaching_info['phone_number'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="phone_number" <?= $userRole==4?"disabled":""?> >
                                                 <?php if(isset($_SESSION['errors']['phone_number'])):?>
                                                     <div class="invalid-feedback">
                                                         <?= $_SESSION['errors']['phone_number']?>
@@ -127,11 +124,11 @@
                                                 <?php endif; ?>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">المعرف الاكاديمي</label>
-                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['academic_id'])?"is-invalid":"" ?>" value="<?= $student_info['academic_id'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="academic_id" <?= $userRole==4?"disabled":""?> >
-                                                <?php if(isset($_SESSION['errors']['academic_id'])):?>
+                                                <label for="exampleInputEmail1" class="form-label" dir="rtl">اللقب الاكاديمي</label>
+                                                <input type="text" class="form-control <?= isset($_SESSION['errors']['title'])?"is-invalid":"" ?>" value="<?= $teaching_info['title'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" dir="rtl" name="title" <?= $userRole!=1?"disabled":""?> >
+                                                <?php if(isset($_SESSION['errors']['title'])):?>
                                                     <div class="invalid-feedback">
-                                                        <?= $_SESSION['errors']['academic_id']?>
+                                                        <?= $_SESSION['errors']['title']?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -139,7 +136,7 @@
                                                 <label for="disabledSelect" class="form-label" dir="rtl"></label>
                                                 <select id="disabledSelect" class="form-select" dir="rtl" name="department_id">
                                                     <?php foreach ($data['departments'] as $department):?>
-                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$teaching_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -147,40 +144,15 @@
                                                 <label for="disabledSelect" class="form-label" dir="rtl"></label>
                                                 <select id="disabledSelect" class="form-select" dir="rtl" name="nationality_id" <?= $userRole==4?"disabled":""?>>
                                                     <?php foreach ($data['nationalities'] as $department):?>
-                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
+                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$teaching_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
-                                                <select id="disabledSelect" class="form-select" dir="rtl" name="grade_id" <?= $userRole==4?"disabled":""?>>
-                                                    <?php foreach ($data['grades'] as $department):?>
-                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="disabledSelect" class="form-label" dir="rtl"></label>
-                                                <select id="disabledSelect" class="form-select" dir="rtl" name="group_id" <?= $userRole==4?"disabled":""?>>
-                                                    <?php foreach ($data['groups'] as $department):?>
-                                                        <option value="<?= $department['id'] ?>" <?= $department['id']==$student_info['department_id']?"selected":"" ?>><?= $department['name'] ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <input type="hidden" value="<?= $student_info['id'] ?>" name="id">
+                                            <input type="hidden" value="<?= $teaching_info['id'] ?>" name="id">
                                             <button type="submit" class="btn btn-primary" dir="rtl">إرسال</button>
                                         </form>
 
                                     </div>
-                                </div>
-                                <div class="content">
-                                    <div id="chart"></div>
-                                </div>
-                                <div class="content">
-                                    <div id="chart2"></div>
-                                </div>
-                                <div class="content">
-                                    <div id="chart3"></div>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +294,7 @@
     };
     var options3 = {
         colors: ['#92BCB5'],
-        series: [<?= $student_info['total_hours'] ?>],
+        series: [<?= $teaching_info['total_hours'] ?>],
         chart: {
             height: 350,
             type: 'radialBar',

@@ -53,30 +53,27 @@ class Student {
     public function update($info) {
         // perform validation, then update the record in the database based on the current $this->id
 
-        if ($info) {
-            $this->id = $info['id'];
-            $this->national_id_number = $info['national_id_number'];
-            $this->nationality_id = $info['nationality_id'];
-            $this->full_name_ar = $info['full_name_ar'];
-            $this->full_name_en = $info['full_name_en'];
-            $this->email = $info['email'];
-            isset($info['password']) ? $this->password = $info['password'] : $this->password = null ;
-            $this->photo = $info['photo'];
-            $this->phone_number = $info['phone_number'];
-            $this->address = $info['address'];
-            $this->description = $info['description'];
-            $this->academic_id = $info['academic_id'];
-            $this->department_id = $info['department_id'];
-            $this->grade_id = $info['grade_id'];
-            $this->created_at = $info['created_at'];
-            $this->updated_at = $info['updated_at'];
-            $this->deleted_at = $info['deleted_at'];
-        }
+//        if ($info) {
+//            $this->id = $info['id'];
+//            $this->national_id_number = $info['national_id_number'];
+//            $this->nationality_id = $info['nationality_id'];
+//            $this->full_name_ar = $info['full_name_ar'];
+//            $this->full_name_en = $info['full_name_en'];
+//            $this->email = $info['email'];
+//            isset($info['password']) ? $this->password = $info['password'] : $this->password = null ;
+//            $this->photo = $info['photo'];
+//            $this->phone_number = $info['phone_number'];
+//            $this->address = $info['address'];
+//            $this->description = $info['description'];
+//            $this->academic_id = $info['academic_id'];
+//            $this->department_id = $info['department_id'];
+//            $this->grade_id = $info['grade_id'];
+//        }
 
         $config = require base_path("app/config.php");
         $db = new Database($config);
 
-        $sql = "UPDATE `teaching_staff` SET";
+        $sql = "UPDATE `students` SET";
 
         $columns = [];
         $values = [];
@@ -125,24 +122,20 @@ class Student {
         $config = require base_path("app/config.php");
         $db = new Database($config);
         $student_courses= $db->query("SELECT `courses_students`.chance_number,courses.course_hour,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on `courses_students`.semester_id = semesters.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
+        $student_courses_data=[];
         foreach ($student_courses as $student_course){
-            $course_total_degree= $db->query("SELECT 
-                  exams.id, 
-                  (SELECT SUM(exam_degrees.degree) 
-                   FROM exam_degrees 
-                   WHERE exam_degrees.exam_id = exams.id) as total_degree
-                FROM 
-                  exams 
-                WHERE 
-                  exams.semester_id = :semester_id AND exams.course_id = :course_id;
+            $course_total_degree= $db->query("SELECT SUM(`degree`) as total_degree FROM `exam_degrees` WHERE `exam_id` IN (SELECT id FROM exams WHERE exams.course_id=:course_id AND exams.semester_id=:semester_id) AND `student_id`=:student_id
                 ",[
                 'semester_id' => $student_course['semester_id'],
                 'course_id' => $student_course['course_id']
-            ])->fetch()['total_degree'];
-            $course_gpa=self::percentage_to_gpa($course_total_degree/100)*$student_course['course_hour'];
-            $student_course[] = ['course_gpa' => $course_gpa];
+                ,'student_id' => $id
+            ])->fetch();
+            $course_total_degree? $course_total_degree=$course_total_degree['total_degree']:$course_total_degree=0;
+            $course_gpa=$this->percentage_to_gpa(($course_total_degree/$config['academic_info']['course_total_degree'])*100)*(int)$student_course['course_hour'];
+            $student_course['course_gpa'] = $course_gpa;
+            $student_courses_data[]=$student_course;
         }
-        foreach ($student_courses as $student_course){
+        foreach ($student_courses_data as $student_course){
             $GPA+=$student_course['course_gpa'];
             $totalHours+=$student_course['course_hour'];
         }
@@ -152,7 +145,7 @@ class Student {
             return 0;
         }
     }
-    private static function percentage_to_gpa($percentage){
+    private function percentage_to_gpa($percentage){
         switch ($percentage){
             case ($percentage>=90):
                 return 4;
@@ -198,6 +191,21 @@ class Student {
         }
         return false;
     }
-
-    // getters and setters for each property (omitted for brevity)
+    public function login($email,$password){
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $student = $db->query("SELECT * FROM `students` WHERE `email` = :email",['email' => $email])->fetch();
+        if ($student){
+            if (password_verify($password,$student['password'])){
+                return $student;
+            }
+        }
+        return false;
+    }
+    public function search($search){
+        $config = require base_path("app/config.php");
+        $db = new Database($config);
+        $students = $db->query("SELECT * FROM `students` WHERE `full_name_ar` LIKE :search OR `full_name_en` LIKE :search OR `email` LIKE :search OR `phone_number` LIKE :search",['search' => "%$search%"])->fetchAll();
+        return $students;
+    }
 }

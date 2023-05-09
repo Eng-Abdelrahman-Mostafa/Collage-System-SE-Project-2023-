@@ -22,3 +22,10 @@ $router->Post('/updateStd', 'app\http\Controllers\Controller_Manage_Students.php
 
 
 $router->get('/student_register_courses', 'app\http\Controllers\Controller_student_register_courses.php', 'index');
+
+
+$router->get('/Manage_semesters', 'app\http\Controllers\Controller_Manage_semesters.php', 'index');
+$router->Post('/addSemester', 'app\http\Controllers\Controller_Manage_semesters.php', 'add');
+$router->Post('/activeSem', 'app\http\Controllers\Controller_Manage_semesters.php', 'active');
+$router->Post('/activeReg', 'app\http\Controllers\Controller_Manage_semesters.php', 'activeReg');
+$router->Post('/deleteSem', 'app\http\Controllers\Controller_Manage_semesters.php', 'delete');

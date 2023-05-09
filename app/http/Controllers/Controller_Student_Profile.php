@@ -8,23 +8,28 @@ class Controller_Student_Profile {
     private int $total_hours = 0;
     private $db;
     public function index() {
-//        $userRole = $_SESSION['user_role'];
+        session_start();
+        $userRole = $_SESSION['user_role'];
         require base_path("app/Modals/Students.php");
-        $userRole = 2;
         $studentId = 0;
+        $config = require base_path("app/config.php");
+        $this->db = new Database($config);
+        $data=[];
+        $data['departments']=$this->db->query("SELECT * FROM `departments`")->fetchAll();
+        $data['grades']=$this->db->query("SELECT * FROM `grades`")->fetchAll();
+        $data['groups']=$this->db->query("SELECT * FROM `groups`")->fetchAll();
+        $data['nationalities']=$this->db->query("SELECT * FROM `nationalities`")->fetchAll();
         if ($userRole == 4) {
             $studentId = $_SESSION['user_id'];
         } else {
             $studentId = $_GET['id'];
         }
-        $config = require base_path("app/config.php");
-        $this->db = new Database($config);
         $student = new Student($studentId);
         $student_info = $student->get();
         $grades_count = $this->getGradesCount($studentId);
         $grades_departments = $this->getGradesDepartments($studentId);
         $student_info['total_hours'] = ($this->total_hours/$config['academic_info']['total_hours'])*100;
-        view('student_profile', compact('student_info', 'grades_count', 'grades_departments', 'userRole'));
+        view('student_profile', compact('student_info', 'grades_count', 'grades_departments', 'userRole','data'));
     }
     private function getGradesCount($id){
         $grades_count = [
@@ -60,6 +65,64 @@ class Controller_Student_Profile {
             $grades_count[$course_perc]++;
         }
         return $grades_count;
+    }
+    public function save_info(){
+        require base_path("app/Modals/Students.php");
+        $errors=[];
+        session_start();
+        if($_POST['national_id_number']===''){
+            $errors['national_id_number']="من فضلك ادخل الرقم القومي";
+        }
+        if($_POST['full_name_ar']===''){
+            $errors['full_name_ar']="من فضلك ادخل الاسم باللغة العربية";
+        }
+        if($_POST['full_name_en']===''){
+            $errors['full_name_en']="من فضلك ادخل الاسم باللغة الانجليزية";
+        }
+        if($_POST['email']===''){
+            $errors['email']="من فضلك ادخل البريد الالكتروني";
+        }
+        if($_POST['phone_number']===''){
+            $errors['phone_number']="من فضلك ادخل رقم الهاتف";
+        }
+        if($_POST['academic_id']===''){
+            $errors['academic_id']="من فضلك ادخل المعرف الاكاديمي";
+        }
+        if (count($errors)>0){
+            $_SESSION['errors']=$errors;
+            if(isset($_SESSION['user_id'])&&isset($_SESSION['user_role'])&&$_SESSION['user_role']==4){
+                header("Location: /student_profile");
+                exit();
+            }else{
+                header("Location: /student_profile?id=".$_POST['id']);
+                dd($_POST);
+                exit();
+            }
+        }else{
+            unset($_SESSION['errors']);
+        }
+        $info=[];
+        $info['id'] = $_POST['id'];
+        $info['national_id_number'] = $_POST['national_id_number'];
+        $info['nationality_id'] = $_POST['nationality_id'];
+        $info['full_name_ar'] = $_POST['full_name_ar'];
+        $info['full_name_en'] = $_POST['full_name_en'];
+        $info['email'] = $_POST['email'];
+        $_POST['password']===''?:$info['password'] = $_POST['password'];
+        $info['phone_number'] = $_POST['phone_number'];
+        $info['academic_id'] = $_POST['academic_id'];
+        $info['department_id'] = $_POST['department_id'];
+        $info['grade_id'] = $_POST['grade_id'];
+        $info['group_id'] = $_POST['group_id'];
+        $student = new Student();
+        $student->update($info);
+        if(isset($_SESSION['user_id'])&&isset($_SESSION['user_role'])&&$_SESSION['user_role']==4){
+            header("Location: /student_profile");
+            exit();
+        }else{
+            header("Location: /student_profile?id=".$_POST['id']);
+            exit();
+        }
     }
     private function getGradesDepartments($id){
         $departments_grades = [];
