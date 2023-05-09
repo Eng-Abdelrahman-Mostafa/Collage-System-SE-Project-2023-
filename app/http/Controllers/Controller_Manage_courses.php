@@ -3,6 +3,7 @@
 namespace app\http\Controllers;
 
 use Core\Database;
+use Modals\Course;
 
 class Controller_Manage_courses
 {
@@ -15,10 +16,10 @@ class Controller_Manage_courses
         $data= $db->query("SELECT courses.name AS name_courses, departments.name AS name_departments, code, course_hour, courses.id AS id_courses
            FROM courses
               INNER JOIN departments ON courses.department_id = departments.id;")->fetchALL();
+        $courses = $db->query("select * from `courses`")->fetchAll();
 
         $departments = $db->query("select * from `departments`")->fetchAll();
-       return view("Manage_courses",compact('data','departments'));
-
+       return view("Manage_courses",compact('data','departments','courses'));
     }
 
 ///////////////////////////////////////////////////////////////////////////////function add///////////////////////////////////////////////////////////////////////////////
@@ -112,6 +113,34 @@ class Controller_Manage_courses
         echo json_encode(array('success' => true, 'course' => $course , 'message' => 'course Founded'));
         exit;
 
+    }
+    public function get_selected_prerequisites()
+    {
+        $courseid= $_POST['id'];
+        require base_path("app/Modals/Course.php");
+        $Course=new Course();
+        $course  =  $Course->get_prerequisites($courseid);
+        if(!$course)
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('success' => false,'message' => 'course not Founded'));
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'course' => $course , 'message' => 'course Founded'));
+        exit;
+    }
+    public function add_prerequisites(){
+        $courseid= $_POST['id'];
+        $prerequisites= $_POST['prerequisites'];
+
+        require base_path("app/Modals/Course.php");
+
+        $Course=new Course();
+        $Course->add_prerequisites($courseid,$prerequisites);
+
+        header("Location: Manage_courses");
+        exit;
     }
 }
 

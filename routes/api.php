@@ -7,3 +7,6 @@ $router->post('/get_semester_status', 'app\http\Controllers\Controller_Manage_se
 $router->post('/get_register_status', 'app\http\Controllers\Controller_Manage_semesters.php','getSemStatus');
 $router->post('/get_semester_data', 'app\http\Controllers\Controller_Manage_semesters.php','getSemStatus');
 
+$router->post('/get_selected_prerequisites', 'app\http\Controllers\Controller_Manage_courses.php','get_selected_prerequisites');
+$router->post('/add_prerequisites', 'app\http\Controllers\Controller_Manage_courses.php','add_prerequisites');
+

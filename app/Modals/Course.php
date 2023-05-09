@@ -90,9 +90,14 @@ class Course
             $sql="DELETE FROM `courses_prerequisites` WHERE `course_id` = ? AND `prerequisties_id` = ?";
             $this->db->query($sql,[$id,$prerequisite]);
         }
-
+        return true;
     }
-
+    public function get_prerequisites($id)
+    {
+        $courseid=$id;
+        $course  = $this->db->query("SELECT * FROM `courses_prerequisites` where `course_id` =:id",['id' => $courseid])->fetchAll();
+        return $course;
+    }
 
 
 }
