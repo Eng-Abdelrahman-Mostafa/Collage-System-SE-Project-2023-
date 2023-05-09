@@ -136,24 +136,8 @@
             </table>
           </div>
         </div>
-        <div class="row mt-5">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <div class="btns">
-                <li class="page-item"><a class="page-link" href="#">السابق</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">التالي</a></li>
-              </div>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+<!--delet-->
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -163,7 +147,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/collage/public/courses_delete" method="post" style="text-align: right">
+        <form action="Manage_courses_delete" method="post" style="text-align: right">
           <p>هل انت متأكد انك تريد مسح الكورس</p>
           <input type="hidden" id="coures_id_delete" name='id' value="">
       </div>
@@ -176,7 +160,7 @@
   </div>
 </div>
 <!--    Modal ending code-->
-
+<!--update-->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -185,37 +169,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/courses_updata" method="post" style="text-align: right">
+        <form action="Manage_courses_update" method="post" style="text-align: right">
+          <input type="hidden" id="course_id_update" name="course_id" value="">
           <div class="form-group">
             <label for="name">اسم الكورس:</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
+            <input type="text" class="form-control" id="course_name" name="name" placeholder="أدخل اسم الكورس" required>
           </div>
           <div class="form-group">
             <label for="department">القسم:</label>
-            <select class="form-control" id="department" name="department" required>
-              <option value="">اختر القسم</option>
-              <option value="3">قسم  IS</option>
-              <option value="1">قسم  CS</option>
-              <option value="2">قسم MI</option>
-              <option value="4">قسم  IT
-
-              </option>
+            <select class="form-control" id="course_department_id" name="department" required>
+              <?php foreach ($departments as $department ):?>
+                <option value="<?= $department['id']?>"><?=$department['name']?></option>
+              <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
             <label for="code">كود المادة:</label>
-            <input type="text" class="form-control" id="code" name="code" placeholder="أدخل كود المادة" required>
+            <input type="text" class="form-control" id="course_code" name="code" placeholder="أدخل كود المادة" required>
           </div>
           <div class="form-group">
             <label for="hours">عدد الساعات:</label>
-            <select class="form-control" id="hours" name="hours" required>
+            <select class="form-control" id="course_hours" name="hours" required>
               <option value="">اختر عدد الساعات</option>
               <option value="2">2 ساعة</option>
               <option value="3">3 ساعات</option>
 
             </select>
           </div>
-          <input type="hidden" id="course_id_update" name="course_id" value="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
@@ -226,7 +206,7 @@
   </div>
 </div>
 
-
+<!--add-->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -235,7 +215,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost/git2/Collage-System-SE-Project-2023-/public/add_courses" method="post" style="text-align: right">
+        <form action="Manage_courses_add" method="post" style="text-align: right">
           <div class="form-group">
             <label for="name">اسم الكورس:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم الكورس" required>
@@ -243,13 +223,9 @@
           <div class="form-group">
             <label for="department">القسم:</label>
             <select class="form-control" id="department" name="department" required>
-              <option value="">اختر القسم</option>
-              <option value="3">قسم  IS</option>
-              <option value="1">قسم  CS</option>
-              <option value="2">قسم MI</option>
-              <option value="4">قسم  IT
-
-              </option>
+              <?php foreach ($departments as $department ):?>
+                <option value="<?= $department['id']?>"><?=$department['name']?></option>
+              <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
@@ -295,6 +271,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
+
     $('.delete-btn').click(function (){
       $('#deleteModal').modal('show');
       let id = this.getAttribute('data');
@@ -302,13 +279,79 @@
       let input_id = document.querySelector('#coures_id_delete');
       input_id.setAttribute("value",id);
     });
+
+
+
+
+
+
+
+
+
+
+
     $('.update-btn').click(function (){
-      $('#updateModal').modal('show');
-      let id = this.getAttribute('data');
+       let id = this.getAttribute('data');
       console.log(id)
       let input_id = document.querySelector('#course_id_update');
       input_id.setAttribute("value",id);
+
+
+
+      const formData = new FormData();
+      formData.append('id',id);
+
+      fetch('<?= site_url() ?>/get_course_data', {
+        method: 'POST',
+        body: formData
+      })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              document.getElementById('course_name').setAttribute('value',data.course[0]['name'])
+              $("#course_department_id").find('option').each(function (){
+                this.removeAttribute('selected')
+                if (this.getAttribute('value')== data.course[0]['department_id'])
+                {
+                  this.setAttribute('selected' , 'selected')
+                }
+              })
+              document.getElementById('course_code').setAttribute('value',data.course[0]['code'])
+
+              $("#course_hours").find('option').each(function (){
+                this.removeAttribute('selected')
+                if (this.getAttribute('value')== data.course[0]['course_hour'])
+                {
+                  this.setAttribute('selected' , 'selected')
+                }
+              })
+              $('#updateModal').modal('show');
+            } else {
+              // Login failed, show error message to user
+              const errorMessage = document.getElementById('error-message');
+              errorMessage.textContent = data.message;
+            }
+          })
+          .catch(error => {
+            // Handle network error or other exceptions
+            console.error(error);
+          });
+
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
     $('.add-btn').click(function (){
       $('#addModal').modal('show');
       let id = this.getAttribute('data');
@@ -316,6 +359,24 @@
       let input_id = document.getElementById('course_id_add');
       input_id.setAttribute("value",id);
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   });
 
 
