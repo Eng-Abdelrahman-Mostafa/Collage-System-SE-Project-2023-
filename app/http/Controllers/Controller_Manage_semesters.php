@@ -15,8 +15,8 @@ class Controller_Manage_semesters {
 
         $roles = $this->db->query("select  *  from `teaching_staff` WHERE role_num= 1 OR role_num = 3")->fetchAll();
         $semesters = $this->db->query("select semesters.* , teaching_staff.full_name_ar as creator_name from `semesters` INNER join  `teaching_staff` on created_by=teaching_staff.id")->fetchAll();
-
-        view('Manage_semesters',compact('roles','semesters'));
+        $courses = $this->db->query("select * from `courses`")->fetchAll();
+        view('Manage_semesters',compact('roles','semesters','courses'));
     }
 
     public function add()

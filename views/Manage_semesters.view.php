@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/all_students.css">
+      <link rel="stylesheet" href="assets/css/multi_select.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <title>Admin</title>
@@ -403,9 +404,49 @@
     </div>
     <!--    Modal ending code-->
 
+
+    <!--    Modal Starting code-->
+    <div class="modal fade" id="coursesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add courses</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="addCourse" method="post" dir="rtl">
+                        <div class="wrapper">
+                            <div class="wrapper">
+                                <div class="container" id="dropdownSelected">
+                                    <span>Selected</span>
+                                </div>
+                                <div class="container">
+                                    <select id="myMultiSelect" multiple search='true'>
+                                        <?php foreach ($courses as $course): ?>
+                                        <option value="<?= $course['id'] ?>"><?= $course['name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" id="course_hidden_id" value="" name="id">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-primary">اضافة</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ending code-->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/df48339200.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/multi-select-dropdown.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -555,6 +596,22 @@
                     });
 
             });
+        });
+
+
+
+
+        $(document).ready(function() {
+            $('.add-courses').click(function () {
+                let id = this.getAttribute('data');
+                console.log(id);
+                let input_id = document.querySelector('#course_hidden_id');
+                input_id.setAttribute("value", id);
+                $('#coursesModal').modal('show');
+                const selectedValues = Array.from(document.getElementById('myMultiSelect').selectedOptions).map((option) => option.value);
+                console.log(selectedValues);
+            });
+
         });
 
 
