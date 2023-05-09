@@ -74,6 +74,7 @@ class Course
     }
     public function add_prerequisites($id=null,$prerequisites){
         $db_prerequisites= $this->db->query("SELECT prerequisties_id FROM `courses_prerequisites` WHERE course_id = ?",[$id])->fetchAll();
+        $db_prerequisites = $db_prerequisites ? $db_prerequisites : [];
         if($id=null){
             $id=$this->id;
         }
@@ -81,6 +82,7 @@ class Course
             if (found_in_array($prerequisite,$db_prerequisites)){
                 continue;
             }else{
+
                 $sql="INSERT INTO `courses_prerequisites` (`course_id`, `prerequisties_id`) VALUES (?, ?)";
                 $this->db->query($sql,[$id,$prerequisite]);
                 unset($db_prerequisites[$prerequisite]);
@@ -96,11 +98,17 @@ class Course
     {
         $courseid=$id;
         $course  = $this->db->query("SELECT * FROM `courses_prerequisites` where `course_id` =:id",['id' => $courseid])->fetchAll();
-        return $course;
+        $preIds = [];
+        foreach ($course as $pre)
+        {
+            $preIds[]= $pre['prerequisties_id'];
+        }
+        return $preIds;
     }
     public function add_to_semester($courses,$semester_id){
         $db_courses_semester= $this->db->query("SELECT * FROM `semester_courses` WHERE `semester_id` = ?",[$semester_id])->fetchAll();
         $db_courses_semester_id=[];
+        $db_courses_semester = $db_courses_semester?$db_courses_semester:[];
         foreach ($db_courses_semester as $course){
             $db_courses_semester_id[]=$course['course_id'];
         }

@@ -127,19 +127,20 @@ class Controller_Manage_courses
             exit;
         }
         header('Content-Type: application/json');
-        echo json_encode(array('success' => true, 'course' => $course , 'message' => 'course Founded'));
+        echo json_encode(array('success' => true, 'courses' => $course , 'message' => 'course Founded'));
         exit;
     }
     public function add_prerequisites(){
         $courseid= $_POST['id'];
-        $prerequisites= $_POST['prerequisites'];
-
+        $prerequisites= $_POST['prerequisites'][0];
+        $prerequisites = explode(',',$prerequisites);
         require base_path("app/Modals/Course.php");
 
         $Course=new Course();
         $Course->add_prerequisites($courseid,$prerequisites);
 
-        header("Location: Manage_courses");
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true, 'message' => 'course added successfully'));
         exit;
     }
 }

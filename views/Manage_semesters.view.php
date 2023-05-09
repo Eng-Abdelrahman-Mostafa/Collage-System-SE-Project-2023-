@@ -671,7 +671,7 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                                // location.reload();
+                                location.reload();
                         } else {
                             // Login failed, show error message to user
                             const errorMessage = document.getElementById('error-message');

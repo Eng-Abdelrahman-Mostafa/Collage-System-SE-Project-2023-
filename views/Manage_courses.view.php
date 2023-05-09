@@ -12,6 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/all_students.css">
+    <link rel="stylesheet" href="assets/css/multi_select.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
   <title>Admin</title>
@@ -20,6 +21,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+
 </head>
 <body>
 <div class="container-fulid" dir="rtl">
@@ -109,7 +111,7 @@
               </thead>
               <tbody><?php $counter=1; ?>
               <?php foreach ($data as $s): ?>
-              <tr class="table-primary">
+              <tr class="table-light">
                 <th scope="row"><?= $counter++ ?></th>
                 <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?php echo $s['name_courses']; ?>
                   <div class="depType">القسم:العام</div>
@@ -126,6 +128,7 @@
                     </button>
                     <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
                        <li><a class="dropdown-item update-btn"data="<?= $s['id_courses'] ?>"> تعديل الكورس  </a></li>
+                      <li><a class="dropdown-item add-courses" data="<?= $s['id_courses'] ?>">اضافة متطلبات</a></li>
                       <li><a class="dropdown-item delete-btn" data="<?= $s['id_courses'] ?>">مسح  الكورس</a></li>
                     </ul>
                   </div>
@@ -258,12 +261,53 @@
 
 <!--    Modal ending code-->
 
+
+        <!--    Modal Starting code-->
+        <div class="modal fade" id="coursesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add courses</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="addCourses" method="post" dir="rtl">
+                            <div class="wrapper">
+                                <div class="wrapper">
+                                    <div class="container" id="dropdownSelected">
+                                        <span>Selected</span>
+                                    </div>
+                                    <div class="container">
+                                        <select id="myMultiSelect" multiple search='true'>
+                                            <?php foreach ($courses as $course): ?>
+                                                <option value="<?= $course['id'] ?>"><?= $course['name'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" id="course_hidden_id" value="" name="id">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                        <button type="button" class="btn btn-primary add_course">اضافة</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--    Modal ending code-->
+
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/df48339200.js" crossorigin="anonymous"></script>
-<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="assets/js/multi-select-dropdown.js"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -283,6 +327,89 @@
 
 
 
+      $(document).ready(function() {
+          $('.add-courses').click(function () {
+              let id = this.getAttribute('data');
+              console.log(id);
+              let input_id = document.querySelector('#course_hidden_id');
+              input_id.setAttribute("value", id);
+
+              clearOptions()
+
+              const formData = new FormData();
+              formData.append('id',id);
+
+              fetch('<?= site_url() ?>/get_selected_prerequisites', {
+                  method: 'POST',
+                  body: formData
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+
+                          const multiSelect = document.getElementById('myMultiSelect');
+                          const selectedValues = data.courses; // Example selected values to add
+
+                          selectedValues.forEach((value) => {
+                              const option = multiSelect.querySelector(`option[value="${value}"]`);
+                              if (option) {
+                                  option.selected = true;
+                              }
+                          });
+
+// Refresh the MultiSelectDropdown to reflect the changes
+                          multiSelect.loadOptions();
+
+
+                      } else {
+                          // Login failed, show error message to user
+                          const errorMessage = document.getElementById('error-message');
+                          errorMessage.textContent = data.message;
+                      }
+                  })
+                  .catch(error => {
+                      // Handle network error or other exceptions
+                      console.error(error);
+                  });
+
+
+              $('#coursesModal').modal('show');
+
+
+
+
+          });
+          $('.add_course').click(function (){
+              const selectedValues = Array.from(document.getElementById('myMultiSelect').selectedOptions).map((option) => option.value);
+              let input_id = document.querySelector('#course_hidden_id');
+              let semester_id = input_id.getAttribute('value')
+
+
+
+              const formData = new FormData();
+              formData.append('id',semester_id);
+              formData.append('prerequisites[]',selectedValues);
+
+              fetch('<?= site_url() ?>/add_prerequisites', {
+                  method: 'POST',
+                  body: formData
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          // location.reload();
+                      } else {
+                          // Login failed, show error message to user
+                          const errorMessage = document.getElementById('error-message');
+                          errorMessage.textContent = data.message;
+                      }
+                  })
+                  .catch(error => {
+                      // Handle network error or other exceptions
+                      console.error(error);
+                  });
+          });
+      });
 
 
 
@@ -290,7 +417,14 @@
 
 
 
-    $('.update-btn').click(function (){
+
+
+
+
+
+
+
+      $('.update-btn').click(function (){
        let id = this.getAttribute('data');
       console.log(id)
       let input_id = document.querySelector('#course_id_update');
@@ -378,6 +512,19 @@
 
 
   });
+
+
+  function clearOptions() {
+      const multiSelect = document.getElementById('myMultiSelect');
+      const selectedValues = []; // Example selected values to add
+
+      $(multiSelect).find('option').each(function() {
+          this.selected = false;
+      });
+
+      // Refresh the MultiSelectDropdown to reflect the changes
+      multiSelect.loadOptions(); // Assuming you have a custom loadOptions() method
+  }
 
 
 </script>
