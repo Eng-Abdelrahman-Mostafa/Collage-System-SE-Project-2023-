@@ -84,7 +84,9 @@ class Course
         }
         foreach ($prerequisites as $prerequisite){
             if (in_array($prerequisite,$db_prerequisites_ids)){
-                continue;
+                if (($key = array_search($prerequisite, $db_prerequisites_ids)) !== false) {
+                    unset($db_prerequisites_ids[$key]);
+                }
             }else{
                 $sql="INSERT INTO `courses_prerequisites` (`course_id`, `prerequisties_id`) VALUES (?, ?)";
                 $this->db->query($sql,[$id,$prerequisite]);
@@ -94,7 +96,6 @@ class Course
             }
         }
         foreach ($db_prerequisites_ids as $prerequisite){
-            dd("bytshrmt");
             $sql="DELETE FROM `courses_prerequisites` WHERE `course_id` = ? AND `prerequisties_id` = ?";
             $this->db->query($sql,[$id,$prerequisite]);
         }
