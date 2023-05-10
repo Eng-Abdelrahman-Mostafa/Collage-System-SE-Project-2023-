@@ -97,6 +97,13 @@ class Controller_Manage_Students {
         header("Location: Manage_Students");
         exit();
     }
+
+    public function search()
+    {
+        require  base_path("app/Modals/Students.php");
+        $word = $_POST['word'];
+
+    }
 }
 
 //write code here
