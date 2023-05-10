@@ -43,6 +43,12 @@ class Controller_login {
         }
 
     }
+    public function logout(){
+        session_start();
+        session_destroy();
+        header('location: /login');
+        exit();
+    }
 }
 
 //write code here

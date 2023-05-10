@@ -133,10 +133,11 @@ svg:not(:host).svg-inline--fa, svg:not(:root).svg-inline--fa {
   box-shadow: var(--shadow);
 }
 
+
+
 .btn
 {
   box-shadow: var(--shadow);
-  color: white;
   font-weight: var(--font-semi-bold);
   height: 40px;
   width: 320px;

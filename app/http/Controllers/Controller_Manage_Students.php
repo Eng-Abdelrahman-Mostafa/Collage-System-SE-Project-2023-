@@ -102,7 +102,10 @@ class Controller_Manage_Students {
     {
         require  base_path("app/Modals/Students.php");
         $word = $_POST['word'];
-
+        $search = new Student($word);
+        $search->search($word);
+        header("Location: Manage_Students");
+        exit();
     }
 }
 
