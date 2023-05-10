@@ -11,5 +11,6 @@ class Middlewares_Provider
         'student'=> Student::class,
         'professor'=> Professor::class,
         'ta'=> TA::class,
+        'teaching_staff'=> TeachingStaff::class,
     ];
 }
