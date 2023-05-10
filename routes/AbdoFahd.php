@@ -33,3 +33,5 @@ $router->Post('/deleteSem', 'app\http\Controllers\Controller_Manage_semesters.ph
 
 
 $router->get('/Manage_appointments', 'app\http\Controllers\Controller_Manage_appointments.php', 'index');
+$router->post('/addApp', 'app\http\Controllers\Controller_Manage_appointments.php', 'add');
+$router->post('/deleteApp', 'app\http\Controllers\Controller_Manage_appointments.php', 'delete');

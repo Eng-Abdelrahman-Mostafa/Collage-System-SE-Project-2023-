@@ -20,7 +20,6 @@ body, div, span, input, select, p {
 }
 
 form {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;

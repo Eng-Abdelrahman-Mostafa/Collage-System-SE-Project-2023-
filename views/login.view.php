@@ -34,7 +34,7 @@
             <p>تسجيل الدخول</p>
             <span></span>
             <!-- Start Form -->
-            <form class="g-3 needs-validation" novalidate action="/login" method="POST">
+            <form class="g-3 needs-validation" novalidate action="<?= site_url()?>/login" method="POST">
                 <div class="input-group has-validation">
                     <i class="fa-solid fa-envelope "></i>
                     <input class="form-control " id="validationCustomUsername" type="email" placeholder="ادخل بريدك الالكتروني" aria-describedby="inputGroupPrepend" name="email" required>

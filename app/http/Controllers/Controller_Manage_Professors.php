@@ -10,7 +10,7 @@ class Controller_Manage_Professors {
                                         FROM `teaching_staff` 
                                         INNER JOIN `departments` 
                                         ON departments.id = teaching_staff.department_id
-                                        where  `role_num`=3;")->fetchAll();
+                                        where  `role_num`=3 or `role_num` = 2;")->fetchAll();
         $roles = $db->query("select * from `roles`")->fetchAll();
         $nationalities = $db->query("select * from `nationalities`")->fetchAll();
         $departments = $db->query("select * from `departments`")->fetchAll();

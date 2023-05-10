@@ -142,39 +142,35 @@
                   <thead>
                     <tr >
                       <th scope="col">#</th>
-                      <th scope="col">اسم الترم</th>
-                      <th scope="col">بداية الترم</th>
-                      <th scope="col">نهاية الترم</th>
-                      <th scope="col">منشئ الترم</th>
-                      <th scope="col"> حالة الترم</th>
+                      <th scope="col">اسم الميعاد</th>
+                      <th scope="col">نوع الميعاد</th>
+                      <th scope="col">المحاضر</th>
+                      <th scope="col">المادة</th>
+                      <th scope="col"> المجموعة</th>
                       <th scope="col">اجراءات</th>
                     </tr>
                   </thead>
                   <tbody>
 
-                  <?php $i=1;  foreach($semesters as $semester): ?>
+                  <?php $i=1;  foreach($appointments as $appointment): ?>
                     <tr class="table-light">
 
                       <th scope="row"><?=$i++?></th>
-                      <td class="name"><?= $semester['title'] ?>
+                      <td class="name"><?= $appointment['title'] ?>
                       </td>
                       <td data-lable="المرحلة الدراسية :" class="table-level-parent">
-                        <span class="table-level"><?= $semester['start_date'] ?></span>
+                        <span class="table-level"><?= $appointment['type'] ?></span>
                     </td>
-                      <td><?= $semester['end_date'] ?></td>
-                      <td><?= $semester['creator_name'] ?></td>
-                      <td><?php if($semester['active_status']==1) {echo 'مفعل';}else{ echo 'غير مفعل';} ?></td>
+                      <td><?= $appointment['full_name_ar'] ?></td>
+                      <td><?= $appointment['c_name'] ?></td>
+                      <td><?= $appointment['g_name'] ?></td>
                       <td>
                             <div class="dropdown-center">
                                 <button class="btn btn-outline-secondary dropdown-toggle btn-drop" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu ul-drop">
-                                    <li><a class="dropdown-item active-sem" data="<?=$semester['id']?>">تفعيل الترم</a></li>
-                                    <li><a class="dropdown-item active-register" data="<?=$semester['id']?>" >تفعيل تسجيل المواد</a></li>
-                                    <li><a class="dropdown-item add-courses" data="<?=$semester['id']?>" >اضافة مواد</a></li>
-                                    <li><a class="dropdown-item update-sem" data="<?=$semester['id']?>" >تعديل الترم</a></li>
-                                    <li><a class="dropdown-item delete-sem" data="<?=$semester['id']?>" >حذف الترم</a></li>
+                                    <li><a class="dropdown-item delete-app" data="<?=$appointment['id']?>" >حذف الترم</a></li>
                                 </ul>
                             </div>
                       </td>
@@ -210,28 +206,28 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add semester</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add appointment</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="addSemester" method="post" dir="rtl">
+                    <form action="addApp" method="post" dir="rtl">
                         <div class=" ">
-                            <label for="validationCustom01" class="form-label">اسم الترم :</label>
-                            <input type="text" class="form-control"  placeholder="ادخل اسم الترم " required name="semesterTitle">
+                            <label for="validationCustom01" class="form-label">اسم الميعاد :</label>
+                            <input type="text" class="form-control"  placeholder="ادخل اسم الميعاد " required name="title">
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
                         </div>
                         <div class=" ">
-                            <label for="validationCustom01" class="form-label">يبدأ من :</label>
-                            <input type="date" class="form-control"   placeholder="بداية الترم" required name="startDate">
+                            <label for="validationCustom01" class="form-label">بداية الميعاد :</label>
+                            <input type="datetime-local" class="form-control"   placeholder="بداية الميعاد" required name="start_time">
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
                         </div>
                         <div class=" ">
-                            <label for="validationCustom01" class="form-label">ينتهي في :</label>
-                            <input type="date" class="form-control"   placeholder="نهاية الترم " required name="endDate">
+                            <label for="validationCustom01" class="form-label">الوقت كامل :</label>
+                            <input type="time" class="form-control"   placeholder="الوقت كامل " required name="full_time">
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
@@ -239,11 +235,24 @@
 
 
                         <div class="c">
-                            <label for="validationCustom04" class="form-label">بواسطة :</label>
-                            <select class="form-select" id="validationCustom04" required name="creator">
-                                <option selected disabled value=""> اختر المنشئ</option>
-                                <?php foreach ($roles as $role):?>
-                                    <option value="<?= $role['id']?>"><?=$role['full_name_ar']?></option>
+                            <label for="validationCustom04" class="form-label">نوع الميعاد :</label>
+                            <select class="form-select" id="validationCustom04" required name="type">
+                                <option selected disabled value=""> اختر نوع الميعاد</option>
+                                    <option value="session">session</option>
+                                    <option value="lecture">lecture</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+
+                        <div class="c">
+                            <label for="validationCustom04" class="form-label">المحاضر :</label>
+                            <select class="form-select" id="validationCustom04" required name="lecturer">
+                                <option selected disabled value=""> اختر المحاضر</option>
+                                <?php foreach ($lecturers as $lecturer):?>
+                                    <option value="<?= $lecturer['id']?>"><?=$lecturer['full_name_ar']?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
@@ -251,76 +260,61 @@
                             </div>
                         </div>
 
+
+
+
+                        <div class="c">
+                            <label for="validationCustom04" class="form-label">اختر المادة :</label>
+                            <select class="form-select" id="validationCustom04" required name="course">
+                                <option selected disabled value=""> اختر المادة</option>
+                                <?php foreach ($courses as $course):?>
+                                    <option value="<?= $course['id']?>"><?=$course['name']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+
+
+                        <div class="c">
+                            <label for="validationCustom04" class="form-label">اختر الترم :</label>
+                            <select class="form-select" id="validationCustom04" required name="semester">
+                                <option selected disabled value=""> اختر الترم</option>
+                                <?php foreach ($semesters as $semester):?>
+                                    <option value="<?= $semester['id']?>"><?=$semester['title']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+                        <div class="c">
+                            <label for="validationCustom04" class="form-label">المجموعة :</label>
+                            <select class="form-select" id="validationCustom04" required name="group">
+                                <option selected disabled value=""> اختر المجموعة</option>
+                                <?php foreach ($groups as $group):?>
+                                    <option value="<?= $group['id']?>"><?=$group['name']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary">اضافة ترم</button>
+                    <button type="submit" class="btn btn-primary">اضافة ميعاد</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
     <!--    Modal ending code-->
-
-    <!--    Modal Starting code-->
-    <div class="modal fade" id="activeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Active semester</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="activeSem" method="post" dir="rtl">
-                    <div class="form-check form-switch">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">تفعيل الترم</label>
-                        <input class="form-check-input switch-cls" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="switchValue"  >
-                    </div>
-                        <div class="mb-3">
-                            <input type="hidden" id="active_hidden_id" value="" name="id">
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">حفظ</button>
-
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--    Modal ending code-->
-
-    <!--    Modal Starting code-->
-    <div class="modal fade" id="active_register_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Active courses register</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="activeReg" method="post" dir="rtl">
-                        <div class="form-check form-switch">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">تفعيل تسجيل المواد</label>
-                            <input class="form-check-input switch-clas" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="switchValue"  >
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" id="register_hidden_id" value="" name="id">
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">حفظ</button>
-
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--    Modal ending code-->
-
-
     <!--    Modal Starting code-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -330,7 +324,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="deleteSem" method="post" style="text-align: right">
+                    <form action="deleteApp" method="post" style="text-align: right">
                         <div class="mb-3">
                             <input type="hidden" id="delete_hidden_id" value="" name="id">
                             <h6>هل تريد حذف الترم بالفعل</h6>
@@ -345,104 +339,6 @@
         </div>
     </div>
     <!--    Modal ending code-->
-
-    <!--    Modal Starting code-->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update semester</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="updateSemester" method="post" dir="rtl">
-                        <input type="hidden" id="update_hidden_id" value="" name="id">
-                        <div class=" ">
-                            <label for="validationCustom01" class="form-label">اسم الترم :</label>
-                            <input type="text" class="form-control"  id="semester_title" placeholder="ادخل اسم الترم " required name="semesterTitle">
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
-                        <div class=" ">
-                            <label for="validationCustom01" class="form-label">يبدأ من :</label>
-                            <input type="date" class="form-control"  id="semester_startDate" placeholder="بداية الترم" required name="startDate">
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
-                        <div class=" ">
-                            <label for="validationCustom01" class="form-label">ينتهي في :</label>
-                            <input type="date" class="form-control"  id="semester_endDate"  placeholder="نهاية الترم " required name="endDate">
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
-
-
-                        <div class="c">
-                            <label for="validationCustom04" class="form-label">بواسطة :</label>
-                            <select class="form-select" id="sem_created_by" required name="creator">
-                                <option selected disabled value=""> اختر المنشئ</option>
-                                <?php foreach ($roles as $role):?>
-                                    <option value="<?= $role['id']?>"><?=$role['full_name_ar']?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary">اضافة ترم</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--    Modal ending code-->
-
-
-    <!--    Modal Starting code-->
-    <div class="modal fade" id="coursesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add courses</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="addCourses" method="post" dir="rtl">
-                        <div class="wrapper">
-                            <div class="wrapper">
-                                <div class="container" id="dropdownSelected">
-                                    <span>Selected</span>
-                                </div>
-                                <div class="container">
-                                    <select id="myMultiSelect" multiple search='true'>
-                                        <?php foreach ($courses as $course): ?>
-                                        <option value="<?= $course['id'] ?>"><?= $course['name'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" id="course_hidden_id" value="" name="id">
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                    <button type="button" class="btn btn-primary add_course">اضافة</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--    Modal ending code-->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/df48339200.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -457,241 +353,7 @@
 
 
         $(document).ready(function() {
-            $('.active-sem').click(function () {
-                let id = this.getAttribute('data');
-                console.log(id);
-                let input_id = document.querySelector('#active_hidden_id');
-                input_id.setAttribute("value", id);
-                $('#activeModal').modal('show');
-
-
-                const formData = new FormData();
-                formData.append('id',id);
-
-                fetch('<?= site_url() ?>/get_semester_status', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                           let swicth = document.querySelector('.switch-cls')
-                            if(data.sem.active_status == '1')
-                            {
-                                swicth.checked=true
-                            }
-                        else
-                            {
-                                swicth.checked=false
-                            }
-
-                        } else {
-                            // Login failed, show error message to user
-                            const errorMessage = document.getElementById('error-message');
-                            errorMessage.textContent = data.message;
-                        }
-                    })
-                    .catch(error => {
-                        // Handle network error or other exceptions
-                        console.error(error);
-                    });
-
-
-
-
-            });
-        });
-
-
-
-
-
-        $(document).ready(function() {
-            $('.active-register').click(function () {
-                let id = this.getAttribute('data');
-                console.log(id);
-                let input_id = document.querySelector('#register_hidden_id');
-                input_id.setAttribute("value", id);
-                $('#active_register_Modal').modal('show');
-
-
-                const formData = new FormData();
-                formData.append('id',id);
-
-                fetch('<?= site_url() ?>/get_register_status', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            let swicth = document.querySelector('.switch-clas')
-                            if(data.sem.registration_status == '1')
-                            {
-                                swicth.checked=true
-                            }
-                            else
-                            {
-                                swicth.checked=false
-                            }
-
-                        } else {
-                            // Login failed, show error message to user
-                            const errorMessage = document.getElementById('error-message');
-                            errorMessage.textContent = data.message;
-                        }
-                    })
-                    .catch(error => {
-                        // Handle network error or other exceptions
-                        console.error(error);
-                    });
-
-
-
-
-            });
-        });
-
-
-
-
-        $(document).ready(function() {
-            $('.update-sem').click(function (){
-                let id = this.getAttribute('data');
-                console.log(id);
-                let input_id = document.querySelector('#update_hidden_id');
-                input_id.setAttribute("value",id);
-
-
-                const formData = new FormData();
-                formData.append('id',id);
-
-                fetch('<?= site_url() ?>/get_semester_data', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            document.getElementById('semester_title').setAttribute('value',data.sem.title)
-                            document.getElementById('semester_startDate').setAttribute('value',data.sem.start_date)
-                            document.getElementById('semester_endDate').setAttribute('value',data.sem.end_date)
-                            $("#sem_created_by").find('option').each(function (){
-                                this.removeAttribute('selected')
-                                if (this.getAttribute('value')== data.sem.created_by)
-                                {
-                                    this.setAttribute('selected' , 'selected')
-                                }
-                            })
-                            $('#updateModal').modal('show');
-                        } else {
-                            // Login failed, show error message to user
-                            const errorMessage = document.getElementById('error-message');
-                            errorMessage.textContent = data.message;
-                        }
-                    })
-                    .catch(error => {
-                        // Handle network error or other exceptions
-                        console.error(error);
-                    });
-
-            });
-        });
-
-
-
-
-        $(document).ready(function() {
-            $('.add-courses').click(function () {
-                let id = this.getAttribute('data');
-                console.log(id);
-                let input_id = document.querySelector('#course_hidden_id');
-                input_id.setAttribute("value", id);
-
-                clearOptions()
-
-                const formData = new FormData();
-                formData.append('id',id);
-
-                fetch('<?= site_url() ?>/get_semester_courses', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-
-                            const multiSelect = document.getElementById('myMultiSelect');
-                            const selectedValues = data.courses; // Example selected values to add
-
-                            selectedValues.forEach((value) => {
-                                const option = multiSelect.querySelector(`option[value="${value}"]`);
-                                if (option) {
-                                    option.selected = true;
-                                }
-                            });
-
-// Refresh the MultiSelectDropdown to reflect the changes
-                            multiSelect.loadOptions();
-
-
-                        } else {
-                            // Login failed, show error message to user
-                            const errorMessage = document.getElementById('error-message');
-                            errorMessage.textContent = data.message;
-                        }
-                    })
-                    .catch(error => {
-                        // Handle network error or other exceptions
-                        console.error(error);
-                    });
-
-
-                $('#coursesModal').modal('show');
-
-
-
-
-            });
-            $('.add_course').click(function (){
-                const selectedValues = Array.from(document.getElementById('myMultiSelect').selectedOptions).map((option) => option.value);
-                let input_id = document.querySelector('#course_hidden_id');
-                let semester_id = input_id.getAttribute('value')
-
-
-
-                const formData = new FormData();
-                formData.append('semester_id',semester_id);
-                formData.append('selected_courses[]',selectedValues);
-
-                fetch('<?= site_url() ?>/addCourses', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                                location.reload();
-                        } else {
-                            // Login failed, show error message to user
-                            const errorMessage = document.getElementById('error-message');
-                            errorMessage.textContent = data.message;
-                        }
-                    })
-                    .catch(error => {
-                        // Handle network error or other exceptions
-                        console.error(error);
-                    });
-            });
-        });
-
-
-
-
-
-
-        $(document).ready(function() {
-            $('.delete-sem').click(function () {
+            $('.delete-app').click(function () {
                 let id = this.getAttribute('data');
                 console.log(id);
                 let input_id = document.querySelector('#delete_hidden_id');
@@ -701,17 +363,6 @@
         });
 
 
-        function clearOptions() {
-            const multiSelect = document.getElementById('myMultiSelect');
-            const selectedValues = []; // Example selected values to add
-
-            $(multiSelect).find('option').each(function() {
-                this.selected = false;
-            });
-
-            // Refresh the MultiSelectDropdown to reflect the changes
-            multiSelect.loadOptions(); // Assuming you have a custom loadOptions() method
-        }
 
 
     </script>

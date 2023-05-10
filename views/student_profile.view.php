@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar">
 <head>
@@ -288,15 +289,14 @@
             name: 'Series 1',
             data: [
                 <?php
-                // dd($grades_departments);
                 $departments_names="";
-                foreach ($grades_departments as $key => $value) {
-                    $departments_names .= $value . ",";
+                foreach ($grades_departments as $grade_department) {
+                    foreach ($grade_department as $key => $value) {
+                        $departments_names.= $value . ",";
+                    }
                 }
                 $departments_names = rtrim($departments_names, ",");
-                echo $departments_names;
                 ?>
-
             ],
         }],
         chart: {
@@ -309,16 +309,14 @@
         xaxis: {
             categories: [
                 <?php
-                // dd($grades_departments);
                 $departments_names="";
-                foreach ($grades_departments as $key => $value) {
-                    $departments_names .="'";
-                    $departments_names .= $key . "',";
+                foreach ($grades_departments as $grade_department) {
+                    foreach ($grade_department as $key => $value) {
+                        $departments_names.= $key . ",";
+                    }
                 }
                 $departments_names = rtrim($departments_names, ",");
-                echo $departments_names;
                 ?>
-
             ]
         }
     };
