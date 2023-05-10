@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/collage-logo.svg">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <!-- matrial icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <title>Document</title>
 
@@ -14,6 +19,11 @@
 </head>
 
 <body dir="rtl">
+<div class="bdy">
+    <div class="container">
+        <?php include 'layouts/aside_bar.view.php';?>
+        <main>
+            <?php include 'layouts/nav_bar.view.php';?>
 
 <div class="div1">
     <img src="assets/images/bg-dashboard.png">
@@ -75,7 +85,9 @@
 
 
 
-
+</main>
+</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {

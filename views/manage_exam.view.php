@@ -38,7 +38,7 @@
                     <span class="stc-value">
                         <svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <i class="fa-solid fa-plus"></i> Font Awesome fontawesome.com -->
                     </span>
-                                <span class="stc-name">اضافة قسم
+                                <span class="stc-name">اضافة امتحان
                     </span>
                             </div>
                         </div>
@@ -101,6 +101,8 @@
                         <tr >
                             <th scope="col">#</th>
                             <th scope="col">الاسم</th>
+                            <th scope="col">الدرجه</th>
+                            <th scope="col">المده الزمنيه</th>
                             <th scope="col">الاجراءات</th>
                         </tr>
                         </thead>
@@ -108,16 +110,18 @@
                         <?php foreach ($data as $s): ?>
                             <tr class="table-primary">
                                 <th scope="row"><?= $counter++ ?></th>
-                                <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?php echo $s['name']; ?>
+                                <td class="name"><i class="fa-solid fa-id-card-clip"></i> <?php echo $s['title']; ?>
                                 </td>
+                                <td><?php echo $s['total_degree']; ?></td>
+                                <td><?php echo $s['total_exam_time']; ?></td>
                                 <td>
                                     <div class="dropdown-center">
                                         <button class="btn btn-outline-secondary dropdown-toggle btn-drop" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             :
                                         </button>
                                         <ul class="dropdown-menu ul-drop" style="background-color: #FFFFFF;">
-                                            <li><a class="dropdown-item update-btn"data="<?= $s['id'] ?>"> تعديل القسم  </a></li>
-                                            <li><a class="dropdown-item delete-btn" data="<?= $s['id'] ?>">مسح  القسم</a></li>
+                                            <li><a class="dropdown-item update-btn"data="<?= $s['id'] ?>"> تعديل الامتحان  </a></li>
+                                            <li><a class="dropdown-item delete-btn" data="<?= $s['id'] ?>">مسح  الامتحان</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -138,8 +142,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="departments-delete" method="post" style="text-align: right">
-                                <p>هل انت متأكد انك تريد مسح القسم</p>
+                            <form action="exams-delete" method="post" style="text-align: right">
+                                <p>هل انت متأكد انك تريد مسح الامتحان</p>
                                 <input type="hidden" id="coures_id_delete" name='id' value="">
                         </div>
                         <div class="modal-footer">
@@ -156,15 +160,23 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">تعديل االقسم</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">تعديل الامتحان</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="departments-update" method="post" style="text-align: right">
+                            <form action="exams-update" method="post" style="text-align: right">
                                 <input type="hidden" id="course_id_update" name="id" value="">
                                 <div class="form-group">
-                                    <label for="name">اسم القسم:</label>
-                                    <input type="text" class="form-control" id="department_name" name="name" placeholder="أدخل اسم القسم" required>
+                                    <label for="name">اسم الامتحان</label>
+                                    <input type="text" class="form-control" id="exam_name" name="title" placeholder="أدخل اسم الامتحان" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">درجة الامتحان</label>
+                                    <input type="text" class="form-control" id="exam_dgree" name="total_degree" placeholder="أدخل درجة الامتحان" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">مدة الامتحان</label>
+                                    <input type="text" class="form-control" id="exam_time" name="total_exam_time" placeholder="أدخل مدة الامتحان" required>
                                 </div>
                         </div>
                         <div class="modal-footer">
@@ -181,14 +193,22 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">اضافة قسم</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">اضافة امتحان</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="departments-add" method="post" style="text-align: right">
+                            <form action="exams-add" method="post" style="text-align: right">
                                 <div class="form-group">
-                                    <label for="name">اسم القسم</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسم القسم" required>
+                                    <label for="name">اسم الامتحان</label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="أدخل اسم الامتحان" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">درجة الامتحان</label>
+                                    <input type="text" class="form-control" id="total_degree" name="total_degree" placeholder="أدخل درجة الامتحان" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">مدة الامتحان</label>
+                                    <input type="text" class="form-control" id="total_exam_time" name="total_exam_time" placeholder="أدخل مدة الامتحان" required>
                                 </div>
                         </div>
                         <div class="modal-footer">

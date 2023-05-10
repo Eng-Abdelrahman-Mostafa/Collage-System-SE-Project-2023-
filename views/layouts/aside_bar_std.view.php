@@ -236,31 +236,37 @@
           <div class="sidebar">
             <ul>
                 <li>
-                    <a href="index.html" class="active">
+                    <a href="dashboard-std" class="active">
                         <span class="material-symbols-sharp">dashboard</span>
                         <h3>لوحة التحكم</h3>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sub-btn">
+                    <a href="student_register_courses" class="sub-btn">
                         <span class="material-symbols-outlined">book</span>
                         <h3>تسجيل المواد</h3>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sub-btn">
+                    <a href="register-courses-dgree" class="sub-btn">
                         <span class="material-symbols-outlined">menu_book</span>
                         <h3>المواد المسجله والدرجات</h3>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sub-btn">
+                    <a href="exam-agenda" class="sub-btn">
                         <span class="material-symbols-outlined">overview</span>
                         <h3>ادارة الجداول</h3>
                     </a>
                 </li>
                 <li>
-                    <a href="#" >
+                    <a href="student_profile" class="sub-btn">
+                        <span class="material-symbols-outlined">person</span>
+                        <h3>ملفك التعريفي</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout" >
                         <span class="material-symbols-outlined">logout</span>
                         <h3>تسجيل الخروج</h3>
                     </a>

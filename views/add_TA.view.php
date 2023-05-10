@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <!-- matrial icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <title>Add</title>
 
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -14,6 +19,12 @@
     <link rel="stylesheet" href="assets/css/add.css">
 </head>
 <body>
+<div class="bdy">
+    <div class="container">
+        <?php include 'layouts/aside_bar.view.php';?>
+        <main>
+            <?php include 'layouts/nav_bar.view.php';?>
+
 <div class="photo" > <img src="assets/images/bg-dashboard.png" alt="">
 </div>
 <div class="container col-md-8 form" >
@@ -161,7 +172,9 @@
 
 </div>
 
-
+        </main>
+    </div>
+</div>
 <script src="js/all.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 

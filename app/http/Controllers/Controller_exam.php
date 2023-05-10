@@ -3,15 +3,15 @@ namespace app\http\Controllers;
 //write code here
 use Core\Database;
 
-class Controller_department {
+class Controller_exam {
 
     public function index (){
         $config = require base_path("app/config.php");
         require_once base_path("Core/Database.php");
         $db=new Database($config);
-        $data= $db->query("SELECT * FROM departments")->fetchALL();
+        $data= $db->query("SELECT * FROM exams")->fetchALL();
 
-        return view("manage_department",compact('data'));
+        return view("manage_exam",compact('data'));
     }
 
 
@@ -20,10 +20,12 @@ class Controller_department {
         require base_path("Core/Database.php");
         $db = new Database($config);
         $errors = [];
-        if(isset($_POST['name'])) {
-            $name = $_POST['name'];
-            $db->query("INSERT INTO departments(name) VALUES (?)",[$name]);
-            header("Location: department");
+        if(isset($_POST['title']) && isset($_POST['total_exam_time']) && isset($_POST['total_degree'])) {
+            $title = $_POST['title'];
+            $total_degree=$_POST['total_degree'];
+            $total_exam_time = $_POST['total_exam_time'];
+            $db->query("INSERT INTO exams(title,total_degree,total_exam_time) VALUES (?,?,?)",[$title,$total_degree,$total_exam_time]);
+            header("Location: exam");
         }
 
 
@@ -35,11 +37,11 @@ class Controller_department {
         $db = new Database($config);
         $id = isset($_POST['id']) ? $_POST['id'] : null;
         if ($id) {
-            $delete_query = "DELETE FROM departments WHERE id = ?";
+            $delete_query = "DELETE FROM exams WHERE id = ?";
             $db->query($delete_query, [$id]);
         }
 
-        header("Location: department");
+        header("Location: exam");
 
     }
 
@@ -48,30 +50,32 @@ class Controller_department {
         require base_path("Core/Database.php");
         $db = new Database($config);
         $errors = [];
-        if(isset($_POST['name'])) {
-            $name = $_POST['name'];
+        if(isset($_POST['title']) && isset($_POST['total_exam_time']) && isset($_POST['total_degree'])) {
+            $title = $_POST['title'];
+            $total_degree=$_POST['total_degree'];
+            $total_exam_time = $_POST['total_exam_time'];
             $id = $_POST['id'];
-            $updated = $db->query("UPDATE departments SET name=? WHERE id=$id",
-                [$name]);
-            header("Location: department");
+            $updated = $db->query("UPDATE exams SET title=?,total_exam_time=?,total_degree=? WHERE id=$id",
+                [$title,$total_exam_time,$total_degree]);
+            header("Location: exam");
         }
 
     }
 
-    public function get_department()
+    public function getCourses()
     {
         $id= $_POST['id'];
         $config = require base_path("app/config.php");
         $db = new Database($config);
-        $department  =   $db->query("SELECT * FROM departments where id =:id",['id' => $id])->fetchAll();
-        if(!$department)
+        $exam  =   $db->query("SELECT * FROM exams where id =:id",['id' => $id])->fetchAll();
+        if(!$exam)
         {
             header('Content-Type: application/json');
             echo json_encode(array('success' => false,'message' => 'course not Founded'));
             exit;
         }
         header('Content-Type: application/json');
-        echo json_encode(array('success' => true, 'course' => $department , 'message' => 'course Founded'));
+        echo json_encode(array('success' => true, 'course' => $exam , 'message' => 'course Founded'));
         exit;
 
     }
@@ -83,4 +87,4 @@ class Controller_department {
 
 //write code here
 
-return new Controller_department();
+return new Controller_exam();

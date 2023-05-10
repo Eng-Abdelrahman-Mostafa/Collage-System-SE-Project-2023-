@@ -14,4 +14,6 @@ $router->Post('/get_semester_courses', 'app\http\Controllers\Controller_Manage_s
 $router->Post('/get_selected_prerequisites', 'app\http\Controllers\Controller_Manage_courses.php', 'get_selected_prerequisites');
 $router->Post('/add_prerequisites', 'app\http\Controllers\Controller_Manage_courses.php', 'add_prerequisites');
 
+$router->Post('/add_department_data', 'app\http\Controllers\Controller_department.php', 'get_department');
+
 
