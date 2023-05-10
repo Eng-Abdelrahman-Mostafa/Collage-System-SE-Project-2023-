@@ -236,63 +236,25 @@
           <div class="sidebar">
             <ul>
                 <li>
-                    <a href="dashboard" class="active">
+                    <a href="dashboard-pr" class="active">
                         <span class="material-symbols-sharp">dashboard</span>
                         <h3>لوحة التحكم</h3>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sub-btn">
-                        <span class="material-symbols-outlined">person</span>                   
-                         <h3>الطالب</h3> <span class="material-symbols-outlined drop">expand_more</span>
-                    </a>
-                    <div class="sub-menu">
-                        <a href="add_student" class="sub-item01">- اضافة طالب</a>
-                        <a href="all_students" class="sub-item02">- كل الطلاب</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="sub-btn">
-                        <span class="material-symbols-outlined">school</span>         
-                         <h3>هيئة التدريس</h3><span class="material-symbols-outlined drop">expand_more</span>
-                    </a>
-                    <div class="sub-menu">
-                        <a href="Manage_Professors" class="sub-item">ادارة هيئة التدريس</a>
-                        <a href="add_TA" class="sub-item">اضافة معيد</a>
-                      </div>
-                </li>
-                <li>
-                    <a href="#" class="sub-btn">
-                        <span class="material-symbols-outlined">menu_book</span>
-                        <h3>المناهج التعليميه</h3><span class="material-symbols-outlined drop">expand_more</span>
-                    </a>
-                    <div class="sub-menu">
-                        <a href="Manage_courses" class="sub-item">ادارة مواد</a>
-                        <a href="Manage_semesters" class="sub-item">ادارة فصل دراسي</a>
-                        <a href="department" class="sub-item">ادارة اقسام</a>
-                      </div>
-                </li>
-                <li>
-                    <a href="#" class="sub-btn">
+                    <a href="Manage_appointments" class="sub-btn">
                         <span class="material-symbols-outlined">overview</span>
-                        <h3>ادارة الجداول</h3><span class="material-symbols-outlined drop">expand_more</span>
+                        <h3>ادارة الجداول</h3>
                     </a>
-                    <div class="sub-menu">
-                        <a href="Manage_appointments" class="sub-item">ادارة المواعيد</a>
-                      </div>
                 </li>
                 <li>
-                    <a href="#" class="sub-btn">
-                        <span class="material-symbols-outlined">unknown_document</span>
-                        <h3>ادارة الامتحانات</h3><span class="material-symbols-outlined drop">expand_more</span>
+                    <a href="student_profile" class="sub-btn">
+                        <span class="material-symbols-outlined">person</span>
+                        <h3>ملفك التعريفي</h3>
                     </a>
-                    <div class="sub-menu">
-                        <a href="exam" class="sub-item">الامتحانات</a>
-                        <a href="exam-degree" class="sub-item">درجات الامتحانات</a>
-                      </div>
                 </li>
                 <li>
-                    <a href="#" >
+                    <a href="logout" >
                         <span class="material-symbols-outlined">logout</span>
                         <h3>تسجيل الخروج</h3>
                     </a>
@@ -303,10 +265,6 @@
 </aside>
 
 <script>
-      $('.sub-btn').click(function(){
-        $(this).next('.sub-menu').slideToggle();
-        $(this).find('.drop').toggleClass('rotate');
-      });
       $('.menu-btn').click(function(){
         $('.side-bar').addClass('active');
         $('.menu-btn').css("visibility", "hidden");

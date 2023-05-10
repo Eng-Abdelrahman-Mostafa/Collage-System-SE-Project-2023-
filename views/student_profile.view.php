@@ -7,11 +7,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" href="assets/images/collage-logo.svg">
-    <link rel="stylesheet" href="assets/css/dashboard.css">
-    <!-- matrial icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
     <title>الملف الشخصي</title>
 
     <!--CDN Links-->
@@ -22,10 +17,6 @@
 </head>
 <body>
 
-    <div class="container">
-        <?php include 'layouts/aside_bar_std.view.php';?>
-        <main>
-            <?php include 'layouts/nav_bar.view.php';?>
 
     <div class="main" style="margin-top: 100px">
             <div class="container">
@@ -201,9 +192,6 @@
             </div>
     </div>
 
-        </main>
-    </div>
-</div>
 <!--CDN Links-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -2,12 +2,12 @@
 return [
     'database' => [
         'host' => 'localhost',
-        'dbname' => 'collage',
+        'dbname' => 'collage2',
         'charset' => 'utf8',
     ],
     'app' => [
         'name' => 'Collage',
-        'url' => 'http://collage.local',
+        'url' => 'http://localhost/git2/Collage-System-SE-Project-2023-/public',
     ],
     'academic_info' => [
         'total_hours' => 144,
