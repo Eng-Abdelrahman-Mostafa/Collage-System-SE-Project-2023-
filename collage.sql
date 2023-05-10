@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2023 at 11:24 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Generation Time: May 10, 2023 at 06:56 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,11 +37,10 @@ CREATE TABLE `appointment` (
                                `group_id` bigint(20) NOT NULL,
                                `start_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
                                `full_time` time NOT NULL,
-                               `max_capacity` int(11) NOT NULL,
                                `created_by` bigint(20) NOT NULL,
                                `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                                `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -54,7 +53,7 @@ CREATE TABLE `appointment_students` (
                                         `student_id` bigint(20) NOT NULL,
                                         `appointment_id` bigint(20) NOT NULL,
                                         `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -68,7 +67,7 @@ CREATE TABLE `courses` (
                            `code` varchar(255) NOT NULL,
                            `department_id` bigint(20) NOT NULL,
                            `course_hour` enum('2','3') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `courses`
@@ -90,7 +89,7 @@ CREATE TABLE `courses_lecturer` (
                                     `id` bigint(20) NOT NULL,
                                     `course_id` bigint(20) NOT NULL,
                                     `lecturer_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,7 @@ CREATE TABLE `courses_prerequisites` (
                                          `id` bigint(20) NOT NULL,
                                          `course_id` bigint(20) NOT NULL,
                                          `prerequisties_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `courses_prerequisites`
@@ -124,16 +123,7 @@ CREATE TABLE `courses_students` (
                                     `semester_id` bigint(20) NOT NULL,
                                     `chance_number` int(11) NOT NULL,
                                     `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses_students`
---
-
-INSERT INTO `courses_students` (`id`, `student_id`, `course_id`, `semester_id`, `chance_number`, `created_at`) VALUES
-                                                                                                                   (1, 4, 2, 3, 1, '2023-05-07 06:00:00'),
-                                                                                                                   (3, 4, 4, 4, 1, '2023-05-08 19:12:42'),
-                                                                                                                   (4, 4, 5, 4, 1, '2023-05-08 19:12:42');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -144,7 +134,7 @@ INSERT INTO `courses_students` (`id`, `student_id`, `course_id`, `semester_id`, 
 CREATE TABLE `departments` (
                                `id` bigint(20) NOT NULL,
                                `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `departments`
@@ -152,7 +142,11 @@ CREATE TABLE `departments` (
 
 INSERT INTO `departments` (`id`, `name`) VALUES
                                              (1, 'CS'),
-                                             (2, 'MI');
+                                             (2, 'MI'),
+                                             (3, 'AI'),
+                                             (4, 'IT'),
+                                             (5, 'IS'),
+                                             (6, 'BS');
 
 -- --------------------------------------------------------
 
@@ -173,14 +167,7 @@ CREATE TABLE `exams` (
                          `total_exam_time` time NOT NULL,
                          `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                          `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `exams`
---
-
-INSERT INTO `exams` (`id`, `title`, `description`, `course_id`, `semester_id`, `creator_id`, `total_degree`, `pass_degree`, `start_time`, `total_exam_time`, `created_at`, `updated_at`) VALUES
-    (1, 'DS EXAM', 'DS', 2, 3, 6, 50, 25, '2023-05-08 19:12:36', '00:10:50', '2023-05-08 13:11:45', '2023-05-08 19:12:36');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -195,14 +182,7 @@ CREATE TABLE `exam_degrees` (
                                 `chance_number` int(11) NOT NULL,
                                 `degree` double NOT NULL,
                                 `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `exam_degrees`
---
-
-INSERT INTO `exam_degrees` (`id`, `student_id`, `exam_id`, `chance_number`, `degree`, `created_at`) VALUES
-    (1, 4, 1, 1, 70, '2023-05-08 13:12:07');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -213,7 +193,7 @@ INSERT INTO `exam_degrees` (`id`, `student_id`, `exam_id`, `chance_number`, `deg
 CREATE TABLE `grades` (
                           `id` bigint(20) NOT NULL,
                           `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `grades`
@@ -235,7 +215,15 @@ CREATE TABLE `groups` (
                           `id` bigint(20) NOT NULL,
                           `name` varchar(250) NOT NULL,
                           `grade_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `grade_id`) VALUES
+                                                    (1, 'A', 1),
+                                                    (2, 'B', 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +234,7 @@ CREATE TABLE `groups` (
 CREATE TABLE `nationalities` (
                                  `id` bigint(20) NOT NULL,
                                  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `nationalities`
@@ -265,7 +253,7 @@ INSERT INTO `nationalities` (`id`, `name`) VALUES
 CREATE TABLE `roles` (
                          `id` bigint(20) NOT NULL,
                          `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `roles`
@@ -293,21 +281,14 @@ CREATE TABLE `semesters` (
                              `created_by` bigint(20) NOT NULL,
                              `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                              `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `semesters`
 --
 
 INSERT INTO `semesters` (`id`, `title`, `start_date`, `end_date`, `active_status`, `registration_status`, `created_by`, `created_at`, `updated_at`) VALUES
-                                                                                                                                                        (1, 'Dummy Semester', '2023-01-01', '2023-06-30', 1, 1, 1, '2023-05-07 16:03:57', '2023-05-08 20:49:19'),
-                                                                                                                                                        (2, 'Sample Semester', '2023-07-01', '2023-12-31', 1, 0, 3, '2023-05-07 06:30:00', '2023-05-08 21:53:09'),
-                                                                                                                                                        (3, 'Test Semester', '2023-09-01', '2023-12-15', 1, 0, 3, '2023-05-07 11:45:00', '2023-05-08 20:37:16'),
-                                                                                                                                                        (4, 'Spring Semester', '2024-01-15', '2024-05-31', 1, 1, 4, '2023-05-07 08:00:00', '2023-05-08 13:21:08'),
-                                                                                                                                                        (5, 'Summer Semester', '2024-06-15', '2024-08-31', 1, 0, 5, '2023-05-07 10:30:00', '2023-05-08 21:17:10'),
-                                                                                                                                                        (6, 'Fall Semester', '2024-09-01', '2024-12-15', 0, 1, 6, '2023-05-07 13:00:00', '2023-05-07 17:24:40'),
-                                                                                                                                                        (7, 'Winter Semester', '2025-01-01', '2025-02-28', 0, 0, 7, '2023-05-07 05:00:00', '2023-05-07 05:00:00'),
-                                                                                                                                                        (8, 'Autumn Semester', '2025-09-01', '2025-12-31', 0, 0, 9, '2023-05-07 12:30:00', '2023-05-07 12:30:00');
+    (10, 'ربيع', '2023-05-10', '2023-06-03', 1, 1, 10, '2023-05-10 06:16:48', '2023-05-10 06:17:35');
 
 -- --------------------------------------------------------
 
@@ -320,15 +301,16 @@ CREATE TABLE `semester_courses` (
                                     `course_id` bigint(20) NOT NULL,
                                     `semester_id` bigint(20) NOT NULL,
                                     `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `semester_courses`
 --
 
 INSERT INTO `semester_courses` (`id`, `course_id`, `semester_id`, `created_at`) VALUES
-                                                                                    (48, 2, 1, '2023-05-09 14:57:59'),
-                                                                                    (51, 4, 2, '2023-05-09 15:13:25');
+                                                                                    (52, 2, 10, '2023-05-10 06:17:14'),
+                                                                                    (53, 4, 10, '2023-05-10 06:17:14'),
+                                                                                    (54, 5, 10, '2023-05-10 06:17:14');
 
 -- --------------------------------------------------------
 
@@ -356,14 +338,14 @@ CREATE TABLE `students` (
                             `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
                             `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
                             `deleted_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `role_num`, `national_id_number`, `nationality_id`, `full_name_ar`, `full_name_en`, `email`, `password`, `photo`, `phone_number`, `address`, `description`, `academic_id`, `department_id`, `grade_id`, `group_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-    (4, 4, 30302020105071, 1, 'عمرو عصام اللي هيناقشنا', 'Mohamed saed', 'shase@fci.helwan.com', '5edb79884e2f55688b7ea75698703b66', '1', '8602164613', 'st new york', 'DaT', 2020212, 2, 2, NULL, '2023-05-06 14:38:47', '2023-05-06 14:38:47', '2023-05-06 14:38:47');
+    (5, 4, 65464844, 1, 'طالب', 'student', 'student@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, '5548', NULL, NULL, 21558, 1, 3, 1, '2023-05-10 05:55:08', '2023-05-10 05:55:08', '2023-05-10 05:55:08');
 
 -- --------------------------------------------------------
 
@@ -389,20 +371,16 @@ CREATE TABLE `teaching_staff` (
                                   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                                   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
                                   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `teaching_staff`
 --
 
 INSERT INTO `teaching_staff` (`id`, `national_id_number`, `nationality_id`, `role_num`, `full_name_ar`, `full_name_en`, `title`, `email`, `password`, `photo`, `phone_number`, `address`, `description`, `department_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                                                                                        (1, 'asdawd', 1, 1, 'عبدو', 'boda', 'eng. ', 'boda@collage.com', '202cb962ac59075b964b07152d234b70', 'sss', '44589', 'sdawdaw4d', 'awdad', 1, '2023-05-01 13:56:09', '2023-05-01 13:56:09', NULL),
-                                                                                                                                                                                                                                                                        (3, '4321345', 1, 2, 'آية محمد حسن', 'Aya Mohamed Hassan', 'Doc', 'Aya@fci.helwan.com', '6ae50163b14dbc1f003b91de37cf6906', '1', '012355165', 'Pasdjasd', 'Kgdasd', 1, '2023-05-02 16:54:19', '2023-05-02 16:54:19', NULL),
-                                                                                                                                                                                                                                                                        (4, '1', 1, 1, 'عبدالرحمن ياسر حامد', 'Abdulrahman Yasser', 'TA', 'Abdulrahman@yahoo.com', 'd41d8cd98f00b204e9800998ecf8427e', '1', '01092219428', 'Cario-Egypt', 'Toas', 1, '2023-05-01 17:35:25', '2023-05-01 17:35:25', NULL),
-                                                                                                                                                                                                                                                                        (5, '1', 1, 1, 'عبدالرحمن ياسر حامد', 'Abdulrahman Yasser', 'Ra', 'abdoasd7911@gmail.com', '6cbd30439c17ba8f35216e676a37596c', '1', '01092219428', 'Cario-Egypt', 'Toas', 1, '2023-05-01 17:44:38', '2023-05-01 17:44:38', NULL),
-                                                                                                                                                                                                                                                                        (6, '54621451245', 2, 2, 'عبيد', 'fahd', 'TA', 'Fasd@yahoo.com', '245058980ca5402f8b813e8b9f412f51', '1', '0109425231', 'Cario-Egypt', 'Toas', 1, '2023-05-01 18:54:23', '2023-05-01 18:54:23', NULL),
-                                                                                                                                                                                                                                                                        (7, '1231421215', 1, 3, 'محمد سعيد الحلواني الاصلي الجديد', 'Mohamed saed ez', 'Doctor', 'Laen@fci.helwan.com', 'd41d8cd98f00b204e9800998ecf8427e', '1', '123456789', 'Cario-Egypt', 'GAMED', 1, '2023-05-03 06:51:52', '2023-05-05 11:21:48', NULL),
-                                                                                                                                                                                                                                                                        (9, '302318947989', 1, 3, 'مروة  اللي هتسقطنا', 'Marwa', 'Doctor', 'Peansa@fci.helwan.com', '806233d00ed82b76e6cf30202db671f8', '1', '0123897564', 'Cario-Egypt', 'GAMED', 1, '2023-05-03 07:56:01', '2023-05-04 09:47:02', NULL);
+                                                                                                                                                                                                                                                                        (10, '3020221', 1, 1, 'ادمن', 'admin', 'admin', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', '', '0109787410', '', '', 1, '2023-05-10 05:51:46', '2023-05-10 05:51:46', NULL),
+                                                                                                                                                                                                                                                                        (11, '34545448', 2, 3, 'دكتور', 'doctor', 'Prof.', 'doctor@gmail.com', '202cb962ac59075b964b07152d234b70', '', '45648', '', '', 2, '2023-05-10 05:52:47', '2023-05-10 05:52:47', NULL),
+                                                                                                                                                                                                                                                                        (13, '5448478', 1, 2, 'معيد', 'TA', 'Eng.', 'ta@gmail.com', '202cb962ac59075b964b07152d234b70', '', '4584848', '', '', 2, '2023-05-10 05:53:54', '2023-05-10 05:53:54', NULL);
 
 --
 -- Indexes for dumped tables
@@ -549,7 +527,7 @@ ALTER TABLE `teaching_staff`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `appointment_students`
@@ -585,7 +563,7 @@ ALTER TABLE `courses_students`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `exams`
@@ -609,7 +587,7 @@ ALTER TABLE `grades`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nationalities`
@@ -627,25 +605,25 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `semester_courses`
 --
 ALTER TABLE `semester_courses`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `teaching_staff`
 --
 ALTER TABLE `teaching_staff`
-    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+    MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

@@ -292,7 +292,7 @@
                       </div>
                 </li>
                 <li>
-                    <a href="#" >
+                    <a href="/logout" >
                         <span class="material-symbols-outlined">logout</span>
                         <h3>تسجيل الخروج</h3>
                     </a>
