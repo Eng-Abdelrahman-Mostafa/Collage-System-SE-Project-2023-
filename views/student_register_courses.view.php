@@ -21,7 +21,7 @@
 <body dir="rtl">
 <div class="bdy">
     <div class="container">
-        <?php include 'layouts/aside_bar.view.php';?>
+        <?php include 'layouts/aside_bar_std.view.php';?>
         <main>
             <?php include 'layouts/nav_bar.view.php';?>
 

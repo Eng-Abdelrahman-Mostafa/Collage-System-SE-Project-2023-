@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/images/collage-logo.svg">
-    <title>Dashboard</title>
+    <title>Exam Agenda</title>
    <!-- css -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
 <style>
