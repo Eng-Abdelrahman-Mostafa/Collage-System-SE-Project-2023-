@@ -85,52 +85,15 @@
             </div>
           </div>
           <div class="stdTableParent">
-            <h5>لائحة الطلاب</h5>
             <div class="row d-flex justify-content-between mt-5">
-              <div class="slco col-lg-2 col-sm-12">
-                <label > المرحلة الدراسية</label>
-                <select class="form-select"  aria-label=".form-select-lg example">
-                  <option selected>جميع المراحل الدراسية</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="slco col-lg-2 col-sm-12">
-                <label > الاقسام</label>
-                <select class="form-select"  aria-label=".form-select-lg example">
-                  <option selected>جميع الاقسام</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="slco col-lg-2 col-sm-12">
-                <label > العام الدراسي</label>
-                <select class="form-select"  aria-label=".form-select-lg example" >
-                  <option selected>جميع الاعوام</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="slco col-lg-2 col-sm-12">
-                <label > المستوى العام</label>
-                <select class="form-select"  aria-label=".form-select-lg example">
-                  <option selected>جميع الاعوام</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
               <div class="col col-lg-1 col-sm-12"></div>
-              <button class="btn col-lg-2 col-sm-12 align-self-end mt-3 fltr">فلترة</button>
             </div>
             <div class="row mt-5">
               <div class="col-lg-10 col-sm-12"></div>
               <div class="col-lg-2 col-sm-12">
-                  <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search" style="width: 100%;">
+                  <form class="form-inline" action="search" method="post">
+                    <input class="form-control mr-sm-2" type="search" placeholder="بحث" name="word" aria-label="Search" style="width: 100%;">
+                        <button type="submit" class="btn col-lg-2 col-sm-12 align-self-end mt-3 btn-primary" style="width: 100%">بحث</button>
                   </form>
               </div>
             </div>
