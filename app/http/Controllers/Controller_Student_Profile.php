@@ -128,7 +128,7 @@ class Controller_Student_Profile {
         $departments_grades = [];
         $departments=$this->db->query("SELECT * FROM `departments`")->fetchAll();
         foreach ($departments as $department){
-            $departments_grades[]=[$department['name'] => 0];
+            $departments_grades[$department['name']]=0;
         }
         $student_courses= $this->db->query("SELECT `courses_students`.chance_number,courses.course_hour,departments.name AS department_name,`courses_students`.course_id ,`courses_students`.semester_id FROM `courses_students` INNER JOIN courses on courses.id=course_id INNER JOIN semesters on semester_id = semesters.id INNER JOIN departments ON courses.department_id=departments.id where semesters.active_status=0 and student_id =:id",['id' => $id])->fetchAll();
         foreach ($student_courses as $student_course){
