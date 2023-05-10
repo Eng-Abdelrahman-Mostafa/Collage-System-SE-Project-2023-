@@ -6,6 +6,9 @@ $router->get("/login", "app\http\Controllers\Controller_login.php",'view',[
 ]);
 $router->post("/login", "app\http\Controllers\Controller_login.php",'submit',['guest']);
 
+$router->get('/logout', 'app\http\Controllers\Controller_login.php', 'logout',[
+    'auth'
+]);
 $router->get('/', 'app\http\Controllers\Controller.php', 'index');
 $router->get('/html', 'app\http\Controllers\Controller.php', 'index');
 $router->get('/dashboard', 'app\http\Controllers\Dashboard.php', 'index');

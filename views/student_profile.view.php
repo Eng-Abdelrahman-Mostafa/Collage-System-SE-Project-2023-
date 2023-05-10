@@ -309,7 +309,6 @@
         xaxis: {
             categories: [
                 <?php
-                // dd($grades_departments);
                 $departments_names="";
                 foreach ($grades_departments as $key => $value) {
                     $departments_names .="'";
