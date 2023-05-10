@@ -284,7 +284,7 @@
                 <li>
                     <a href="#" class="sub-btn">
                         <span class="material-symbols-outlined">unknown_document</span>
-                        <h3>ادارة الامتحانات</h3><span class="material-symbols-outlined drop">expand_more</span>
+                        <h3>ادارة الامتحانات.</h3><span class="material-symbols-outlined drop">expand_more</span>
                     </a>
                     <div class="sub-menu">
                         <a href="exam" class="sub-item">الامتحانات</a>

@@ -256,7 +256,7 @@
                 <li>
                     <a href="logout" >
                         <span class="material-symbols-outlined">logout</span>
-                        <h3>تسجيل الخروج</h3>
+                        <h3>تسجيل الخروج.</h3>
                     </a>
                 </li>
             </ul>
